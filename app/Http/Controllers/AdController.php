@@ -9,4 +9,8 @@ class AdController extends Controller
     public function adOperationView(){
         return view('ad.adOperation');
     }
+
+    public function memberAdView(){ //id pass hobe member er
+        return view('personaldetails.addetails');
+    }
 }

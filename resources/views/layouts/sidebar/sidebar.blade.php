@@ -56,7 +56,7 @@
 
 
             <li>
-                <a href="Totaladrcs.php" aria-expanded="false">
+                <a href="{{ route('total-ad&rcs') }}" aria-expanded="false">
                     <i class="icon-badge menu-icon"></i><span class="nav-text">Total Ad and RCS</span>
                 </a>
             </li> 
@@ -66,8 +66,8 @@
                     <i class="icon-grid menu-icon"></i><span class="nav-text">Personal Cheque</span>
                 </a>
                 <ul aria-expanded="false">
-                    <li><a href="memberrcs.php">RCS Details</a></li>
-                    <li><a href="memberad.php">AD Details</a></li>
+                    <li><a href="{{ route('rcs-member_personal') }}">RCS Details</a></li>
+                    <li><a href="{{ route('ad-member_personal') }}">AD Details</a></li>
                 </ul>
             </li>
             

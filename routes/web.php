@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\RcsController;
 use App\Http\Controllers\AdController;
+use App\Http\Controllers\TotaladrcsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,3 +48,11 @@ Route::get('/searchbydate-cheque',[ChequeManagementController::class,'searchbyda
 
 //ad
 Route::get('/ad-operation',[AdController::class,'adOperationView'])->name('ad-operation');
+
+//Total ad & rcs
+Route::get('/total-ad&rcs',[TotaladrcsController::class,'totalAdRcsView'])->name('total-ad&rcs');
+
+//Member personal Ad & Rcs cash & cheque details
+
+Route::get('/ad-member_personal',[AdController::class,'memberAdView'])->name('ad-member_personal');
+Route::get('/rcs-member_personal',[RcsController::class,'memberRcsView'])->name('rcs-member_personal');
