@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MemberController;
+use App\Http\Controllers\RcsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +18,16 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/sample', function () {
+    return view('sample');
+});
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');
+//member
+Route::get('/member-entry', [MemberController::class, 'memberEntry'])->name('member-entry');
+Route::get('/member-table', [MemberController::class, 'memberTable'])->name('member-table');
+
+//rcs
+Route::get('/rcs-operation',[RcsController::class,'rcsOperationView'])->name('rcs-operation');
