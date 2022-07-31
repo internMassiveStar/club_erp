@@ -36,7 +36,7 @@
             </li>
            
             <li>
-                <a href="Cheque-management.php" aria-expanded="false">
+                <a href="{{ route('cheque-management') }}" aria-expanded="false">
                     <i class="icon-badge menu-icon"></i><span class="nav-text">Cheque Management</span>
                 </a>
             </li>
@@ -45,7 +45,7 @@
                     <i class="icon-badge menu-icon"></i> <span class="nav-text">Cheque View</span>
                 </a>
                 <ul aria-expanded="false">
-                    <li><a href="allcheque.php">All Cheque</a></li>
+                    <li><a href="{{ route('all-cheque') }}">All Cheque</a></li>
                     <li><a href="todaycheque.php">Today's Chque</a></li>
                     <li><a href="tomorrowcheque.php">Tomorrows Cheque</a></li>
                     <li><a href="searchbydate.php">Search by Date</a></li>
