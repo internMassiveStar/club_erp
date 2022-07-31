@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\RcsController;
+use App\Http\Controllers\AdController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,3 +32,6 @@ Route::get('/member-table', [MemberController::class, 'memberTable'])->name('mem
 
 //rcs
 Route::get('/rcs-operation',[RcsController::class,'rcsOperationView'])->name('rcs-operation');
+
+//ad
+Route::get('/ad-operation',[AdController::class,'adOperationView'])->name('ad-operation');

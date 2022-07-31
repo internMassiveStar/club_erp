@@ -78,7 +78,7 @@
                   
                     <!---Container Fluid-->
         
-           -
+           
                  @include('layouts.footer.footer')
                 <!-- Footer -->
                 
