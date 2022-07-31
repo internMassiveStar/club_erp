@@ -4,6 +4,7 @@ use App\Http\Controllers\ChequeManagementController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\RcsController;
+use App\Http\Controllers\AdController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +34,7 @@ Route::get('/member-table', [MemberController::class, 'memberTable'])->name('mem
 //rcs
 Route::get('/rcs-operation',[RcsController::class,'rcsOperationView'])->name('rcs-operation');
 
+
 //cheque management
 
 Route::get('/cheque-management',[ChequeManagementController::class,'chequeMangement'])->name('cheque-management');
@@ -42,3 +44,6 @@ Route::get('/tomorrow-cheque',[ChequeManagementController::class,'tomorrowCheque
 Route::get('/searchbydate-cheque',[ChequeManagementController::class,'searchbydateCheque'])->name('searchbydate-cheque');
 
 
+
+//ad
+Route::get('/ad-operation',[AdController::class,'adOperationView'])->name('ad-operation');

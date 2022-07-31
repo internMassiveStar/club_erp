@@ -20,6 +20,14 @@
             </li>
             <li>
                 <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                    <i class="icon-badge menu-icon"></i> <span class="nav-text">Asset Deposit</span>
+                </a>
+                <ul aria-expanded="false">
+                    <li><a href="{{ route('ad-operation') }}">Ad operation</a></li>
+                </ul>
+            </li>
+            <li>
+                <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                     <i class="icon-grid menu-icon"></i><span class="nav-text">Running Cost Share</span>
                 </a>
                 <ul aria-expanded="false">
@@ -47,14 +55,6 @@
            
 
 
-            <li>
-                <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                    <i class="icon-badge menu-icon"></i> <span class="nav-text">Asset Deposit</span>
-                </a>
-                <ul aria-expanded="false">
-                    <li><a href="AdOpt.php">Ad operation</a></li>
-                </ul>
-            </li>
             <li>
                 <a href="Totaladrcs.php" aria-expanded="false">
                     <i class="icon-badge menu-icon"></i><span class="nav-text">Total Ad and RCS</span>
