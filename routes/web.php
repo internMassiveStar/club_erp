@@ -43,6 +43,7 @@ Route::get('/all-cheque',[ChequeManagementController::class,'allCheque'])->name(
 Route::get('/today-cheque',[ChequeManagementController::class,'todayCheque'])->name('today-cheque');
 Route::get('/tomorrow-cheque',[ChequeManagementController::class,'tomorrowCheque'])->name('tomorrow-cheque');
 Route::get('/searchbydate-cheque',[ChequeManagementController::class,'searchbydateCheque'])->name('searchbydate-cheque');
+Route::get('/searchbyadorrcsCheque-cheque',[ChequeManagementController::class,'searchbyadorrcsCheque'])->name('searchbyadorrcs-cheque');
 
 
 
