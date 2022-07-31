@@ -46,10 +46,10 @@
                 </a>
                 <ul aria-expanded="false">
                     <li><a href="{{ route('all-cheque') }}">All Cheque</a></li>
-                    <li><a href="todaycheque.php">Today's Chque</a></li>
-                    <li><a href="tomorrowcheque.php">Tomorrows Cheque</a></li>
-                    <li><a href="searchbydate.php">Search by Date</a></li>
-                    <li><a href="searchbyadorrcs.php">Search by AD/RCS</a></li>
+                    <li><a href="{{ route('today-cheque') }}">Today's Chque</a></li>
+                    <li><a href="{{ route('tomorrow-cheque') }}">Tomorrows Cheque</a></li>
+                    <li><a href="{{ route('searchbydate-cheque') }}">Search by Date</a></li>
+                    <li><a href="{{ route('searchbyadorrcs-cheque') }}">Search by AD/RCS</a></li>
                 </ul>
             </li>
            
