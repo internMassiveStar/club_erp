@@ -12,4 +12,7 @@ class RcsController extends Controller
     public function memberRcsView(){ //id pass hobe member er
         return view('personaldetails.rcsdetails');
     }
+    public function monthlyProcedure(){
+        return view('rcs.monthlyProcedure');
+    }
 }
