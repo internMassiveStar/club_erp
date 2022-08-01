@@ -1,4 +1,4 @@
-<div class="nk-sidebar">           
+<div class="nk-sidebar position-fixed">           
     <div class="nk-nav-scroll">
         <ul class="metismenu" id="menu">
             <li class="nav-label text-info"><b></b></li>
@@ -11,10 +11,12 @@
                 <ul aria-expanded="false">
                     <li><a href="{{ route('member-entry') }}">Member Entry</a></li>
                     <li><a href="{{ route('member-table') }}">Member Table</a></li>
+                    <li><a href="{{ route('professional-info') }}">Professional Info.</a></li>
+                    <li><a href="{{ route('personal-info') }}">Personal Info.</a></li>
                 </ul>
             </li>
             <li>
-                <a href="Employee-register.php" aria-expanded="false">
+                <a href="{{ route('employee-register') }}" aria-expanded="false">
                     <i class="icon-badge menu-icon"></i><span class="nav-text">Employee Entry</span>
                 </a>
             </li>
@@ -78,7 +80,7 @@
                 </a>
             </li>
            <li>
-                <a href="RCS-Master.php" aria-expanded="false">
+                <a href="{{ route('monthly-procedure') }}" aria-expanded="false">
                     <i class="icon-badge menu-icon"></i><span class="nav-text">Monthly Procedure</span>
                 </a>
             </li>

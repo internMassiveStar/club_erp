@@ -1,4 +1,4 @@
-<div class="nav-header">
+<div class="nav-header position-fixed">
     <div class="brand-logo">
         <a href="{{ route('dashboard') }}">
            <!--  <b class="logo-abbr"><img src="images/logo.png" alt=""> </b> -->
@@ -6,7 +6,7 @@
            <b class="logo-abbr"><h4 style="color:white;" >MCL</h4> </b>
             <!-- <span class="logo-compact"><img src="./images/logo-compact.png" alt=""></span> -->
             <span class="logo-compact"><h4 style="color:white;"> Mirpur Club Ltd. </h4></span>
-            <span class="brand-title">
+            <span class="brand-title position-fixed">
                 <!-- <img src="images/logo-text.png" alt=""> -->
                 <h3 style="color:white;" >Mirpur Club Ltd</h3>
             </span>
@@ -20,7 +20,7 @@
 <!--**********************************
     Header start
 ***********************************-->
-<div class="header">    
+<div class="header position-fixed">    
     <div class="header-content clearfix">
         
         <div class="nav-control">
