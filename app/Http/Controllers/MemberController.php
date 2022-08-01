@@ -12,4 +12,7 @@ class MemberController extends Controller
     public function memberTable(){
         return view('member.memberTable');
     }
+    public function changePassword(){
+        return view('member.changePassword');
+    }
 }

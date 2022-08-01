@@ -31,6 +31,7 @@ Route::get('/dashboard', function () {
 //member
 Route::get('/member-entry', [MemberController::class, 'memberEntry'])->name('member-entry');
 Route::get('/member-table', [MemberController::class, 'memberTable'])->name('member-table');
+Route::get('/change-password', [MemberController::class, 'changePassword'])->name('change-password');
 
 //rcs
 Route::get('/rcs-operation',[RcsController::class,'rcsOperationView'])->name('rcs-operation');
@@ -44,6 +45,7 @@ Route::get('/today-cheque',[ChequeManagementController::class,'todayCheque'])->n
 Route::get('/tomorrow-cheque',[ChequeManagementController::class,'tomorrowCheque'])->name('tomorrow-cheque');
 Route::get('/searchbydate-cheque',[ChequeManagementController::class,'searchbydateCheque'])->name('searchbydate-cheque');
 Route::get('/searchbyadorrcsCheque-cheque',[ChequeManagementController::class,'searchbyadorrcsCheque'])->name('searchbyadorrcs-cheque');
+
 
 
 
