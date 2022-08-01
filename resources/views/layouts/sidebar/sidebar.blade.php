@@ -6,13 +6,21 @@
            
             <li>
                 <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                    <i class="icon-speedometer menu-icon"></i><span class="nav-text">Member info</span>
+                    <i class="icon-speedometer menu-icon"></i><span class="nav-text">Member</span>
                 </a>
                 <ul aria-expanded="false">
                     <li><a href="{{ route('member-entry') }}">Member Entry</a></li>
-                    <li><a href="{{ route('member-table') }}">Member Table</a></li>
-                    <li><a href="{{ route('professional-info') }}">Professional Info.</a></li>
-                    <li><a href="{{ route('personal-info') }}">Personal Info.</a></li>
+                    <li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                            <span class="nav-text">Member Table</span>
+                        </a>
+                        <ul>
+                            <li><a href="{{ route('member-table') }}">Member Info</a></li>
+                            <li><a href="{{ route('professional-info') }}">Professional Info.</a></li>
+                            <li><a href="{{ route('personal-info') }}">Personal Info.</a></li>
+                        </ul>
+                    </li>
+                    
                 </ul>
             </li>
             <li>
