@@ -11,7 +11,7 @@
                         <h2 class="text-center">Member Information</h2>
 
                         <div class="form-validation">
-                            <form class="form-valide" action="MemberProfession.php" method="post" enctype="multipart/form-data" >
+                            <form class="form-valide" action="{{ route('member-professionentry') }}" method="post" enctype="multipart/form-data" >
                             
                                 <div class="form-group row">
                                     <h6 class="col-lg-4 col-form-label"><b>Member ID </b><span class="text-danger">*</span>

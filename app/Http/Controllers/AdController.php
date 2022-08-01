@@ -11,6 +11,6 @@ class AdController extends Controller
     }
 
     public function memberAdView(){ //id pass hobe member er
-        return view('personaldetails.addetails');
+        return view('personaldetails.adDetails');
     }
 }

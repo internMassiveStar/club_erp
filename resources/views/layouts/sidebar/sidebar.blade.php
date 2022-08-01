@@ -75,7 +75,7 @@
             
             
             <li>
-                <a href="cheque-queue.php" aria-expanded="false">
+                <a href="{{ route('chequeQueue-cheque') }}" aria-expanded="false">
                     <i class="icon-badge menu-icon"></i><span class="nav-text">Cheque Queue System</span>
                 </a>
             </li>

@@ -24,5 +24,9 @@ class ChequeManagementController extends Controller
     public function searchbyadorrcsCheque(){
         return view('cheque.searchbyadorrcsCheque');
     }
+
+    public function chequeQueue(){
+        return view ('cheque.chequeQueue');
+    }
     
 }

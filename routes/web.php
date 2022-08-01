@@ -31,6 +31,8 @@ Route::get('/dashboard', function () {
 })->name('dashboard');
 //member
 Route::get('/member-entry', [MemberController::class, 'memberEntry'])->name('member-entry');
+Route::get('/member-professionentry', [MemberController::class, 'memberprofessionEntry'])->name('member-professionentry');
+Route::get('/member-personalentry', [MemberController::class, 'memberpersonalEntry'])->name('member-personalentry');
 Route::get('/member-table', [MemberController::class, 'memberTable'])->name('member-table');
 Route::get('/Professional-information', [MemberController::class, 'professionalInfo'])->name('professional-info');
 Route::get('/personal-information', [MemberController::class, 'personalInfo'])->name('personal-info');
@@ -49,6 +51,7 @@ Route::get('/today-cheque',[ChequeManagementController::class,'todayCheque'])->n
 Route::get('/tomorrow-cheque',[ChequeManagementController::class,'tomorrowCheque'])->name('tomorrow-cheque');
 Route::get('/searchbydate-cheque',[ChequeManagementController::class,'searchbydateCheque'])->name('searchbydate-cheque');
 Route::get('/searchbyadorrcsCheque-cheque',[ChequeManagementController::class,'searchbyadorrcsCheque'])->name('searchbyadorrcs-cheque');
+Route::get('/chequeQueue-cheque',[ChequeManagementController::class,'chequeQueue'])->name('chequeQueue-cheque');
 
 
 

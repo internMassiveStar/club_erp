@@ -9,6 +9,12 @@ class MemberController extends Controller
     public function memberEntry(){
         return view('member.memberEntry');
     }
+    public function memberpersonalEntry(){
+        return view('member.memberpersonalEntry');
+    }
+    public function memberprofessionEntry(){
+        return view('member.memberprofessionEntry');
+    }
     public function memberTable(){
         return view('member.memberTable');
     }
