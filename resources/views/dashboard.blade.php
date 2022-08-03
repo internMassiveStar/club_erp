@@ -1,7 +1,7 @@
 @extends('layouts.master') 
 @section('main-content')
 
-<div class="container-fluid" style="padding-top: 5%">
+<div class="container-fluid" >
    
 
 <div class="row">

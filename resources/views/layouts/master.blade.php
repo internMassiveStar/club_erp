@@ -69,7 +69,7 @@
                     @include('layouts.sidebar.sidebar')
                     <div class="content-body">
 
-                        <div class="container-fluid" style="padding-top: 5%">
+                        <div class="container-fluid" style="padding-top: 10%">
                             @yield('main-content')
                        
                         </div>
