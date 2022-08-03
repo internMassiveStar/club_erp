@@ -1,5 +1,13 @@
 @extends('layouts.master') 
 @section('main-content')
+@if(Auth::guard('member')->check())
+@php
+header("Location: " . URL::to('/dashboard'), true, 302);
+exit();
+@endphp
+@else
+<div style="padding-top: 5%; font-size: 20px; color: #7571f9">
+
 
  <details>
     <summary>
@@ -483,6 +491,7 @@
         </div>
     </div>
  </details>
-
+</div>
+@endif
 
 @endsection

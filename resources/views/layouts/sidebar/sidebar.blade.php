@@ -1,8 +1,34 @@
 <div class="nk-sidebar position-fixed">           
     <div class="nk-nav-scroll">
         <ul class="metismenu" id="menu">
-            <li class="nav-label text-info"><b></b></li>
-           
+            @if(Auth::guard('member')->check())
+            <li class="nav-label text-info"><b>{{ Auth::guard('member')->user()->name}}</b></li>
+           {{-- @if(Auth::guard('member')->user()->role==1) --}}
+
+ 
+ <li>
+    <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+        <i class="icon-grid menu-icon"></i><span class="nav-text">Personal Cheque</span>
+    </a>
+    <ul aria-expanded="false">
+        <li><a href="{{ route('rcs-member_personal') }}">RCS Details</a></li>
+        <li><a href="{{ route('ad-member_personal') }}">AD Details</a></li>
+    </ul>
+</li>
+<li>
+    <a href="{{ route('change-password') }}" aria-expanded="false">
+        <i class="icon-badge menu-icon"></i><span class="nav-text">Change Password</span>
+    </a>
+</li> 
+<li>
+    <a href="{{ route('logout') }}" aria-expanded="false">
+        <i class="icon-grid menu-icon"></i><span class="nav-text">Logout</span>
+    </a>
+</li>
+
+@else
+
+<li class="nav-label text-info"><b>{{ Auth::guard('employee')->user()->name}}</b></li>
            
             <li>
                 <a class="has-arrow" href="javascript:void()" aria-expanded="false">
@@ -23,6 +49,7 @@
                     
                 </ul>
             </li>
+         
             <li>
                 <a href="{{ route('employee-register') }}" aria-expanded="false">
                     <i class="icon-badge menu-icon"></i><span class="nav-text">Employee Entry</span>
@@ -70,7 +97,10 @@
                     <i class="icon-badge menu-icon"></i><span class="nav-text">Total Ad and RCS</span>
                 </a>
             </li> 
-          
+         
+                
+         
+       
              <li>
                 <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                     <i class="icon-grid menu-icon"></i><span class="nav-text">Personal Cheque</span>
@@ -80,8 +110,8 @@
                     <li><a href="{{ route('ad-member_personal') }}">AD Details</a></li>
                 </ul>
             </li>
-            
-            
+        
+        
             <li>
                 <a href="{{ route('chequeQueue-cheque') }}" aria-expanded="false">
                     <i class="icon-badge menu-icon"></i><span class="nav-text">Cheque Queue System</span>
@@ -99,10 +129,11 @@
                 </a>
             </li> 
             <li>
-                <a href="logout.php" aria-expanded="false">
+                <a href="{{ route('logout') }}" aria-expanded="false">
                     <i class="icon-grid menu-icon"></i><span class="nav-text">Logout</span>
                 </a>
             </li>
+            @endif
         </ul>
     </div>
 </div>

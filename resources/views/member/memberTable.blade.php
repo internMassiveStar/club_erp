@@ -1,6 +1,11 @@
 @extends('layouts.master') 
 @section('main-content')
-
+@if(Auth::guard('member')->check())
+@php
+header("Location: " . URL::to('/dashboard'), true, 302);
+exit();
+@endphp
+@else
 
 <div class="row">
     <div class="col-12">
@@ -303,6 +308,7 @@
         </div>
     </div>
 </div>
+@endif
 @endsection
 
 <script>

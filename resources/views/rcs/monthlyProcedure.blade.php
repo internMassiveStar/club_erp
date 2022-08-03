@@ -1,6 +1,11 @@
 @extends('layouts.master') 
 @section('main-content')
-
+@if(Auth::guard('member')->check())
+@php
+header("Location: " . URL::to('/dashboard'), true, 302);
+exit();
+@endphp
+@else
   <div class="login-form-bg h-100">
     <div class="container h-100">
         <div class="row justify-content-center h-100" style="margin-top:10%">
@@ -29,4 +34,5 @@
             </div>
         </div>
     </div>
+    @endif
     @endsection

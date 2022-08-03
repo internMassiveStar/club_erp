@@ -1,6 +1,9 @@
 @extends('layouts.master') 
 @section('main-content')
+
 <div class="container-fluid" style="padding-top: 5%">
+   
+
 <div class="row">
     <div class="col-lg-3 col-sm-6">
         <div class="card gradient-1">

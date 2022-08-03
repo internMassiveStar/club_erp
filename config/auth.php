@@ -40,6 +40,17 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        //member guards
+        'member' => [
+            'driver' => 'session',
+            'provider' => 'members',
+        ],
+
+        //employee guard
+        'employee' => [
+            'driver' => 'session',
+            'provider' => 'employees',
+        ],
     ],
 
     /*
@@ -64,11 +75,18 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
+//member-auth
+        'members' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Member::class,
+        ],
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        //employee-auth
+        'employees' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Employee::class,
+        ]
+
     ],
 
     /*
