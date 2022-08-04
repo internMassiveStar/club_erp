@@ -1,11 +1,6 @@
 @extends('layouts.master')
 @section('main-content')
-@if(Auth::guard('member')->check())
-@php
-header("Location: " . URL::to('/dashboard'), true, 302);
-exit();
-@endphp
-@else
+
     <div class="col-lg-12">
         <h6></h6>
         <div class="card">

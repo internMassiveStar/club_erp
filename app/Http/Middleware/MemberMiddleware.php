@@ -17,7 +17,11 @@ class MemberMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
+        if (Auth::guard('admin')->check() || Auth::guard('employee')->check()) 
+        return $next($request);
        
+        else
+        return redirect('/');
         return $next($request);
     }
 }
