@@ -29,7 +29,7 @@ return new class extends Migration
            
             $table->string('last_year');
             $table->string('last_result');
-            $table->string('profile_pic');
+            $table->string('certificate')->nullable();
             $table->rememberToken();
           
             $table->timestamps();
