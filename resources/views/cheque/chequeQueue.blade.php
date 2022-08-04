@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('main-content')
-@if(Auth::guard('member')->check())
+@if(Auth::guard('member')->check() || Auth::guard('employee')->check())
 @php
 header("Location: " . URL::to('/dashboard'), true, 302);
 exit();

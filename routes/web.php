@@ -93,6 +93,7 @@ Route::post('/login-member',[MemberController::class,'loginMember'])->name('logi
     
     //ad
     Route::get('/ad-operation',[AdController::class,'adOperationView'])->name('ad-operation');
+    Route::post('/ad-operation',[AdController::class,'adOperationInsert'])->name('ad-operation');
     
     //Total ad & rcs
     Route::get('/total-ad&rcs',[TotaladrcsController::class,'totalAdRcsView'])->name('total-ad&rcs');
