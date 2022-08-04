@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Employee;
+
 use App\Models\Member;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+
 class MemberController extends Controller
 {
 
@@ -20,9 +22,7 @@ class MemberController extends Controller
           
             if (Hash::check($request->password,$password->password) && $password->role==0) {
                 Auth::guard('member')->attempt(['email' => $request->email, 'password' => $request->password],$request->get('remember'));
-                Session::put('role',1);
-           
-            
+
                 return redirect('/dashboard');     
             }else if(Hash::check($request->password,$password->password) && $password->role==1){
                 Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password],$request->get('remember'));
@@ -38,7 +38,7 @@ class MemberController extends Controller
             $password=Employee::select('password')->where('email',$request->email)->first();
             if (Hash::check($request->password,$password->password)) {
                 Auth::guard('employee')->attempt(['email' => $request->email, 'password' => $request->password],$request->get('remember'));
-                
+
                 return redirect('/dashboard');  
             }else{
             return redirect('/');

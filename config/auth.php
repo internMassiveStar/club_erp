@@ -79,11 +79,19 @@ return [
     */
 
     'providers' => [
+
         // 'users' => [
         //     'driver' => 'eloquent',
         //     'model' => App\Models\User::class,
         // ],
 //member-auth
+
+        'users' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\User::class,
+        ],
+        //member-auth
+
         'members' => [
             'driver' => 'eloquent',
             'model' => App\Models\Member::class,

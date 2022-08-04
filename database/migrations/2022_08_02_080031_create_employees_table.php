@@ -22,8 +22,8 @@ return new class extends Migration
             $table->string('mobile');
             $table->string('address');
             $table->string('nid');
-            $table->string('joining_date');
-            $table->string('resigning_date')->nullable();
+            $table->date('joining_date');
+            $table->date('resigning_date')->nullable();
             $table->string('last_degree');
             $table->string('last_institute');
            

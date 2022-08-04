@@ -117,5 +117,37 @@ Route::group(['middleware' => ['MemberMiddleware']], function () {
 
 
 
+    Route::get('/change-password', [MemberController::class, 'changePassword'])->name('change-password');
+         
+    Route::get('/ad-member_personal',[AdController::class,'memberAdView'])->name('ad-member_personal');
+    Route::get('/rcs-member_personal',[RcsController::class,'memberRcsView'])->name('rcs-member_personal');
+    
+    //rcs
+    Route::get('/rcs-operation',[RcsController::class,'rcsOperationView'])->name('rcs-operation');
+    
+    
+    //cheque management
+    
+    Route::get('/cheque-management',[ChequeManagementController::class,'chequeMangement'])->name('cheque-management');
+    Route::get('/all-cheque',[ChequeManagementController::class,'allCheque'])->name('all-cheque');
+    Route::get('/today-cheque',[ChequeManagementController::class,'todayCheque'])->name('today-cheque');
+    Route::get('/tomorrow-cheque',[ChequeManagementController::class,'tomorrowCheque'])->name('tomorrow-cheque');
+    Route::get('/searchbydate-cheque',[ChequeManagementController::class,'searchbydateCheque'])->name('searchbydate-cheque');
+    Route::get('/searchbyadorrcsCheque-cheque',[ChequeManagementController::class,'searchbyadorrcsCheque'])->name('searchbyadorrcs-cheque');
+    Route::get('/chequeQueue-cheque',[ChequeManagementController::class,'chequeQueue'])->name('chequeQueue-cheque');
+    
+    
+    
+    
+    //ad
+    Route::get('/ad-operation',[AdController::class,'adOperationView'])->name('ad-operation');
+    Route::post('/ad-operation',[AdController::class,'adOperationInsert'])->name('ad-operation');
+    
+    //Total ad & rcs
+    Route::get('/total-ad&rcs',[TotaladrcsController::class,'totalAdRcsView'])->name('total-ad&rcs');
+    
+    //Member personal Ad & Rcs cash & cheque details
+
+
   
    

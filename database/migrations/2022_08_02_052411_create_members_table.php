@@ -26,7 +26,7 @@ return new class extends Migration
             $table->string('category');
             $table->string('type');
             $table->string('nid');
-            $table->string('joining_date')->nullable();
+            $table->date('joining_date')->nullable();
             $table->string('ad');
             $table->string('msp');
             $table->string('rcs');
