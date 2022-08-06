@@ -26,6 +26,7 @@ class MemberController extends Controller
                 return redirect('/dashboard');     
             }else if(Hash::check($request->password,$password->password) && $password->role==1){
                 Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password],$request->get('remember'));
+                Session::put('id',Auth::guard('admin')->user()->member_id);
                 return redirect('/dashboard');    
             }else{
                 return redirect('/');
@@ -38,7 +39,7 @@ class MemberController extends Controller
             $password=Employee::select('password')->where('email',$request->email)->first();
             if (Hash::check($request->password,$password->password)) {
                 Auth::guard('employee')->attempt(['email' => $request->email, 'password' => $request->password],$request->get('remember'));
-
+                Session::put('id',Auth::guard('employee')->user()->employee_id);
                 return redirect('/dashboard');  
             }else{
             return redirect('/');

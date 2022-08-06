@@ -117,12 +117,13 @@
                     <i class="icon-badge menu-icon"></i><span class="nav-text">Cheque Queue System</span>
                 </a>
             </li>
+            @if( Auth::guard('admin')->check())
            <li>
                 <a href="{{ route('monthly-procedure') }}" aria-expanded="false">
                     <i class="icon-badge menu-icon"></i><span class="nav-text">Monthly Procedure</span>
                 </a>
             </li>
-            
+            @endif
             {{-- <li>
                 <a href="{{ route('change-password') }}" aria-expanded="false">
                     <i class="icon-badge menu-icon"></i><span class="nav-text">Change Password</span>
