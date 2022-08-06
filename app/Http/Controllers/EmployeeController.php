@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Employee;
+use Illuminate\Support\Facades\Session;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\File;
+use phpDocumentor\Reflection\DocBlock\Tags\See;
 
 class EmployeeController extends Controller
 {
@@ -15,9 +18,11 @@ class EmployeeController extends Controller
     
     //   $a= Auth::guard('employee')->user()->name;
     //   dd($a);
+    
+
     $data=Employee::get();
 
-
+ 
         return view('employee.employeeRegister',compact('data'));
     }
 
@@ -65,6 +70,7 @@ class EmployeeController extends Controller
             $employee->certificate=$last_img; 
         }
         $employee->last_year=$request->year;
+        $employee->insert_by=  Session::get('id');
         $employee->save();
         return redirect()->back();
 
@@ -85,7 +91,7 @@ class EmployeeController extends Controller
             $name_gen = hexdec(uniqid());
             $img_ext = strtolower($certificate->getClientOriginalExtension());
             $img_name = $name_gen . "." . $img_ext;
-            $up_location = 'certificate/';
+            $up_location = 'emp_certificate/';
             $last_img = $up_location . $img_name;
             $certificate->move($up_location, $img_name);
             $path = public_path('/' . $employee->certificate);
@@ -112,8 +118,9 @@ class EmployeeController extends Controller
             $employee->certificate=$last_img; 
         }
         $employee->last_year=$request->year;
+        $employee->update_by=Session::get('id');
         $employee->update();
-        return redirect(route('employee-register'));
+        return redirect(route('rcs-operation'));
 
     }
 }

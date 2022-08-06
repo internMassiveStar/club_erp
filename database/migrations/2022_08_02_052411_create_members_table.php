@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('members', function (Blueprint $table) {
             $table->id();
-            $table->string('member_id')->unique();
+            $table->integer('member_id')->unique();
             $table->string('name');
             $table->string('email');
             $table->string('password');
@@ -29,7 +29,7 @@ return new class extends Migration
             $table->date('joining_date')->nullable();
             $table->string('ad');
             $table->string('msp');
-            $table->string('rcs');
+            $table->string('rcs')->nullable();
             $table->string('reference_id')->nullable();
             $table->string('remarks')->nullable();
             $table->string('a_photo')->nullable();
@@ -39,6 +39,8 @@ return new class extends Migration
             $table->string('a_certifacte_1')->nullable();
             $table->string('a_certifacte_2')->nullable();
             $table->string('a_certifacte_3')->nullable();
+            $table->integer('insert_by')->nullable();
+            $table->integer('update_by')->nullable();
             $table->integer('status')->default(0);
             $table->integer('role')->default(0);
             $table->rememberToken();

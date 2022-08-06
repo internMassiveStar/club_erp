@@ -64,14 +64,26 @@ Route::group(['middleware' => ['MemberMiddleware']], function () {
        
           
             Route::get('/member-entry', [MemberController::class, 'memberEntry'])->name('member-entry');
-            Route::get('/member-professionentry', [MemberController::class, 'memberprofessionEntry'])->name('member-professionentry');
-            Route::get('/member-personalentry', [MemberController::class, 'memberpersonalEntry'])->name('member-personalentry');
+            
             Route::get('/member-table', [MemberController::class, 'memberTable'])->name('member-table');
             Route::get('/Professional-information', [MemberController::class, 'professionalInfo'])->name('professional-info');
+            Route::get('/update-profession/{id}', [MemberController::class, 'updateprofessionalInfo'])->name('update-profession');
+            Route::post('/profession-update/{id}', [MemberController::class, 'professionalInfoUpdate'])->name('profession-update');
+
             Route::get('/personal-information', [MemberController::class, 'personalInfo'])->name('personal-info');
+
+            Route::get('/update-personal/{id}', [MemberController::class, 'updatepersonalInfo'])->name('update-personal');
+            Route::post('/personal-update/{id}', [MemberController::class, 'personalInfoUpdate'])->name('personal-update');
+
+            Route::post('member-complete-entry',[MemberController::class,'memberCompleteEntry'])->name('member-complete-entry');
+            Route::get('member-update/{id}',[MemberController::class,'memberUpdate'])->name('member-update');
+            Route::post('update-member/{id}',[MemberController::class,'updateMember'])->name('update-member');
+
+            
                   
             
             //employee
+
                 
              Route::get('/employee-register',[EmployeeController::class,'employeeRegister'])->name('employee-register');
              Route::post('/employee-register',[EmployeeController::class,'registerEmployee'])->name('register-employee');
@@ -86,11 +98,16 @@ Route::group(['middleware' => ['MemberMiddleware']], function () {
 
               //rcs
               Route::get('/rcs-operation',[RcsController::class,'rcsOperationView'])->name('rcs-operation');
-              Route::post('/rcs-operation',[RcsController::class,'rcsOperationInsert'])->name('rcs-operation');
-              
+
+              Route::post('/rcs-operation',[RcsController::class,'rcsOperationInsert'])->name('operation-rcs');
+              Route::get('/rcs-update/{id}',[RcsController::class,'rcsUpate'])->name('rcs-update');
+              Route::post('/update-rcs/{id}',[RcsController::class,'updateRcs'])->name('update-rcs');
+
+                        
+                
+
                 
                 
-                //Member personal Ad & Rcs cash & cheque details
             
                
                 
@@ -110,7 +127,7 @@ Route::group(['middleware' => ['MemberMiddleware']], function () {
                 Route::get('/searchbyadorrcsCheque-cheque',[ChequeManagementController::class,'searchbyadorrcsCheque'])->name('searchbyadorrcs-cheque');
                 Route::get('/chequeQueue-cheque',[ChequeManagementController::class,'chequeQueue'])->name('chequeQueue-cheque');
                 
-               
+              
            
          
                  Route::get('/change-password', [MemberController::class, 'changePassword'])->name('change-password');
@@ -125,6 +142,8 @@ Route::group(['middleware' => ['MemberMiddleware']], function () {
         Route::group(['middleware' => ['auth:member']], function(){
        
             Route::get('/change-password', [MemberController::class, 'changePassword'])->name('change-password');
+            
+            //Member personal Ad & Rcs cash & cheque details
             Route::get('/ad-member_personal',[AdController::class,'memberAdView'])->name('ad-member_personal');
             Route::get('/rcs-member_personal',[RcsController::class,'memberRcsView'])->name('rcs-member_personal');
           });
