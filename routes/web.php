@@ -88,16 +88,21 @@ Route::group(['middleware' => ['MemberMiddleware']], function () {
               Route::get('/rcs-operation',[RcsController::class,'rcsOperationView'])->name('rcs-operation');
               Route::post('/rcs-operation',[RcsController::class,'rcsOperationInsert'])->name('rcs-operation');
               
-                //Total ad & rcs
+                
                 
                 //Member personal Ad & Rcs cash & cheque details
             
                
                 
-               
-                Route::get('/total-ad&rcs',[TotaladrcsController::class,'totalAdRcsView'])->name('total-ad&rcs');
+            //Total ad & rcs
+            Route::get('/total-ad&rcs',[TotaladrcsController::class,'totalAdRcsView'])->name('total-ad&rcs');
             
-                Route::get('/cheque-management',[ChequeManagementController::class,'chequeMangement'])->name('cheque-management');
+            //Cheque management    
+            Route::get('/cheque-management',[ChequeManagementController::class,'chequeMangement'])->name('cheque-management');
+            Route::post('/cheque-management',[ChequeManagementController::class,'chequeMangementInsert'])->name('cheque-management');
+            Route::get('/cheque-management/{id}',[ChequeManagementController::class,'chequeMangementEdit'])->name('cheque-managementEdit');
+            Route::post('/cheque-management/{id}',[ChequeManagementController::class,'chequeMangementUpdate'])->name('cheque-managementUpdate');
+
                 Route::get('/all-cheque',[ChequeManagementController::class,'allCheque'])->name('all-cheque');
                 Route::get('/today-cheque',[ChequeManagementController::class,'todayCheque'])->name('today-cheque');
                 Route::get('/tomorrow-cheque',[ChequeManagementController::class,'tomorrowCheque'])->name('tomorrow-cheque');

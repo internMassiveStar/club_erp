@@ -34,7 +34,7 @@
                 
                                                                 
                     </div>    
-                   <button type="submit" class="btn mb-1 btn-success" name="EmployeeEntry"> {{ @$editData ? 'Update' : 'Insert' }}</button>
+                   <button type="submit" class="btn mb-1 btn-success" name="AdoptEntry"> {{ @$editData ? 'Update' : 'Insert' }}</button>
                 </form>
             </div>
         </div>
@@ -101,6 +101,6 @@
     </div>
 </div> 
 @endisset
-      
+     
 @endsection
 

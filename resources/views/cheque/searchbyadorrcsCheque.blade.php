@@ -22,15 +22,37 @@
                                 <th>Cheque Date</th>
                                 <th>Honored Date</th>
                                 <th>Dishonored Date</th>
-                                <th>Dishonored Date</th>
                                 <th>Old Dishonored Cheque No</th>
-                                <th>Cheque Out By</th>
+                                <th>Cheque In By</th>
                                 <th>Cheque Managed By</th>
+                                <th>Cheque Out By</th>
                                 <th>Remarks</th>
                                 <th>Attachment</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($data as $item)
+                            <tr>
+                                <td>{{ $item->member_id }}</td>
+                                <td>{{ $item->name }}</td>
+                                <td>{{ $item->bank_name }}</td>
+                                <td>{{ $item->ad_rcs }}</td>
+                                <td>{{ $item->type }}</td>
+                                <td>{{ $item->cheque_no}}</td>
+                                <td>{{ $item->receiving_amount}}</td>
+                                <td>{{ $item->receiving_date }}</td>
+                                <td>{{ $item->cheque_date }}</td>
+                                <td>{{ $item->honored_date }}</td>
+                                <td>{{ $item->dishonored_date }}</td>
+                                <td>{{ $item->oldcheque_no }}</td>
+                                <td>{{ $item->cheque_inby }}</td>
+                                <td>{{ $item->cheque_managedby }}</td>
+                                <td>{{ $item->cheque_outby }}</td>
+                                <td>{{ $item->Remarks }}</td>
+                                <td>{{ $item->attachment }}</td>
+                            </tr>
+                                
+                            @endforeach
                      
                             
                         </tbody>
@@ -49,8 +71,8 @@
                                 <th>Dishonored Date</th>
                                 <th>Old Dishonored Cheque No</th>
                                 <th>Cheque In By</th>
-                                <th>Cheque Out By</th>
                                 <th>Cheque Managed By</th>
+                                <th>Cheque Out By</th>
                                 <th>Remarks</th>
                                 <th>Attachment</th>
                             </tr>

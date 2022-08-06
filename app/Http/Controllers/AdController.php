@@ -41,14 +41,15 @@ class AdController extends Controller
     }
 
     public function adOperationEdit($id){
-        $data = DB::table('adoperations')
-                    ->select('adoperations.*','members.name')
-                    ->leftJoin('members','adoperations.member_id','members.member_id')
-                    ->get();
+        // $data = DB::table('adoperations')
+        //             ->select('adoperations.*','members.name')
+        //             ->leftJoin('members','adoperations.member_id','members.member_id')
+        //             ->get();
         $editData = Adoperation::findorFail($id);
         
         //dd($data); 
-        return view('ad.adOperation', compact('editData' , 'data'));
+        //return view('ad.adOperation', compact('editData' , 'data'));
+        return view('ad.adOperation', compact('editData'));
     }
 
     public function adOperationUpdate(Request $req, $id ){
@@ -63,7 +64,7 @@ class AdController extends Controller
         $db->receiving_date = $receiving_date;
         $db->receiving_amount = $receiving_amount;
         $db->receiving_tool = $receiving_tool;
-        $db->update_emp_id = Session::get('emp_id');
+        $db->update_emp_id = Session::get('id');
         $db->save();
         return redirect('/ad-operation');
     }
