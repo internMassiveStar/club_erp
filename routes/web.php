@@ -71,7 +71,7 @@ Route::group(['middleware' => ['MemberMiddleware']], function () {
             Route::get('/personal-information', [MemberController::class, 'personalInfo'])->name('personal-info');
                   
             
-             //employee
+            //employee
                 
              Route::get('/employee-register',[EmployeeController::class,'employeeRegister'])->name('employee-register');
              Route::post('/employee-register',[EmployeeController::class,'registerEmployee'])->name('register-employee');
@@ -80,8 +80,9 @@ Route::group(['middleware' => ['MemberMiddleware']], function () {
 
             //ad
             Route::get('/ad-operation',[AdController::class,'adOperationView'])->name('ad-operation');
-          
-            Route::post('/ad-operation',[AdController::class,'adOperationInsert'])->name('ad-operation');
+            Route::post('/ad-operation',[AdController::class,'adOperationInsert'])->name('ad-operation');  
+            Route::get('/ad-operation/{id}',[AdController::class,'adOperationEdit'])->name('ad-operationEdit');  
+            Route::post('/ad-operation/{id}',[AdController::class,'adOperationUpdate'])->name('ad-operationUpdate'); 
 
               //rcs
               Route::get('/rcs-operation',[RcsController::class,'rcsOperationView'])->name('rcs-operation');
