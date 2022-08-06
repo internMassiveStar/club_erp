@@ -48,21 +48,18 @@ if(Auth::guard('member')->check()){
  
  
 })->name('logout');
-
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');
 
 Route::post('/login-member',[MemberController::class,'loginMember'])->name('login-member');
 
-
-
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
 
 Route::group(['middleware' => ['MemberMiddleware']], function () {
     if(['middleware' => ['auth:employee']] || ['middleware' => ['auth:admin']]){
         Route::group([], function(){
        
-          
+       
             Route::get('/member-entry', [MemberController::class, 'memberEntry'])->name('member-entry');
             Route::get('/member-professionentry', [MemberController::class, 'memberprofessionEntry'])->name('member-professionentry');
             Route::get('/member-personalentry', [MemberController::class, 'memberpersonalEntry'])->name('member-personalentry');
@@ -75,23 +72,17 @@ Route::group(['middleware' => ['MemberMiddleware']], function () {
                 
              Route::get('/employee-register',[EmployeeController::class,'employeeRegister'])->name('employee-register');
              Route::post('/employee-register',[EmployeeController::class,'registerEmployee'])->name('register-employee');
-             Route::get('/employee-update/{id}',[EmployeeController::class,'employeeUpdate'])->name('employee-update');
-             Route::post('/update-employee/{id}',[EmployeeController::class,'updateEmployee'])->name('update-employee');
-
             //ad
             Route::get('/ad-operation',[AdController::class,'adOperationView'])->name('ad-operation');
           
-            Route::post('/ad-operation',[AdController::class,'adOperationInsert'])->name('ad-operation');
-
-              //rcs
-              Route::get('/rcs-operation',[RcsController::class,'rcsOperationView'])->name('rcs-operation');
-              Route::post('/rcs-operation',[RcsController::class,'rcsOperationInsert'])->name('rcs-operation');
+             Route::post('/ad-operation',[AdController::class,'adOperationInsert'])->name('ad-operation');
+    
               
                 //Total ad & rcs
                 
                 //Member personal Ad & Rcs cash & cheque details
             
-               
+                Route::get('/monthly-procedure',[RcsController::class,'monthlyProcedure'])->name('monthly-procedure');
                 
                
                 Route::get('/total-ad&rcs',[TotaladrcsController::class,'totalAdRcsView'])->name('total-ad&rcs');
@@ -104,7 +95,8 @@ Route::group(['middleware' => ['MemberMiddleware']], function () {
                 Route::get('/searchbyadorrcsCheque-cheque',[ChequeManagementController::class,'searchbyadorrcsCheque'])->name('searchbyadorrcs-cheque');
                 Route::get('/chequeQueue-cheque',[ChequeManagementController::class,'chequeQueue'])->name('chequeQueue-cheque');
                 
-               
+                 //rcs
+                 Route::get('/rcs-operation',[RcsController::class,'rcsOperationView'])->name('rcs-operation');
            
          
                  Route::get('/change-password', [MemberController::class, 'changePassword'])->name('change-password');
@@ -125,12 +117,7 @@ Route::group(['middleware' => ['MemberMiddleware']], function () {
     
 
 
-          Route::group(['middleware' => ['auth:admin']], function(){
-          
-            Route::get('/ad-member_personal',[AdController::class,'memberAdView'])->name('ad-member_personal');
-            Route::get('/rcs-member_personal',[RcsController::class,'memberRcsView'])->name('rcs-member_personal');
-            Route::get('/monthly-procedure',[RcsController::class,'monthlyProcedure'])->name('monthly-procedure');
-          });
+
  
 
 

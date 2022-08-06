@@ -31,7 +31,7 @@ class AdController extends Controller
         $db->receiving_date = $receiving_date;
         $db->receiving_amount = $receiving_amount;
         $db->receiving_tool = $receiving_tool;
-        $db->insert_emp_id = Session::get('id');
+        $db->insert_emp_id = Session::get('emp_id');
         //dd( Session::get('emp_id'));
         
         $db->save();

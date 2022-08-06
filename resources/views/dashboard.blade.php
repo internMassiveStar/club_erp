@@ -1,6 +1,6 @@
 @extends('layouts.master') 
 @section('main-content')
-@if(Auth::guard('employee')->check() || Auth::guard('admin')->check() || Auth::guard('member')->check())
+
 <div class="container-fluid" >
    
 
@@ -459,10 +459,4 @@
     </div>
 </div>
 </div>
-@else
-@php
-header("Location: " . URL::to('/'), true, 302);
-exit();
-@endphp
-@endif
 @endsection
