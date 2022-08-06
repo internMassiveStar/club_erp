@@ -1,5 +1,6 @@
 @extends('layouts.master') 
 @section('main-content')
+@section('title') {{'Member Entry'}} @endsection
 
 <div style="padding-top: 5%; font-size: 20px; color: #7571f9">
 
@@ -17,20 +18,21 @@
                     <h2 class="text-center">Member Information</h2>
 
                     <div class="form-validation">
-                        <form class="form-valide" action="{{ route('member-professionentry') }}" method="post" enctype="multipart/form-data" >
+                        <form class="form-valide" action="{{ route('member-complete-entry') }}" method="post" enctype="multipart/form-data" >
+                            @csrf
                         
                             <div class="form-group row">
                                 <h6 class="col-lg-4 col-form-label"><b>Member ID </b><span class="text-danger">*</span>
                                 </h6>
                                 <div class="col-lg-6">
-                                    <input style="border: .01px solid #969393;" type="text" class="form-control"  placeholder="Member ID" name="MemberID" required>
+                                    <input style="border: .01px solid #969393;" type="text" class="form-control"  placeholder="Member ID" name="member_id" >
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <h6 class="col-lg-4 col-form-label" for="val-username"><b>Member Name </b><span class="text-danger">*</span>
                                 </h6>
                                 <div class="col-lg-6">
-                                    <input style="border: .01px solid #969393;" type="text" class="form-control" id="val-username" name="val-username" placeholder="Member Name..">
+                                    <input style="border: .01px solid #969393;" type="text" class="form-control" id="val-username" name="name" placeholder="Member Name..">
                                 </div>
                             </div>
 
@@ -38,7 +40,7 @@
                                 <h6 class="col-lg-4 col-form-label" for="val-email"><b>Email </b><span class="text-danger">*</span>
                                 </h6>
                                 <div class="col-lg-6">
-                                    <input style="border: .01px solid #969393;" type="text" class="form-control" id="val-email" name="val-email" placeholder="Email Address..">
+                                    <input style="border: .01px solid #969393;" type="text" class="form-control" id="val-email" name="email" placeholder="Email Address..">
                                 </div>
                             </div>
 
@@ -46,7 +48,7 @@
                                 <h6 class="col-lg-4 col-form-label" for="val-password"><b>Password</b> <span class="text-danger">*</span>
                                 </h6>
                                 <div class="col-lg-6">
-                                    <input style="border: .01px solid #969393;" type="password" class="form-control" id="val-password" name="val-password" placeholder="Choose a safe one..">
+                                    <input style="border: .01px solid #969393;" type="password" class="form-control" id="val-password" name="password" placeholder="Choose a safe one..">
                                 </div>
                             </div>
 
@@ -54,7 +56,7 @@
                                 <h6 class="col-lg-4 col-form-label" for="val-confirm-password"><b>Confirm Password </b><span class="text-danger">*</span>
                                 </h6>
                                 <div class="col-lg-6">
-                                    <input style="border: .01px solid #969393;" type="password" class="form-control" id="val-confirm-password" name="val-confirm-password" placeholder="..and confirm it!">
+                                    <input style="border: .01px solid #969393;" type="password" class="form-control" id="confirm-password" name="confirm-password" placeholder="..and confirm it!">
                                 </div>
                             </div>
 
@@ -62,7 +64,7 @@
                                 <h6 class="col-lg-4 col-form-label"><b>Mobile Number </b><span class="text-danger">*</span>
                                 </h6>
                                 <div class="col-lg-6">
-                                    <input style="border: .01px solid #969393;" type="text" class="form-control" name="MemberNumber" placeholder="017-999-0000" required>
+                                    <input style="border: .01px solid #969393;" type="text" class="form-control" name="mobile" placeholder="017-999-0000" >
                                 </div>
                             </div>
                             
@@ -70,21 +72,21 @@
                                 <h6 class="col-lg-4 col-form-label"><b>Mobile Number Alternative
                                 </b></h6>
                                 <div class="col-lg-6">
-                                    <input style="border: .01px solid #969393;" type="text" class="form-control"  placeholder="Member Number Alternative" name="MobileNoAlt">
+                                    <input style="border: .01px solid #969393;" type="text" class="form-control"  placeholder="Member Number Alternative" name="alt_mobile">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <h6 class="col-lg-4 col-form-label"><b>Member Address </b><span class="text-danger">*</span>
                                 </h6>
                                 <div class="col-lg-6">
-                                    <input style="border: .01px solid #969393;" type="text" class="form-control"  placeholder="Member Address" name="MemberAddress" required>
+                                    <input style="border: .01px solid #969393;" type="text" class="form-control"  placeholder="Member Address" name="address" >
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <h6 class="col-lg-4 col-form-label"><b>Area</b> <span class="text-danger">*</span>
                                 </h6>
                                 <div class="col-lg-6">
-                                    <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="Area" name="Area" required>
+                                    <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="Area" name="area" >
                                 </div>
                             </div>
                                 
@@ -93,7 +95,7 @@
                                 <h6 class="col-lg-4 col-form-label" ><b>Member Catagory </b><span class="text-danger"></span>
                                 </h6>
                                 <div class="col-lg-6">
-                                    <select style="border: .01px solid #969393;" class="form-control"  name="MemberCatagory">
+                                    <select style="border: .01px solid #969393;" class="form-control"  name="category">
                                         <option value="">Please select</option>
                                         <option value="Sponser_Member">Sponser Member</option>
                                         <option value="Platinum_Member">Platinum Member</option>
@@ -112,7 +114,7 @@
                                 <h6 class="col-lg-4 col-form-label" ><b>Member Type </b><span class="text-danger"></span>
                                 </h6>
                                 <div class="col-lg-6">
-                                    <select style="border: .01px solid #969393;" class="form-control"  name="MemberType">
+                                    <select style="border: .01px solid #969393;" class="form-control"  name="type">
                                         <option value="">Please select</option>
                                         <option value="Genarel">Genarel Member</option>
                                         <option value="Associate">Associate Member</option>
@@ -130,7 +132,7 @@
                                 <h6 class="col-lg-4 col-form-label" for="val-digits"><b>NID </b><span class="text-danger">*</span>
                                 </h6>
                                 <div class="col-lg-6">
-                                    <input style="border: .01px solid #969393;" type="text" class="form-control" id="val-digits" name="val-digits" placeholder="NID">
+                                    <input style="border: .01px solid #969393;" type="text" class="form-control" id="val-digits" name="nid" placeholder="NID">
                                 </div>
                             </div>
                             
@@ -138,35 +140,35 @@
                                 <h6 class="col-lg-4 col-form-label"><b>Joining Date </b><span class="text-danger">*</span>
                                 </h6>
                                 <div class="col-lg-6">
-                                    <input style="border: .01px solid #969393;" type="date" class="form-control"  placeholder="Joining Date" name="JoiningDate" required>
+                                    <input style="border: .01px solid #969393;" type="date" class="form-control"  placeholder="Joining Date" name="joining_date" >
                                 </div>
                             </div>
                                 <div class="form-group row">
                                 <h6 class="col-lg-4 col-form-label"><b> Asset Deposit </b><span class="text-danger">*</span>
                                 </h6>
                                 <div class="col-lg-6">
-                                    <input style="border: .01px solid #969393;" type="text" class="form-control" id="val-currency" name="ADtobePaid" placeholder="Asset Deposit (AD)" required>
+                                    <input style="border: .01px solid #969393;" type="text" class="form-control" id="val-currency" name="ad" placeholder="Asset Deposit (AD)" >
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <h6 class="col-lg-4 col-form-label"> <b>Membership Status Point</b>
                                 </h6>
                                 <div class="col-lg-6">
-                                    <input style="border: .01px solid #969393;" type="text" class="form-control" id="val-website" name="MSP" placeholder="Membership Status Point (MSP)" >
+                                    <input style="border: .01px solid #969393;" type="text" class="form-control" id="val-website" name="msp" placeholder="Membership Status Point (MSP)" >
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <h6 class="col-lg-4 col-form-label"><b>Monthly Running Cost Share </b><span class="text-danger">*</span>
                                 </h6>
                                 <div class="col-lg-6">
-                                    <input style="border: .01px solid #969393;" type="text" class="form-control"name="MonthlyRCS" placeholder="Monthly Running Cost Share (RCS)" required>
+                                    <input style="border: .01px solid #969393;" type="text" class="form-control" name="rcs" placeholder="Monthly Running Cost Share (RCS)" >
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <h6 class="col-lg-4 col-form-label"><b>Reference Member ID </b><span class="text-danger">*</span>
                                 </h6>
                                 <div class="col-lg-6">
-                                    <input style="border: .01px solid #969393;" type="text" class="form-control" name="ReferenceMemberID" placeholder="Reference Member ID" required>
+                                    <input style="border: .01px solid #969393;" type="text" class="form-control" name="reference_id" placeholder="Reference Member ID" >
                                 </div>
                             </div>
 
@@ -175,7 +177,7 @@
                                 <h6 class="col-lg-4 col-form-label"><b>Remarks </b><span class="text-danger">*</span>
                                 </h6>
                                 <div class="col-lg-6">
-                                    <textarea style="border: .01px solid #969393;" class="form-control"  name="Remarks" rows="5" placeholder="Enter Member AD,RCS Etc Details.." required></textarea>
+                                    <textarea style="border: .01px solid #969393;" class="form-control"  name="Remarks" rows="5" placeholder="Enter Member AD,RCS Etc Details.." ></textarea>
                                 </div>
                             </div>
                             
@@ -230,21 +232,10 @@
                                 </div>
                             </div>
                             
-                            <div class="form-group row">
-                                <label class="col-lg-4 col-form-label"><a href="#">Terms &amp; Conditions</a>  <span class="text-danger">*</span>
-                                </label>
-                                <div class="col-lg-8">
-                                    <h6 class="css-control css-control-primary css-checkbox" for="val-terms">
-                                        <input type="checkbox" class="css-control-input" id="val-terms" name="val-terms" value="1"> <span class="css-control-indicator"></span>  I agree to the terms</h6>
-                                </div>
-                            </div>
+                           
 
-                            <div class="form-group row">
-                                <div class="col-lg-8 ml-auto">
-                                    <button type="submit" class="btn btn-primary" name="Member_Submit">Submit</button>
-                                </div>
-                            </div>
-                        </form>
+                         
+                    
                     </div>
                 </div>
             </div>
@@ -262,33 +253,31 @@
             <div class="card-body">
                 <h2 class="text-center">Member Profession Information</h2>
                 <div class="basic-form">
-                    <form class="mt-5 mb-5 login-input" method="post" action="{{ route('member-personalentry') }}">
+                    {{-- <form class="mt-5 mb-5 login-input" method="post" action="{{ route('member-personalentry') }}"> --}}
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <h6><b>Member Profession</b></h6>
-                                <input style="border: .01px solid #969393;" type="text" class="form-control input-default" placeholder="  Member Profession" name="MemberProfession" >
+                                <input style="border: .01px solid #969393;" type="text" class="form-control input-default" placeholder=" Member Profession" name="member_profession" >
                             </div>
                             <div class="form-group col-md-6">
                                 <h6><b>Member Designation</b></h6>
-                                <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="  Member Designation" name="MemberDesignation">
+                                <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="  Member Designation" name="member_designation">
                             </div>    
                             
                             <div class="form-group col-md-6">
                                 <h6><b>Member Office Name</b></h6>
-                                <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="  Member Office Name" name="MemberOfficeName">
+                                <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="  Member Office Name" name="office_name">
                             </div>
                             <div class="form-group col-md-6">
                                 <h6><b>Member Office Address</b></h6>
-                                <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="  Member Office Address" name="MemberOfficeAddress">
+                                <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="  Member Office Address" name="office_address">
                             </div>
                             
                             
                         </div>    
                     
-                        <button type="submit" class="btn mb-1 btn-secondary" name="MemberPfSkip"> Skip </button>
-                        
-                        <button type="submit" class="btn mb-1 btn-success" name="MemberPfInsert"> Insert </button> 
-                    </form>
+                      
+                  
                 </div>
             </div>
         </div>
@@ -304,7 +293,7 @@
             <div class="card-body">
                 <h2 class="text-center">Member Education Information</h2>
                 <div class="basic-form">
-                    <form class="mt-5 mb-5 login-input" method="post" action="{{ route('member-personalentry') }}">
+                    {{-- <form class="mt-5 mb-5 login-input" method="post" action="{{ route('member-personalentry') }}"> --}}
                         <div class="form-row">
                             <div class="card-body">
                                 <div class="row">
@@ -399,7 +388,7 @@
                         <button type="submit" class="btn mb-1 btn-secondary" name="MemberPfSkip"> Skip </button>
                         
                         <button type="submit" class="btn mb-1 btn-success" name="MemberPfInsert"> Insert </button> 
-                    </form>
+                  
                 </div>
             </div>
         </div>
@@ -416,47 +405,47 @@
             <div class="card-body">
                 <h2 class="text-center">Member Personal Information</h2>
                 <div class="basic-form">
-                    <form class="mt-5 mb-5 login-input" method="post" action="index.php">
+                    {{-- <form class="mt-5 mb-5 login-input" method="post" action="index.php"> --}}
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <h6><b>Member Spouse Name</b></h6>
-                                <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="  Member Spouse Name" name="MemberSpouseName">
+                                <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="  Member Spouse Name" name="sopouse_name">
                             </div>
                             <div class="form-group col-md-6">
                                 <h6><b>Member Father Name</b></h6>
-                                <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="  Member Father Name" name="MemberFatherName">
+                                <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="  Member Father Name" name="father_name">
                             </div>    
                             
                             <div class="form-group col-md-6">
                                 <h6><b>Member Mother Name</b></h6>
-                                <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="  Member Father Name" name="MemberMotherName">
+                                <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="  Member Mother Name" name="mother_name">
                             </div>
                             <div class="form-group col-md-6">
                                 <h6><b>Member Children Name</b></h6>
-                                <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="  Member Children Name 1" name="MemberChildrenName1">
+                                <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="  Member Children Name 1" name="children_name_1">
                             </div>
                             <div class="form-group col-md-6">
                                 <h6><b>Member Children Name</b></h6>
-                                <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="  Member Children Name 2" name="MemberChildrenName2">
+                                <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="  Member Children Name 2" name="children_name_2">
                             </div>
                             <div class="form-group col-md-6">
                                 <h6><b>Member Children Name</b></h6>
-                                <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="  Member Children Name 3" name="MemberChildrenName3">
+                                <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="  Member Children Name 3" name="children_name_3">
                             </div>
                             
                             <div class="form-group col-md-6">
                                 <h6><b>Member Date Of Birth</b></h6>
-                                <input style="border: .01px solid #969393;" type="date" class="form-control" placeholder="  Member Date Of Birth" name="MemberDateOfBirth">
+                                <input style="border: .01px solid #969393;" type="date" class="form-control" placeholder="  Member Date Of Birth" name="date_birth">
                             </div>
                             <div class="form-group col-md-6">
                                 <h6><b>Member Home District</b></h6>
-                                <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="  Member Home District" name="MemberHomeDistrict">
+                                <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="  Member Home District" name="home_district">
                             </div>
                         </div>    
-                        <button type="submit" class="btn mb-1 btn-secondary" name="MemberPSkip"> Skip </button>
+                       
                         <!--  <div class="bootstrap-modal"> -->
                             <!-- Button trigger modal -->
-                            <button type="submit" class="btn mb-1 btn-success" name="MemberConfirm" id ="MemberConfirm"  >Confirm</button>
+                            <button type="submit" class="btn mb-1 btn-success" name="MemberConfirm" id ="MemberConfirm"  >Insert</button>
                             <!--<button type="button" class="btn mb-1 btn-success" name="MemberConfirm" data-toggle="modal" data-target="#exampleModalCenter">Confirm</button>-->
                             <!-- Modal -->
                             

@@ -13,16 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('rcsoperations', function (Blueprint $table) {
+        Schema::create('memberprofessions', function (Blueprint $table) {
             $table->id();
             $table->integer('member_id');
-            $table->date('receiving_date');
-            $table->integer('receiving_amount');
-            $table->string('receiving_tool');
+            $table->string('member_profession')->nullable();
+            $table->string('member_designation')->nullable();
+            $table->string('office_name')->nullable();
+            $table->string('office_address')->nullable();
             $table->integer('insert_by')->nullable();
             $table->integer('update_by')->nullable();
             $table->timestamps();
-         
         });
     }
 
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rcsoperations');
+        Schema::dropIfExists('memberprofessions');
     }
 };

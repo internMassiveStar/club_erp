@@ -1,7 +1,7 @@
 @extends('layouts.master') 
 @section('main-content')
 
-
+@section('title') {{'Member  Info.'}} @endsection
 <div class="row">
     <div class="col-12">
         <div class="card">
@@ -30,59 +30,65 @@
                                 <th>RCS</th>
                                 <th>Ref ID</th>
                                 <th>Remarks</th>
-                                <th>Attatchment photo</th>
-                                <th>Attatchment Form</th>
-                                <th>Attatchment NID</th>
-                                <th>Attatchment NOC</th>
-                                <th>Attatchment Certificate-1</th>
-                                <th>Attatchment Certificate-2</th>
-                                <th>Attatchment Certificate-3</th>
-                               
+                                <th>Action</th>
+                                
                             </tr>
                         </thead>
                         <tbody>
                         <tr>
-                            <td>data</td>
-                            <td>data</td>
-                            <td>data</td>
-                            <td>data</td>
-                            <td>data</td>
-                            <td>data</td>
-                            <td>data</td>
-                            <td>data</td>
-                            <td>data</td>
-                            <td>data</td>
-                            <td>data</td>
+                            @foreach ($data as $item )
+                                
+                  
+                            <td>{{ $item->member_id }}</td>
+                            <td>{{ $item->name }}</td>
+                            <td>{{ $item->email }}</td>
+                            <td>{{ $item->mobile }}</td>
+                            <td>{{ $item->alt_mobile }}</td>
+                            <td>{{ $item->address }}</td>
+                            <td>{{ $item->area }}</td>
+                            <td>{{ $item->category }}</td>
+                            <td>{{ $item->type }}</td>
+                            <td>{{ $item->nid }}</td>
+                            <td>{{ $item->joining_date }}</td>
+                            <td>{{ $item->ad }}</td>
+                            <td>{{ $item->msp }}</td>
+                            <td>{{ $item->rcs }}</td>
+                            <td>{{ $item->reference_id }}</td>
+                            <td>{{ $item->Remarks }}</td>
+                            <td>
+                                <a class="btn btn-danger btn-sm"
+                                 href="{{ route('member-update',$item->id) }}">update</a>
+                              
+                            </td>
+                           
                         </tr>
                         
-
+                        @endforeach
                         </tbody>
-                        <tfoot>
-                            <tr>
-                              
-                                
-                            </tr>
-                        </tfoot>
+                      
                     </table>
                 </div>
+@isset($editData)
+    
+
             <div class="card-body">
                 <h6></h6>
                 <h2 class="text-center">Member Information</h2>
                <div class="form-validation">
-                    <form class="form-valide" action="MemberTable.php" method="post" enctype="multipart/form-data" >
-                    
+                    <form class="form-valide" action="{{ route('update-member',$editData->id) }}" method="post" enctype="multipart/form-data" >
+                    @csrf
                         <div class="form-group row">
                             <h6 class="col-lg-4 col-form-label"><b>Member ID </b><span class="text-danger">*</span>
                             </h6>
                             <div class="col-lg-6">
-                                <input style="border: .01px solid #969393;" type="text" class="form-control"  placeholder="Member ID" name="MemberID" id="MemberID"required>
+                                <input style="border: .01px solid #969393;" type="text" class="form-control"  placeholder="Member ID" name="member_id" value="{{ $editData->member_id }}">
                             </div>
                         </div>
                         <div class="form-group row">
                             <h6 class="col-lg-4 col-form-label" for="val-username"><b>Member Name </b><span class="text-danger">*</span>
                             </h6>
                             <div class="col-lg-6">
-                                <input style="border: .01px solid #969393;" type="text" class="form-control" id="val-username" name="val-username" placeholder="Member Name..">
+                                <input style="border: .01px solid #969393;" type="text" class="form-control" id="val-username" name="name" value="{{ $editData->name }}">
                             </div>
                         </div>
 
@@ -90,31 +96,17 @@
                             <h6 class="col-lg-4 col-form-label" for="val-email"><b>Email </b><span class="text-danger">*</span>
                             </h6>
                             <div class="col-lg-6">
-                                <input style="border: .01px solid #969393;" type="text" class="form-control" id="val-email" name="val-email" placeholder="Email Address..">
+                                <input style="border: .01px solid #969393;" type="text" class="form-control" id="val-email" name="email"  value="{{ $editData->email }}">
                             </div>
                         </div>
 
-                        <!-- <div class="form-group row">-->
-                        <!--    <h6 class="col-lg-4 col-form-label" for="val-password"><b>Password</b> <span class="text-danger">*</span>-->
-                        <!--    </h6>-->
-                        <!--    <div class="col-lg-6">-->
-                        <!--        <input style="border: .01px solid #969393;" type="password" class="form-control" id="val-password" name="val-password" placeholder="Choose a safe one..">-->
-                        <!--    </div>-->
-                        <!--</div>-->
-
-                        <!--<div class="form-group row">-->
-                        <!--    <h6 class="col-lg-4 col-form-label" for="val-confirm-password"><b>Confirm Password </b><span class="text-danger">*</span>-->
-                        <!--    </h6>-->
-                        <!--    <div class="col-lg-6">-->
-                        <!--        <input style="border: .01px solid #969393;" type="password" class="form-control" id="val-confirm-password" name="val-confirm-password" placeholder="..and confirm it!">-->
-                        <!--    </div>-->
-                        <!--</div>-->
+                      
 
                         <div class="form-group row">
                             <h6 class="col-lg-4 col-form-label"><b>Mobile Number </b><span class="text-danger">*</span>
                             </h6>
                             <div class="col-lg-6">
-                                <input style="border: .01px solid #969393;" type="text" class="form-control" name="MemberNumber" id="MemberNumber"placeholder="017-999-0000" required>
+                                <input style="border: .01px solid #969393;" type="text" class="form-control" name="mobile"  value="{{ $editData->mobile }}">
                             </div>
                         </div>
                         
@@ -122,21 +114,21 @@
                             <h6 class="col-lg-4 col-form-label"><b>Mobile Number Alternative
                             </b></h6>
                             <div class="col-lg-6">
-                                <input style="border: .01px solid #969393;" type="text" class="form-control"  placeholder="Member Number Alternative" name="MobileNoAlt" id="MobileNoAlt">
+                                <input style="border: .01px solid #969393;" type="text" class="form-control"  name="alt_mobile"  value="{{ $editData->alt_mobile }}">
                             </div>
                         </div>
                         <div class="form-group row">
                             <h6 class="col-lg-4 col-form-label"><b>Member Address </b><span class="text-danger">*</span>
                             </h6>
                             <div class="col-lg-6">
-                                <input style="border: .01px solid #969393;" type="text" class="form-control"  placeholder="Member Address" name="MemberAddress" id="MemberAddress"required>
+                                <input style="border: .01px solid #969393;" type="text" class="form-control"   name="address"  value="{{ $editData->address }}">
                             </div>
                         </div>
                         <div class="form-group row">
                             <h6 class="col-lg-4 col-form-label"><b>Area</b> <span class="text-danger">*</span>
                             </h6>
                             <div class="col-lg-6">
-                                <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="Area" name="Area" id ="Area" required>
+                                <input style="border: .01px solid #969393;" type="text" class="form-control"  name="area"  value="{{ $editData->area }}">
                             </div>
                         </div>
                          
@@ -145,8 +137,8 @@
                             <h6 class="col-lg-4 col-form-label" ><b>Member Catagory </b><span class="text-danger"></span>
                             </h6>
                             <div class="col-lg-6">
-                                <select style="border: .01px solid #969393;" class="form-control"  name="MemberCatagory" id="MemberCatagory">
-                                    <option value="">Please select</option>
+                                <select style="border: .01px solid #969393;" class="form-control"  name="category"  value="{{ $editData->category }}">
+                                    <option  value="{{ $editData->category }}">{{ $editData->category }}</option>
                                     <option value="Sponser_Member">Sponser Member</option>
                                     <option value="Platinum_Member">Platinum Member</option>
                                     <option value="Gold_Member">Gold Member</option>
@@ -164,8 +156,8 @@
                             <h6 class="col-lg-4 col-form-label" ><b>Member Type </b><span class="text-danger"></span>
                             </h6>
                             <div class="col-lg-6">
-                                <select style="border: .01px solid #969393;" class="form-control"  name="MemberType" id="MemberType">
-                                    <option value="">Please select</option>
+                                <select style="border: .01px solid #969393;" class="form-control"  name="type" >
+                                    <option value="{{ $editData->type }}">{{ $editData->type }}</option>
                                     <option value="Genarel">Genarel Member</option>
                                     <option value="Associate">Associate Member</option>
                                     <option value="Student">Student</option>
@@ -182,7 +174,7 @@
                             <h6 class="col-lg-4 col-form-label" for="val-digits"><b>NID </b><span class="text-danger">*</span>
                             </h6>
                             <div class="col-lg-6">
-                                <input style="border: .01px solid #969393;" type="text" class="form-control" id="val-digits" name="val-digits" placeholder="NID">
+                                <input style="border: .01px solid #969393;" type="text" class="form-control" id="val-digits" name="nid" value="{{ $editData->nid }}">
                             </div>
                         </div>
                        
@@ -190,35 +182,35 @@
                             <h6 class="col-lg-4 col-form-label"><b>Joining Date </b><span class="text-danger">*</span>
                             </h6>
                             <div class="col-lg-6">
-                                <input style="border: .01px solid #969393;" type="date" class="form-control"  placeholder="Joining Date .." name="joiningdate" id="joiningdate" required>
+                                <input style="border: .01px solid #969393;" type="date" class="form-control"  placeholder="Joining Date .." name="joining_date" value="{{ $editData->joining_date }}" >
                             </div>
                         </div>
                          <div class="form-group row">
                             <h6 class="col-lg-4 col-form-label"><b> Asset Deposit </b><span class="text-danger">*</span>
                             </h6>
                             <div class="col-lg-6">
-                                <input style="border: .01px solid #969393;" type="text" class="form-control" id="ADtobePaid" name="ADtobePaid" placeholder="Asset Deposit (AD)" required>
+                                <input style="border: .01px solid #969393;" type="text" class="form-control" id="ADtobePaid" name="ad"  value="{{ $editData->ad }}">
                             </div>
                         </div>
                         <div class="form-group row">
                             <h6 class="col-lg-4 col-form-label"> <b>Membership Status Point</b>
                             </h6>
                             <div class="col-lg-6">
-                                <input style="border: .01px solid #969393;" type="text" class="form-control" id="MSP" name="MSP" placeholder="Membership Status Point (MSP)" >
+                                <input style="border: .01px solid #969393;" type="text" class="form-control" id="MSP" name="msp" value="{{ $editData->msp }}" >
                             </div>
                         </div>
                         <div class="form-group row">
                             <h6 class="col-lg-4 col-form-label"><b>Monthly Running Cost Share </b><span class="text-danger">*</span>
                             </h6>
                             <div class="col-lg-6">
-                                <input style="border: .01px solid #969393;" type="text" class="form-control" name="MonthlyRCS" id="MonthlyRCS" placeholder="Monthly Running Cost Share (RCS)" required>
+                                <input style="border: .01px solid #969393;" type="text" class="form-control" name="rcs"  value="{{ $editData->rcs }}">
                             </div>
                         </div>
                         <div class="form-group row">
                             <h6 class="col-lg-4 col-form-label"><b>Reference Member ID </b><span class="text-danger">*</span>
                             </h6>
                             <div class="col-lg-6">
-                                <input style="border: .01px solid #969393;" type="text" class="form-control" name="ReferenceMemberID"id="ReferenceMemberID" placeholder="Reference Member ID" required>
+                                <input style="border: .01px solid #969393;" type="text" class="form-control" name="reference_id" value="{{ $editData->reference_id }}">
                             </div>
                         </div>
 
@@ -227,7 +219,7 @@
                             <h6 class="col-lg-4 col-form-label"><b>Remarks </b><span class="text-danger">*</span>
                             </h6>
                             <div class="col-lg-6">
-                                <textarea style="border: .01px solid #969393;" class="form-control"  name="Remarks" id="Remarks" rows="5" placeholder="Enter Member AD,RCS Etc Details.." required></textarea>
+                                <textarea style="border: .01px solid #969393;" class="form-control"  name="remarks" >{{ $editData->remarks }}</textarea>
                             </div>
                         </div>
                         
@@ -299,6 +291,7 @@
                     </form>
                 </div>
         </div>
+        @endisset
     </div>
         </div>
     </div>

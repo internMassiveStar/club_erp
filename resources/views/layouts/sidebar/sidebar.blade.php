@@ -27,8 +27,14 @@
 </li>
 
 @elseif(Auth::guard('employee')->check() || Auth::guard('admin')->check())
-<li class="nav-label text-info"><b>
-    {{Auth::guard('employee')->check()? Auth::guard('employee')->user()->name : Auth::guard('admin')->user()->name }}</b></li>
+<li class="nav-label text-info">
+    @if(Auth::guard('employee')->check())
+    <b>
+    {{ Auth::guard('employee')->user()->name }}</b>
+    @else
+    {{ Auth::guard('admin')->user()->name}}
+    @endif
+</li>
            
             <li>
                 <a class="has-arrow" href="javascript:void()" aria-expanded="false">

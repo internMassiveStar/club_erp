@@ -1,7 +1,7 @@
 
 @extends('layouts.master') 
 @section('main-content')
-
+@section('title') {{'Member Professional Info.'}} @endsection
   <div class="row">
     <div class="col-lg-12">
         <div class="card">
@@ -14,97 +14,72 @@
                     <table class="table table-striped table-bordered zero-configuration" id="Mptable">
                         <thead>
                             <tr>
-                            <th>ID</th>
-                                <th>Name</th>
-                                <th>Profession</th>
-                                <th>Designation</th>
-                                <th>Office Name</th>
-                                <th>Office Address</th>
-                                <th>Degree-1</th>
-                                <th>Institute-1</th>
-                                <th>Result-1</th>
-                                <th>Year-1</th>
-                                <th>Degree-2</th>
-                                <th>Institute-2</th>
-                                <th>Result-2</th>
-                                <th>Year-2</th>
-                                <th>Degree-3</th>
-                                <th>Institute-3</th>
-                                <th>Result-3</th>
-                                <th>Year-3</th>
-                                <th>Degree-4</th>
-                                <th>Institute-4</th>
-                                <th>Result-4</th>
-                                <th>Year-4</th>
-                                <th>Degree-5</th>
-                                <th>Institute-5</th>
-                                <th>Result-5</th>
-                                <th>Year-5</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                           
-                        </tbody>
-                        <tfoot>
-                            <tr>
                                 <th>ID</th>
                                 <th>Name</th>
                                 <th>Profession</th>
                                 <th>Designation</th>
                                 <th>Office Name</th>
                                 <th>Office Address</th>
-                                <th>Degree-1</th>
-                                <th>Institute-1</th>
-                                <th>Result-1</th>
-                                <th>Year-1</th>
-                                <th>Degree-2</th>
-                                <th>Institute-2</th>
-                                <th>Result-2</th>
-                                <th>Year-2</th>
-                                <th>Degree-3</th>
-                                <th>Institute-3</th>
-                                <th>Result-3</th>
-                                <th>Year-3</th>
-                                <th>Degree-4</th>
-                                <th>Institute-4</th>
-                                <th>Result-4</th>
-                                <th>Year-4</th>
-                                <th>Degree-5</th>
-                                <th>Institute-5</th>
-                                <th>Result-5</th>
-                                <th>Year-5</th>
+                                <th>Action</th>
+                               
                             </tr>
-                        </tfoot>
+                        </thead>
+                        <tbody>
+                            <tr>
+                            @foreach ($data as $item )
+                                
+                  
+                        <td>{{ $item->member_id }}</td>
+                        <td>{{ $item->name }}</td>
+                        <td>{{ $item->member_profession }}</td>
+                        <td>{{ $item->member_designation }}</td>
+                        <td>{{ $item->office_name }}</td>
+                        <td>{{ $item->office_address }}</td>
+                        
+                        <td>
+                            <a class="btn btn-danger btn-sm"
+                             href="{{ route('update-profession',$item->id) }}">update</a>
+                          
+                        </td>
+                       
+                    </tr>
+                    
+                    @endforeach 
+                        </tbody>
+                        
                     </table>
                 </div>
-            
+            @isset($editData)
+                
+           
                 <h4 class="text-center">Member Profession Information</h4>
                 <div class="basic-form">
-                    <form class="mt-5 mb-5 login-input" method="post" action="MemberTable.php">
+                    <form class="mt-5 mb-5 login-input" method="post" action="{{ route('profession-update',$editData->id) }}">
+                        @csrf
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <h6><b>Member ID</b></h6>
-                                <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder=" Member ID" name="MemberID" id ="MemberIDs">
+                                <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder=" Member ID" name="member_id" value="{{ $editData->member_id }}">
                             </div>
                           
                             <div class="form-group col-md-6">
                                 <h6><b>Member Profession</b></h6>
-                                <input style="border: .01px solid #969393;" type="text" class="form-control input-default" placeholder="  Member Profession" name="MemberProfession" id="MemberProfession"  >
+                                <input style="border: .01px solid #969393;" type="text" class="form-control input-default"  name="member_profession"  value="{{ $editData->member_profession }}"  >
                             </div>
                             <div class="form-group col-md-6">
                                 <h6><b>Member Designation</b></h6>
-                                <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="  Member Designation" name="MemberDesignation" id="MemberDesignation">
+                                <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="  Member Designation" name="member_designation" value="{{ $editData->member_designation }}">
                             </div>    
                           
                             <div class="form-group col-md-6">
                                 <h6><b>Member Office Name</b></h6>
-                                <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="  Member Office Name" name="MemberOfficeName" id ="MemberOfficeName">
+                                <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="  Member Office Name" name="office_name" value="{{ $editData->office_name }}">
                             </div>
                             <div class="form-group col-md-6">
                                 <h6><b>Member Office Address</b></h6>
-                                <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="  Member Office Address" name="MemberOfficeAddress" id ="MemberOfficeAddress">
+                                <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="  Member Office Address" name="office_address" value="{{ $editData->office_address }}">
                             </div>
-                            <div class="card-body">
+                            {{-- <div class="card-body">
                                 <h4 class="text-center">Member Education Information</h4><br>
                                 <div class="row">
                                     <div class="form-group col-md-3">
@@ -192,7 +167,7 @@
                                         <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="  Member Education Year"  name="MemberEducationYear-5" id="MemberEducationYear-5">
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                          </div>
                     </div>
                         <button type="submit" class="btn mb-1 btn-warning" name="MemberPfUpdate">
@@ -202,6 +177,7 @@
                     </form>
                 </div>
             </div>
+            @endisset
         </div>
     </div>
 </div>

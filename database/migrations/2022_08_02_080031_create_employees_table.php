@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
-            $table->string('employee_id')->unique();
+            $table->integer('employee_id')->unique();
             $table->string('name');
             $table->string('email');
             $table->string('password');
@@ -26,10 +26,12 @@ return new class extends Migration
             $table->date('resigning_date')->nullable();
             $table->string('last_degree');
             $table->string('last_institute');
-           
-            $table->string('last_year');
-            $table->string('last_result');
+      
+            $table->integer('last_year');
+            $table->integer('last_result');
             $table->string('certificate')->nullable();
+            $table->integer('insert_by')->nullable();
+            $table->integer('update_by')->nullable();
             $table->rememberToken();
           
             $table->timestamps();
