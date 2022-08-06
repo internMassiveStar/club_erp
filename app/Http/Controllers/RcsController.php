@@ -15,4 +15,8 @@ class RcsController extends Controller
     public function monthlyProcedure(){
         return view('rcs.monthlyProcedure');
     }
+
+    public function rcsOperationInsert(){
+        return view('rcs.monthlyProcedure');
+    }
 }
