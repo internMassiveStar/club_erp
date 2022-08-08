@@ -49,6 +49,7 @@
                         <ul>
                             <li><a href="{{ route('member-table') }}">Member Info</a></li>
                             <li><a href="{{ route('professional-info') }}">Professional Info.</a></li>
+                            <li><a href="{{ route('education-info') }}">Education Info</a></li>
                             <li><a href="{{ route('personal-info') }}">Personal Info.</a></li>
                         </ul>
                     </li>

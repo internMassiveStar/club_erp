@@ -30,6 +30,8 @@
                                 <th>RCS</th>
                                 <th>Ref ID</th>
                                 <th>Remarks</th>
+                                <th> Photo </th>
+                                <th>Nid</th>
                                 <th>Action</th>
                                 
                             </tr>
@@ -56,8 +58,23 @@
                             <td>{{ $item->reference_id }}</td>
                             <td>{{ $item->Remarks }}</td>
                             <td>
+                           
+                        <a href="{{ @$item->a_photo ? url('/' . $item->a_photo) : url('a_photo/no-image.png') }}">
+                           <img style="width: 50px;height:50px;" 
+                           src="{{ @$item->a_photo ? url('/' . $item->a_photo) : url('a_photo/no-image.png') }}"
+                           alt="">
+                        </a>
+                            </td>
+                            <td>
+                                <img style="width: 50px;height:50px;"
+                                src="{{ @$item->a_nid ? url('/' . $item->a_nid) : url('a_nid/no-image.png') }}"
+                                alt="">
+                               
+                                </td>
+                            <td>
                                 <a class="btn btn-danger btn-sm"
                                  href="{{ route('member-update',$item->id) }}">update</a>
+                           
                               
                             </td>
                            
@@ -81,7 +98,7 @@
                             <h6 class="col-lg-4 col-form-label"><b>Member ID </b><span class="text-danger">*</span>
                             </h6>
                             <div class="col-lg-6">
-                                <input style="border: .01px solid #969393;" type="text" class="form-control"  placeholder="Member ID" name="member_id" value="{{ $editData->member_id }}">
+                                <input style="border: .01px solid #969393;" type="text" class="form-control"  placeholder="Member ID" name="member_id" value="{{ $editData->member_id }}" readonly>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -224,65 +241,65 @@
                         </div>
                         
 
-                     <!--    <div class="form-group row">
+                        <div class="form-group row">
                             <h6 class="col-lg-4 col-form-label"> Attatchment (Photo)<span class="text-danger"></span>
                             </h6>
+                            <img id="output"  style="width: 50px;height:50px;" src="{{  url('/' . $editData->a_photo) }}" />
                             <div class="col-lg-6">
-                                <input type="file" name="photo" class="form-control-file" >
+                                
+                                <input type="file" name="a_photo" class="form-control-file" accept="image/*" onchange="loadFile(event)" >
+                                
                             </div>
                         </div>
                         <div class="form-group row">
                             <h6 class="col-lg-4 col-form-label"> Attatchment (Hard copy Form)<span class="text-danger"></span>
                             </h6>
+                            <img id="output1" style="width: 50px;height:50px;" src="{{  url('/' . $editData->a_form) }}"/>
                             <div class="col-lg-6">
-                                <input type="file" name="form" class="form-control-file" >
+                              
+                                <input type="file" name="a_form" class="form-control-file"  accept="image/*" onchange="loadFile1(event)" >
                             </div>
                         </div>
                         <div class="form-group row">
                             <h6 class="col-lg-4 col-form-label"> Attatchment (NID)<span class="text-danger"></span>
                             </h6>
+                            <img id="output2" style="width: 50px;height:50px;" src="{{  url('/' . $editData->a_nid) }}"/>
                             <div class="col-lg-6">
-                                <input type="file" name="nid" class="form-control-file" >
+                                <input type="file" name="a_nid" class="form-control-file" accept="image/*" onchange="loadFile2(event)">
                             </div>
                         </div>
                         <div class="form-group row">
                             <h6 class="col-lg-4 col-form-label"> Attatchment (NOC)<span class="text-danger"></span>
                             </h6>
+                            <img id="output3" style="width: 50px;height:50px;" src="{{  url('/' . $editData->a_noc) }}"/>
                             <div class="col-lg-6">
-                                <input type="file" name="noc" class="form-control-file" >
+                                <input type="file" name="a_noc" class="form-control-file" accept="image/*" onchange="loadFile3(event)">
                             </div>
                         </div>
                         <div class="form-group row">
                             <h6 class="col-lg-4 col-form-label"> Attatchment (Certificate-1)<span class="text-danger"></span>
                             </h6>
-                            <div class="col-lg-6">
-                                <input type="file" name="Certificate-1" class="form-control-file" >
+                            <img id="output4" style="width: 50px;height:50px;" src="{{  url('/' . $editData->a_certifacte_1) }}"/>
+                            <div class="col-lg-6"> a_certifacte_1
+                                <input type="file" name="a_certificate_1" class="form-control-file" accept="image/*" onchange="loadFile4(event)">
                             </div>
                         </div>
                         <div class="form-group row">
                             <h6 class="col-lg-4 col-form-label"> Attatchment (Certificate-2)<span class="text-danger"></span>
                             </h6>
+                            <img id="output5" style="width: 50px;height:50px;" src="{{  url('/' . $editData->a_certifacte_2) }}"/>
                             <div class="col-lg-6">
-                                <input type="file" name="Certificate-2"class="form-control-file" >
+                                <input type="file" name="a_certificate_2"class="form-control-file" accept="image/*" onchange="loadFile5(event)">
                             </div>
                         </div>
                         <div class="form-group row">
                             <h6 class="col-lg-4 col-form-label"> Attatchment (Certificate-3)<span class="text-danger"></span>
                             </h6>
+                            <img id="output6" style="width: 50px;height:50px;" src="{{  url('/' . $editData->a_certifacte_3) }}"/>
                             <div class="col-lg-6">
-                                <input type="file" name="Certificate-3" class="form-control-file" >
+                                <input type="file" name="a_certificate_3" class="form-control-file" accept="image/*" onchange="loadFile6(event)" >
                             </div>
                         </div>
-                        
-                        <div class="form-group row">
-                            <label class="col-lg-4 col-form-label"><a href="#">Terms &amp; Conditions</a>  <span class="text-danger">*</span>
-                            </label>
-                            <div class="col-lg-8">
-                                <h6 class="css-control css-control-primary css-checkbox" for="val-terms">
-                                    <input type="checkbox" class="css-control-input" id="val-terms" name="val-terms" value="1"> <span class="css-control-indicator"></span>  I agree to the terms</h6>
-                            </div>
-                        </div> -->
-
                         <div class="form-group row">
                             <div class="col-lg-8 ml-auto">
                                 <button type="submit" class="btn btn-primary" name="Member_Update">UPDATE</button>
@@ -302,7 +319,64 @@
 <script>
 
 
+var loadFile = function(event) {
+    var reader = new FileReader();
+    reader.onload = function(){
+      var output = document.getElementById('output');
+      output.src = reader.result;
+    };
+    reader.readAsDataURL(event.target.files[0]);
+  };
+  var loadFile1 = function(event) {
+    var reader = new FileReader();
+    reader.onload = function(){
+      var output = document.getElementById('output1');
+      output.src = reader.result;
+    };
+    reader.readAsDataURL(event.target.files[0]);
+  };
+  var loadFile2 = function(event) {
+    var reader = new FileReader();
+    reader.onload = function(){
+      var output = document.getElementById('output2');
+      output.src = reader.result;
+    };
+    reader.readAsDataURL(event.target.files[0]);
+  };
+  var loadFile3 = function(event) {
+    var reader = new FileReader();
+    reader.onload = function(){
+      var output = document.getElementById('output3');
+      output.src = reader.result;
+    };
+    reader.readAsDataURL(event.target.files[0]);
+  };
+  var loadFile4 = function(event) {
+    var reader = new FileReader();
+    reader.onload = function(){
+      var output = document.getElementById('output4');
+      output.src = reader.result;
+    };
+    reader.readAsDataURL(event.target.files[0]);
+  };
+  var loadFile5= function(event) {
+    var reader = new FileReader();
+    reader.onload = function(){
+      var output = document.getElementById('output5');
+      output.src = reader.result;
+    };
+    reader.readAsDataURL(event.target.files[0]);
+  };
+  var loadFile6 = function(event) {
+    var reader = new FileReader();
+    reader.onload = function(){
+      var output = document.getElementById('output6');
+      output.src = reader.result;
+    };
+    reader.readAsDataURL(event.target.files[0]);
+  };
    
+</script>
     <script>
         $(document).ready(function () {
             $("#Membertable").dataTable();
