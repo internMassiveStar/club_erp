@@ -74,6 +74,10 @@ Route::group(['middleware' => ['MemberMiddleware']], function () {
 
             Route::get('/update-personal/{id}', [MemberController::class, 'updatepersonalInfo'])->name('update-personal');
             Route::post('/personal-update/{id}', [MemberController::class, 'personalInfoUpdate'])->name('personal-update');
+            Route::get('/eduction-info', [MemberController::class, 'educationInfo'])->name('education-info');
+            Route::get('/update-education/{id}', [MemberController::class, 'updateEducation'])->name('update-education');
+            Route::post('/education-update/{id}', [MemberController::class, 'educationUpdate'])->name('education-update');
+
 
             Route::post('member-complete-entry',[MemberController::class,'memberCompleteEntry'])->name('member-complete-entry');
             Route::get('member-update/{id}',[MemberController::class,'memberUpdate'])->name('member-update');

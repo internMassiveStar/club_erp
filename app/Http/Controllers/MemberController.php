@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Employee;
 
 use App\Models\Member;
+use App\Models\Membereducation;
 use App\Models\Memberpersonal;
 use App\Models\Memberprofession;
 use Illuminate\Support\Facades\DB;
@@ -13,6 +14,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\File;
+
 
 class MemberController extends Controller
 {
@@ -76,6 +79,120 @@ class MemberController extends Controller
     }
     public function updateMember(Request $request,$id){
         $member=Member::findOrfail($id);
+        // if(!$member->member_id ==$request->member_id){
+        //     $profession=DB::table('memberprofessions')->select('member_id')->where('member_id',$member->member_id)->first();
+        //     $personal=DB::table('memberpersonals')->select('member_id')->where('member_id',$member->member_id)->first();
+        //     $education=DB::table('membereducations')->select('member_id')->where('member_id',$member->member_id)->first();
+        //     $profession->member_id=$request->member_id;
+        //     $personal->member_id=$request->member_id;
+        //     $education->member_id=$request->member_id;
+        // }
+
+        //attachment photo  
+        $a_photo=$request->file('a_photo');
+        if($a_photo){
+            $name_gen = hexdec(uniqid());
+            $img_ext = strtolower($a_photo->getClientOriginalExtension());
+            $img_name = $name_gen . "." . $img_ext;
+            $up_location = 'a_photo/';
+            $a_photo_up = $up_location . $img_name;
+            $a_photo->move($up_location, $img_name);
+            $path = public_path('/' . $member->a_photo);
+            if (File::exists($path)) {
+                @unlink($path);
+            }
+        }
+        //attachment from
+
+        $a_form=$request->file('a_form'); 
+        if($a_form){
+        $name_gen = hexdec(uniqid());
+        $img_ext = strtolower($a_form->getClientOriginalExtension());
+        $img_name = $name_gen . "." . $img_ext;
+        $up_location = 'a_form/';
+        $a_form_up = $up_location . $img_name;
+        $a_form->move($up_location, $img_name);
+        $path = public_path('/' . $member->a_form);
+        if (File::exists($path)) {
+            @unlink($path);
+        }
+        }
+
+        //attachment nid
+
+        $a_nid=$request->file('a_nid');
+        if($a_nid){
+        $name_gen = hexdec(uniqid());
+        $img_ext = strtolower($a_nid->getClientOriginalExtension());
+        $img_name = $name_gen . "." . $img_ext;
+        $up_location = 'a_nid/';
+        $a_nid_up = $up_location . $img_name;
+        $a_nid->move($up_location, $img_name);
+        $path = public_path('/' . $member->a_nid);
+        if (File::exists($path)) {
+            @unlink($path);
+        }
+        }
+
+        //attachment noc
+
+        $a_noc=$request->file('a_noc');
+        if($a_noc){
+        $name_gen = hexdec(uniqid());
+        $img_ext = strtolower($a_noc->getClientOriginalExtension());
+        $img_name = $name_gen . "." . $img_ext;
+        $up_location = 'a_noc/';
+        $a_noc_up = $up_location . $img_name;
+        $a_noc->move($up_location, $img_name);
+        $path = public_path('/' . $member->a_noc);
+        if (File::exists($path)) {
+            @unlink($path);
+        }
+        }
+        //attachment certificate 1
+        $a_certificate_1=$request->file('a_certificate_1');
+        if($a_certificate_1){
+        $name_gen = hexdec(uniqid());
+        $img_ext = strtolower($a_certificate_1->getClientOriginalExtension());
+        $img_name = $name_gen . "." . $img_ext;
+        $up_location = 'a_certificate_1/';
+        $a_certificate_1_up = $up_location . $img_name;
+        $a_certificate_1->move($up_location, $img_name);
+        $path = public_path('/' . $member->a_certificate_1);
+        if (File::exists($path)) {
+            @unlink($path);
+        }
+        }
+        //attachment certificate 2
+        $a_certificate_2=$request->file('a_certificate_2');
+        if($a_certificate_2){
+        $name_gen = hexdec(uniqid());
+        $img_ext = strtolower($a_certificate_2->getClientOriginalExtension());
+        $img_name = $name_gen . "." . $img_ext;
+        $up_location = 'a_certificate_2/';
+        $a_certificate_2_up = $up_location . $img_name;
+        $a_certificate_2->move($up_location, $img_name);
+        $path = public_path('/' . $member->a_certificate_2);
+        if (File::exists($path)) {
+            @unlink($path);
+        }
+        }
+        //attachment certificate 3
+        $a_certificate_3=$request->file('a_certificate_3');
+        if($a_certificate_3){
+        $name_gen = hexdec(uniqid());
+        $img_ext = strtolower($a_certificate_3->getClientOriginalExtension());
+        $img_name = $name_gen . "." . $img_ext;
+        $up_location = 'a_certificate_3/';
+        $a_certificate_3_up = $up_location . $img_name;
+        $a_certificate_3->move($up_location, $img_name);
+        $path = public_path('/' . $member->a_certificate_3);
+        if (File::exists($path)) {
+            @unlink($path);
+        }
+        }
+        
+        
         $member->member_id=$request->member_id;
         $member->name=$request->name;
         $member->email=$request->email;
@@ -93,6 +210,27 @@ class MemberController extends Controller
         $member->rcs=$request->rcs;
         $member->reference_id=$request->reference_id;
         $member->update_by=Session::get('id');
+        if($a_photo){
+            $member->a_photo=$a_photo_up;
+        }
+        if($a_form){
+            $member->a_form=$a_form_up;
+        }
+        if($a_nid){
+            $member->a_nid=$a_nid_up;
+        }
+        if($a_noc){
+            $member->a_noc=$a_noc_up;
+        }
+        if($a_certificate_1){
+            $member->a_certifacte_1=$a_certificate_1_up;
+        }
+        if($a_certificate_2){
+            $member->a_certifacte_2=$a_certificate_2_up;
+        }
+        if($a_certificate_3){
+            $member->a_certifacte_3=$a_certificate_3_up;
+        }
         $member->update();
         return redirect()->back();
     }
@@ -161,14 +299,132 @@ class MemberController extends Controller
         $member_personal->update();
         return redirect()->back();
     }
+    public function educationInfo(){
+        $data=DB::table('membereducations')
+                  ->leftJoin('members','members.member_id','membereducations.member_id')
+                  ->select('members.name','membereducations.*')
+             
+                 ->get();
+           
+        return view('member.educationInfo',compact('data'));
+    }
+    public function updateEducation($id){
+        $editData=Membereducation::findOrfail($id);
+        $data=DB::table('membereducations')
+                  ->leftJoin('members','members.member_id','membereducations.member_id')
+                  ->select('members.name','membereducations.*')
+             
+                 ->get();
+           
+        return view('member.educationInfo',compact('data','editData'));
+    }
+
+    public function educationUpdate(Request $request,$id){
+        $member_education=Membereducation::findOrfail($id);
+
+        $member_education->degree =$request->degree;
+            $member_education->institute=$request->institute;
+        
+            
+            $member_education->result=$request->result;
+            $member_education->year=$request->year;
+            $member_education->update_by=Session::get('id');
+    
+            $member_education->update();
+            return redirect()->back();
+
+    }
+
     public function changePassword(){
         return view('member.changePassword');
     }
+//   public function insertEduction(Request $request){
+//     $count_class = count($request->degree);
+
+//     dd($count_class);
+//   }
     
     public function memberCompleteEntry(Request $request){
 
+        $member_id=$request->member_id;
+        //attachment photo  
+                $a_photo=$request->file('a_photo');
+                if($a_photo){
+                    $name_gen = hexdec(uniqid());
+                    $img_ext = strtolower($a_photo->getClientOriginalExtension());
+                    $img_name = $name_gen . "." . $img_ext;
+                    $up_location = 'a_photo/';
+                    $a_photo_up = $up_location . $img_name;
+                    $a_photo->move($up_location, $img_name);
+                }
+        //attachment from
+
+        $a_form=$request->file('a_form');
+        if($a_form){
+            $name_gen = hexdec(uniqid());
+            $img_ext = strtolower($a_form->getClientOriginalExtension());
+            $img_name = $name_gen . "." . $img_ext;
+            $up_location = 'a_from/';
+            $a_form_up = $up_location . $img_name;
+            $a_form->move($up_location, $img_name);
+        }
+
+        //attachment nid
+
+        $a_nid=$request->file('a_nid');
+        if($a_nid){
+            $name_gen = hexdec(uniqid());
+            $img_ext = strtolower($a_nid->getClientOriginalExtension());
+            $img_name = $name_gen . "." . $img_ext;
+            $up_location = 'a_nid/';
+            $a_nid_up = $up_location . $img_name;
+            $a_nid->move($up_location, $img_name);
+        }
+
+        //attachment noc
+
+        $a_noc=$request->file('a_noc');
+        if($a_nid){
+            $name_gen = hexdec(uniqid());
+            $img_ext = strtolower($a_noc->getClientOriginalExtension());
+            $img_name = $name_gen . "." . $img_ext;
+            $up_location = 'a_noc/';
+            $a_noc_up = $up_location . $img_name;
+            $a_noc->move($up_location, $img_name);
+        }
+        //attachment certificate 1
+        $a_certificate_1=$request->file('a_certificate_1');
+        if($a_certificate_1){
+            $name_gen = hexdec(uniqid());
+            $img_ext = strtolower($a_certificate_1->getClientOriginalExtension());
+            $img_name = $name_gen . "." . $img_ext;
+            $up_location = 'a_certificate_1/';
+            $a_certificate_1_up = $up_location . $img_name;
+            $a_certificate_1->move($up_location, $img_name);
+        }
+        //attachment certificate 2
+        $a_certificate_2=$request->file('a_certificate_2');
+        if($a_certificate_1){
+            $name_gen = hexdec(uniqid());
+            $img_ext = strtolower($a_certificate_2->getClientOriginalExtension());
+            $img_name = $name_gen . "." . $img_ext;
+            $up_location = 'a_certificate_2/';
+            $a_certificate_2_up = $up_location . $img_name;
+            $a_certificate_2->move($up_location, $img_name);
+        }
+        //attachment certificate 3
+        $a_certificate_3=$request->file('a_certificate_3');
+        if($a_certificate_3){
+            $name_gen = hexdec(uniqid());
+            $img_ext = strtolower($a_certificate_3->getClientOriginalExtension());
+            $img_name = $name_gen . "." . $img_ext;
+            $up_location = 'a_certificate_3/';
+            $a_certificate_3_up = $up_location . $img_name;
+            $a_certificate_3->move($up_location, $img_name);
+        }
+       
         $member= new Member();
-        $member->member_id=$request->member_id;
+        $member->member_id=  $member_id;
         $member->name=$request->name;
         $member->email=$request->email;
         $member->password=Hash::make($request->password);
@@ -185,10 +441,31 @@ class MemberController extends Controller
         $member->rcs=$request->rcs;
         $member->reference_id=$request->reference_id;
         $member->insert_by=Session::get('id');
+        if($a_photo){
+            $member->a_photo=$a_photo_up;
+        }
+        if($a_form){
+            $member->a_form=$a_form_up;
+        }
+        if($a_nid){
+            $member->a_nid=$a_nid_up;
+        }
+        if($a_noc){
+            $member->a_noc=$a_noc_up;
+        }
+        if($a_certificate_1){
+            $member->a_certifacte_1=$a_certificate_1_up;
+        }
+        if($a_certificate_2){
+            $member->a_certifacte_2=$a_certificate_2_up;
+        }
+        if($a_certificate_3){
+            $member->a_certifacte_3=$a_certificate_3_up;
+        }
         $member->save();
 
         $member_profession=new Memberprofession();
-        $member_profession->member_id=$request->member_id;
+        $member_profession->member_id=  $member_id;
         $member_profession->member_profession=$request->member_profession;
         $member_profession->member_designation=$request->member_designation;
         $member_profession->office_name=$request->office_name;
@@ -197,7 +474,7 @@ class MemberController extends Controller
         $member_profession->save();
 
         $member_personal=new Memberpersonal();
-        $member_personal->member_id=$request->member_id;
+        $member_personal->member_id=$member_id;
         $member_personal->sopouse_name=$request->sopouse_name;
         $member_personal->father_name=$request->father_name;
         $member_personal->mother_name=$request->mother_name;
@@ -208,6 +485,41 @@ class MemberController extends Controller
         $member_personal->home_district=$request->home_district;
         $member_personal->insert_by=Session::get('id');
         $member_personal->save();
+
+
+
+
+    
+  
+        if($request->degree != null){
+            $degree = array_values(array_filter($request->degree));
+            $institute = array_values(array_filter($request->institute));
+            $result = array_values(array_filter($request->result));
+            $year = array_values(array_filter($request->year));
+
+            $count_class = count($degree);
+     
+       
+        for( $i=0; $i <$count_class; $i++){
+           
+            $member_education=new Membereducation();
+            $member_education->member_id= $member_id;
+            
+            $member_education->degree =$degree[$i];
+            $member_education->institute=$institute[$i];
+        
+            
+            $member_education->result=$result[$i];
+            $member_education->year=$year[$i];
+            $member_education->insert_by=Session::get('id');
+    
+            $member_education->save();
+
+        }
+      
+    }
+
+        
         
         return redirect()->back();
 

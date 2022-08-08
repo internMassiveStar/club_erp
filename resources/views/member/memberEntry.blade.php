@@ -18,8 +18,8 @@
                     <h2 class="text-center">Member Information</h2>
 
                     <div class="form-validation">
-                        <form class="form-valide" action="{{ route('member-complete-entry') }}" method="post" enctype="multipart/form-data" >
-                            @csrf
+                        <form class="form-valide" action="{{ route('member-complete-entry') }}" method="post" enctype="multipart/form-data"> 
+                             @csrf
                         
                             <div class="form-group row">
                                 <h6 class="col-lg-4 col-form-label"><b>Member ID </b><span class="text-danger">*</span>
@@ -185,50 +185,60 @@
                             <div class="form-group row">
                                 <h6 class="col-lg-4 col-form-label"> Attatchment (Photo)<span class="text-danger"></span>
                                 </h6>
+                                <img id="output"  style="width: 50px;height:50px;"/>
                                 <div class="col-lg-6">
-                                    <input type="file" name="photo" class="form-control-file" >
+                                    
+                                    <input type="file" name="a_photo" class="form-control-file" accept="image/*" onchange="loadFile(event)" >
+                                    
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <h6 class="col-lg-4 col-form-label"> Attatchment (Hard copy Form)<span class="text-danger"></span>
                                 </h6>
+                                <img id="output1" style="width: 50px;height:50px;"/>
                                 <div class="col-lg-6">
-                                    <input type="file" name="form" class="form-control-file" >
+                                  
+                                    <input type="file" name="a_form" class="form-control-file"  accept="image/*" onchange="loadFile1(event)" >
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <h6 class="col-lg-4 col-form-label"> Attatchment (NID)<span class="text-danger"></span>
                                 </h6>
+                                <img id="output2" style="width: 50px;height:50px;"/>
                                 <div class="col-lg-6">
-                                    <input type="file" name="nid" class="form-control-file" >
+                                    <input type="file" name="a_nid" class="form-control-file" accept="image/*" onchange="loadFile2(event)">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <h6 class="col-lg-4 col-form-label"> Attatchment (NOC)<span class="text-danger"></span>
                                 </h6>
+                                <img id="output3" style="width: 50px;height:50px;"/>
                                 <div class="col-lg-6">
-                                    <input type="file" name="noc" class="form-control-file" >
+                                    <input type="file" name="a_noc" class="form-control-file" accept="image/*" onchange="loadFile3(event)">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <h6 class="col-lg-4 col-form-label"> Attatchment (Certificate-1)<span class="text-danger"></span>
                                 </h6>
+                                <img id="output4" style="width: 50px;height:50px;"/>
                                 <div class="col-lg-6">
-                                    <input type="file" name="Certificate-1" class="form-control-file" >
+                                    <input type="file" name="a_certificate_1" class="form-control-file" accept="image/*" onchange="loadFile4(event)">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <h6 class="col-lg-4 col-form-label"> Attatchment (Certificate-2)<span class="text-danger"></span>
                                 </h6>
+                                <img id="output5" style="width: 50px;height:50px;"/>
                                 <div class="col-lg-6">
-                                    <input type="file" name="Certificate-2"class="form-control-file" >
+                                    <input type="file" name="a_certificate_2"class="form-control-file" accept="image/*" onchange="loadFile5(event)">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <h6 class="col-lg-4 col-form-label"> Attatchment (Certificate-3)<span class="text-danger"></span>
                                 </h6>
+                                <img id="output6" style="width: 50px;height:50px;"/>
                                 <div class="col-lg-6">
-                                    <input type="file" name="Certificate-3" class="form-control-file" >
+                                    <input type="file" name="a_certificate_3" class="form-control-file" accept="image/*" onchange="loadFile6(event)" >
                                 </div>
                             </div>
                             
@@ -253,7 +263,7 @@
             <div class="card-body">
                 <h2 class="text-center">Member Profession Information</h2>
                 <div class="basic-form">
-                    {{-- <form class="mt-5 mb-5 login-input" method="post" action="{{ route('member-personalentry') }}"> --}}
+                   
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <h6><b>Member Profession</b></h6>
@@ -293,106 +303,123 @@
             <div class="card-body">
                 <h2 class="text-center">Member Education Information</h2>
                 <div class="basic-form">
-                    {{-- <form class="mt-5 mb-5 login-input" method="post" action="{{ route('member-personalentry') }}"> --}}
+                
                         <div class="form-row">
                             <div class="card-body">
-                                <div class="row">
-                                    <div class="form-group col-md-3">
+                        
+                                <div class="row" id="addrow">
+                                    <div class="form-group col-md-2">
                                         <h6><b>Member Education Degree-1</b></h6>
-                                        <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="  Member Education Degree" name="MemberEducationDegree-1" >
+                                        <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="  Member Education Degree" name="degree[]" >
                                     </div>
-                                    <div class="form-group col-md-3">
+                                    <div class="form-group col-md-2">
                                         <h6><b>Member Education Institute-1</b></h6>
-                                        <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="  Member Education Institute" name="MemberEducationInstitute-1">
+                                        <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="  Member Education Institute" name="institute[]">
                                     </div>
-                                    <div class="form-group col-md-3">
+                                    <div class="form-group col-md-2">
                                         <h6><b>Member Education Result-1</b></h6>
-                                        <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="  Member Education Result" name="MemberEducationResult-1">
+                                        <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="  Member Education Result" name="result[]">
                                     </div>
-                                    <div class="form-group col-md-3">
+                                    <div class="form-group col-md-2">
                                         <h6><b>Member Education Year-1</b></h6>
-                                        <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="  Member Education Year" name="MemberEducationYear-1">
+                                        <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="  Member Education Year" name="year[]">
                                     </div>
-
-                                    <div class="form-group col-md-3">
-                                        <h6><b>Member Education Degree-2</b></h6>
-                                        <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="  Member Education Degree" name="MemberEducationDegree-2" >
-                                    </div>
-                                    <div class="form-group col-md-3">
-                                        <h6><b>Member Education Institute-2</b></h6>
-                                        <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="  Member Education Institute" name="MemberEducationInstitute-2">
-                                    </div>
-                                    <div class="form-group col-md-3">
-                                        <h6><b>Member Education Result-2</b></h6>
-                                        <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="  Member Education Result" name="MemberEducationResult-2">
-                                    </div>
-                                    <div class="form-group col-md-3">
-                                        <h6><b>Member Education Year-2</b></h6>
-                                        <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="  Member Education Year" name="MemberEducationYear-2">
-                                    </div>
-
-                                    <div class="form-group col-md-3">
-                                        <h6><b>Member Education Degree-3</b></h6>
-                                        <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="  Member Education Degree" name="MemberEducationDegree-3" >
-                                    </div>
-                                    <div class="form-group col-md-3">
-                                        <h6><b>Member Education Institute-2</b></h6>
-                                        <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="  Member Education Institute" name="MemberEducationInstitute-3">
-                                    </div>
-                                    <div class="form-group col-md-3">
-                                        <h6><b>Member Education Result-3</b></h6>
-                                        <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="  Member Education Result" name="MemberEducationResult-3">
-                                    </div>
-                                        <div class="form-group col-md-3">
-                                        <h6><b>Member Education Year-3</b></h6>
-                                        <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="  Member Education Year" name="MemberEducationYear-3">
-                                    </div>
-
-                                    <div class="form-group col-md-3">
-                                        <h6><b>Member Education Degree-4</b></h6>
-                                        <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="  Member Education Degree" name="MemberEducationDegree-4" >
-                                    </div>
-                                    <div class="form-group col-md-3">
-                                        <h6><b>Member Education Institute-4</b></h6>
-                                        <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="  Member Education Institute" name="MemberEducationInstitute-4">
-                                    </div>
-                                    <div class="form-group col-md-3">
-                                        <h6><b>Member Education Result-4</b></h6>
-                                        <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="  Member Education Result" name="MemberEducationResult-4">
-                                    </div>
-                                    <div class="form-group col-md-3">
-                                        <h6><b>Member Education Year-4</b></h6>
-                                        <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="  Member Education Year" name="MemberEducationYear-4">
-                                    </div>
-
-                                        <div class="form-group col-md-3">
-                                        <h6><b>Member Education Degree-5</b></h6>
-                                        <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="  Member Education Degree" name="MemberEducationDegree-5" >
-                                    </div>
-                                    <div class="form-group col-md-3">
-                                        <h6><b>Member Education Institute-5</b></h6>
-                                        <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="  Member Education Institute" name="MemberEducationInstitute-5">
-                                    </div>
-                                    <div class="form-group col-md-3">
-                                        <h6><b>Member Education Result-5</b></h6>
-                                        <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="  Member Education Result" name="MemberEducationResult-5">
-                                    </div>
-                                    <div class="form-group col-md-3">
-                                        <h6><b>Member Education Year-5</b></h6>
-                                        <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="  Member Education Year" name="MemberEducationYear-5">
-                                    </div>
+                                   
                                 </div>
+                                <div id="1" style="display:none;">
+                                <div class="row"  >
+                                    <div class="form-group col-md-2">
+                                      
+                                        <input style="border: .01px solid #969393;" type="text" class="form-control"  name="degree[]" >
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                   
+                                        <input style="border: .01px solid #969393;" type="text" class="form-control" name="institute[]">
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                        
+                                        <input style="border: .01px solid #969393;" type="text" class="form-control" name="result[]">
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                     
+                                        <input style="border: .01px solid #969393;" type="text" class="form-control"  name="year[]">
+                                    </div>
+                                   
+                                </div>
+                                </div>
+                                 <div id="2" style="display:none;">
+                                    <div class="row"  >
+                                        <div class="form-group col-md-2">
+                                          
+                                            <input style="border: .01px solid #969393;" type="text" class="form-control"  name="degree[]" >
+                                        </div>
+                                        <div class="form-group col-md-2">
+                                       
+                                            <input style="border: .01px solid #969393;" type="text" class="form-control" name="institute[]">
+                                        </div>
+                                        <div class="form-group col-md-2">
+                                            
+                                            <input style="border: .01px solid #969393;" type="text" class="form-control"  name="result[]">
+                                        </div>
+                                        <div class="form-group col-md-2">
+                                         
+                                            <input style="border: .01px solid #969393;" type="text" class="form-control" name="year[]">
+                                        </div>
+                                       
+                                    </div>
+                                    </div> 
+                                    <div id="3" style="display:none;">
+                                        <div class="row"  >
+                                            <div class="form-group col-md-2">
+                                              
+                                                <input style="border: .01px solid #969393;" type="text" class="form-control"  name="degree[]" >
+                                            </div>
+                                            <div class="form-group col-md-2">
+                                           
+                                                <input style="border: .01px solid #969393;" type="text" class="form-control"  name="institute[]">
+                                            </div>
+                                            <div class="form-group col-md-2">
+                                                
+                                                <input style="border: .01px solid #969393;" type="text" class="form-control"  name="result[]">
+                                            </div>
+                                            <div class="form-group col-md-2">
+                                             
+                                                <input style="border: .01px solid #969393;" type="text" class="form-control"  name="year[]">
+                                            </div>
+                                           
+                                        </div>
+                                        </div>
+    
+                                </div> 
+
+                               
+                                 {{-- <div class="myDiv">
+    
+                                </div>
+                                <div class="myDiv">
+    
+                                </div>
+                                <div class="myDiv">
+    
+                                </div>  --}}
+                      
+                                <a class="btn mb-1 btn-success"  onclick="rowAdd()" >Add Row </a> 
+                                </div>
+                                
+                            </div>
+                            
                             </div>
                         </div>    
-                    
-                        <button type="submit" class="btn mb-1 btn-secondary" name="MemberPfSkip"> Skip </button>
+             
                         
-                        <button type="submit" class="btn mb-1 btn-success" name="MemberPfInsert"> Insert </button> 
-                  
+                        
+                 
+                            
+                       
+                       
                 </div>
-            </div>
-        </div>
-    </div>
+            
+     
  </details>
   
  <details>
@@ -443,32 +470,9 @@
                             </div>
                         </div>    
                        
-                        <!--  <div class="bootstrap-modal"> -->
-                            <!-- Button trigger modal -->
+                     
                             <button type="submit" class="btn mb-1 btn-success" name="MemberConfirm" id ="MemberConfirm"  >Insert</button>
-                            <!--<button type="button" class="btn mb-1 btn-success" name="MemberConfirm" data-toggle="modal" data-target="#exampleModalCenter">Confirm</button>-->
-                            <!-- Modal -->
-                            
-                            <!--<div class="modal fade" id="exampleModalCenter">-->
-                            <!--    <div class="modal-dialog modal-dialog-centered" role="document">-->
-                            <!--        <div class="modal-content">-->
-                            <!--            <div class="modal-header">-->
-                            <!--                <h5 class="modal-title">Confirmation</h5>-->
-                            <!--                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>-->
-                            <!--                </button>-->
-                            <!--            </div>-->
-                            <!--            <div class="modal-body">-->
-                            <!--                <p>Congratulation Sir/Madam, You are now offically member of Mirpur Club Ltd.</p>-->
-                            <!--            </div>-->
-                            <!--            <div class="modal-footer">-->
-                                            <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
-                            <!--                <button type="button" class="btn btn-primary" name="MemberPoConfirm">Ok</button>-->
-                            <!--            </div>-->
-                            <!--        </div>-->
-                            <!--    </div>-->
-                            <!--</div>-->
-                            
-                        <!-- </div> -->
+                          
                     </form>
                 </div>
             </div>
@@ -479,3 +483,128 @@
 
 
 @endsection
+
+
+<script>
+var clicks=0;
+function rowAdd(){
+    clicks += 1;
+    if(clicks==1){
+     
+    var x = document.getElementById("1");
+    if (x.style.display === "none") {
+    x.style.display = "inline";
+    }
+    
+  }
+  if(clicks==2){
+    var y = document.getElementById("2");
+    if (y.style.display === "none") {
+    y.style.display = "inline";
+  }
+ 
+}
+if(clicks==3){
+    var z= document.getElementById("3");
+    if (z.style.display === "none") {
+    z.style.display = "inline";
+  }
+  }
+}
+
+
+
+
+  var loadFile = function(event) {
+    var reader = new FileReader();
+    reader.onload = function(){
+      var output = document.getElementById('output');
+      output.src = reader.result;
+    };
+    reader.readAsDataURL(event.target.files[0]);
+  };
+  var loadFile1 = function(event) {
+    var reader = new FileReader();
+    reader.onload = function(){
+      var output = document.getElementById('output1');
+      output.src = reader.result;
+    };
+    reader.readAsDataURL(event.target.files[0]);
+  };
+  var loadFile2 = function(event) {
+    var reader = new FileReader();
+    reader.onload = function(){
+      var output = document.getElementById('output2');
+      output.src = reader.result;
+    };
+    reader.readAsDataURL(event.target.files[0]);
+  };
+  var loadFile3 = function(event) {
+    var reader = new FileReader();
+    reader.onload = function(){
+      var output = document.getElementById('output3');
+      output.src = reader.result;
+    };
+    reader.readAsDataURL(event.target.files[0]);
+  };
+  var loadFile4 = function(event) {
+    var reader = new FileReader();
+    reader.onload = function(){
+      var output = document.getElementById('output4');
+      output.src = reader.result;
+    };
+    reader.readAsDataURL(event.target.files[0]);
+  };
+  var loadFile5= function(event) {
+    var reader = new FileReader();
+    reader.onload = function(){
+      var output = document.getElementById('output5');
+      output.src = reader.result;
+    };
+    reader.readAsDataURL(event.target.files[0]);
+  };
+  var loadFile6 = function(event) {
+    var reader = new FileReader();
+    reader.onload = function(){
+      var output = document.getElementById('output6');
+      output.src = reader.result;
+    };
+    reader.readAsDataURL(event.target.files[0]);
+  };
+  
+// var clicks = 0;
+
+// function rowAdd(){
+
+//     clicks += 1;
+  
+
+//     for(var i = 0; i < clicks; i++){
+//    // Change the content
+    
+ 
+//     document.getElementsByClassName('myDiv')[i].innerHTML=` <div class="row" id="addrow">
+//                                     <div class="form-group col-md-2">
+                                     
+//                                         <input style="border: .01px solid #969393;" type="text" class="form-control"  name="degree[]" >
+//                                     </div>
+//                                     <div class="form-group col-md-2">
+                                     
+//                                         <input style="border: .01px solid #969393;" type="text" class="form-control" name="institute[]" >
+//                                     </div>
+//                                     <div class="form-group col-md-2">
+                                    
+//                                         <input style="border: .01px solid #969393;" type="text" class="form-control" name="result[]">
+//                                     </div>
+//                                     <div class="form-group col-md-2">
+                                      
+//                                         <input style="border: .01px solid #969393;" type="text" class="form-control" name="year[]" >
+//                                     </div>
+
+//                                 </div>`
+//                             }
+// }
+
+
+
+    </script>
