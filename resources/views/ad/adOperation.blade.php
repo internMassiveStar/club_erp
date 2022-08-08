@@ -1,4 +1,9 @@
 @extends('layouts.master')
+
+@section('title')
+    AD Operation
+@endsection
+
 @section('main-content')
 
 <div class="col-lg-12">

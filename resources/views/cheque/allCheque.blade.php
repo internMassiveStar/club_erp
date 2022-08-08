@@ -1,4 +1,7 @@
 @extends('layouts.master') 
+@section('title')
+    Total Cheque
+@endsection 
 @section('main-content')
 
 <div class="row">

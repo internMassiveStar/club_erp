@@ -1,5 +1,8 @@
 
-@extends('layouts.master') 
+@extends('layouts.master')
+@section('title')
+    Cheque Information
+@endsection 
 @section('main-content')
 
     <div class="col-lg-12">
@@ -172,7 +175,8 @@
                                         <td>{{ $item->cheque_managedby }}</td>
                                         <td>{{ $item->cheque_outby }}</td>
                                         <td>{{ $item->Remarks }}</td>
-                                        <td>{{ $item->attachment }}</td>
+                                        <td><img src="{{ $item->attachment }}" alt="" height="100px" width="100px">
+                                            </td>
                                         <td>{{ $item->insert_by }}</td>
                                         <td>{{ $item->update_by }}</td>
                                         <td><input type="submit" 

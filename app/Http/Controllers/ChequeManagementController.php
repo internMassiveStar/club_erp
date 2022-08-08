@@ -74,6 +74,8 @@ class ChequeManagementController extends Controller
 
 
         }
+        $honored = $req->get('honored_date');  
+        $dishonored = $req->get('dishonored_date');  
         $db->member_id = $req->get('member_id');
         $db->ad_rcs = $req->get('ad_rcs');
         $db->type = $req->get('type');
@@ -82,17 +84,27 @@ class ChequeManagementController extends Controller
         $db->receiving_amount = $req->get('receiving_amount');
         $db->receiving_date = $req->get('receiving_date');
         $db->cheque_date = $req->get('cheque_date');
-        $db->honored_date = $req->get('honored_date');
-        $db->dishonored_date = $req->get('dishonored_date');
+        $db->honored_date = $honored;
+        $db->dishonored_date = $dishonored;
         $db->oldcheque_no = $req->get('oldcheque_no');
         $db->cheque_inby = $req->get('cheque_inby');
         $db->Remarks = $req->get('Remarks');
+        if(!$honored && !$dishonored && ($db->status==1) && ($db->process == 1)){
+            $db->status = 0;
+            $db->process = 0;
+        }
+        elseif($honored || $dishonored){
+            $db->status = 1;
+            $db->process = 1;
+        }
+
         
         if($attachment){
             $db->attachment=$last_img; 
         }
         $db->update_by = Session::get('id');
         $db->update();
+        // need some change code here
         return redirect('/cheque-management');
 
     }
@@ -144,8 +156,78 @@ class ChequeManagementController extends Controller
         return view('cheque.searchbyadorrcsCheque')->with($data);
     }
 
+
+
+    // Cheque Queue
+
     public function chequeQueue(){
-        return view ('cheque.chequeQueue');
+        $all_cheque = DB::table('cheques')
+                        ->select('cheques.*','members.name')
+                        ->leftJoin('members','cheques.member_id','members.member_id')
+                        ->where([['cheques.status','=','0'],['cheques.process','=','0']])
+                        ->get();
+
+        $process = DB::table('cheques')
+                        ->select('cheques.*','members.name')
+                        ->leftJoin('members','cheques.member_id','members.member_id')
+                        ->where([['cheques.status','=','0'],['cheques.process','=','1']])
+                        ->get();
+
+        $bank_approval = DB::table('cheques')
+                        ->select('cheques.*','members.name')
+                        ->leftJoin('members','cheques.member_id','members.member_id')
+                        ->where([['cheques.status','=','1'],['cheques.process','=','0']])
+                        ->get();
+        $honored = DB::table('cheques')
+                        ->select('cheques.*','members.name')
+                        ->leftJoin('members','cheques.member_id','members.member_id')
+                        ->where([['cheques.status','=','1'],['cheques.process','=','1']])
+                        ->whereNotNull('cheques.honored_date')
+                        ->whereNull('dishonored_date')
+                        ->get();
+        $dishonored = DB::table('cheques')
+                        ->select('cheques.*','members.name')
+                        ->leftJoin('members','cheques.member_id','members.member_id')
+                        ->where([['cheques.status','=','1'],['cheques.process','=','1']])
+                        ->whereNotNull('cheques.dishonored_date')
+                        ->whereNull('cheques.honored_date')
+                        ->get();
+                        
+        $After_dishonored_newc_cheque = DB::table('cheques')
+                        ->select('cheques.*','members.name')
+                        ->leftJoin('members','cheques.member_id','members.member_id')
+                        ->where([['cheques.status','=','0'],['cheques.process','=','0'],['cheques.dishonored_date','=','NULL'],['cheques.honored_date','=','NULL'],['cheques.oldcheque_no','!=','NULL']])
+                        ->get();
+        $data = compact('all_cheque','process','bank_approval','honored','dishonored','After_dishonored_newc_cheque');
+                        
+        return view ('cheque.chequeQueue')->with($data);
+    }
+
+    public function chequeQueueProcess($id){
+        $db = Cheque::findorFail($id);
+        $db->process = 1;
+        $db->update();
+        return redirect()->back();
+    }
+
+    public function chequeQueueUpdate(Request $req){
+        $data = DB::table('cheques')
+                    ->select('cheques.*')
+                    ->where([['cheques.status','=','0'],['cheques.process','=','1']])
+                    ->get();
+                    //dd($data);
+        foreach ($data as $key => $value) {
+
+            $db = Cheque::findorFail($value->id);
+            if($db){
+                $db->status = 1;
+                $db->process = 0;
+                $db->cheque_managedby = $req->get('val-username');
+                $db->cheque_outby = $req->get('CarriedName');
+                $db->update();
+            }
+        }
+        return redirect()->back();
     }
     
 }

@@ -1,4 +1,8 @@
 @extends('layouts.master') 
+@section('title')
+    Tomorrow's Cheques
+@endsection 
+
 @section('main-content')
 
 <div class="row">

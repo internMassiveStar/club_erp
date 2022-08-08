@@ -1,8 +1,12 @@
 @extends('layouts.master')
+
+@section('title')
+    Total AD & RCS Table
+@endsection 
+
 @section('main-content')
 
-
-   <div class="row">
+<div class="row">
     <div class="col-12">
         <div class="card">
             <div class="card-body">
@@ -21,7 +25,21 @@
                                 <th>Total Due RCS</th>
                             </tr>
                         </thead>
-                        <tbody>                                          
+                        <tbody>
+                            @isset($data)
+                                @foreach ($data as $item)
+                                <tr>
+                                    <td>{{ $item->member_id }}</td>
+                                    <td>{{ $item->name }}</td>
+                                    <td>{{ $item->total_ad }}</td>
+                                    <td>{{ $item->total_paidad }}</td>
+                                    <td>{{ $item->total_duead }}</td>
+                                    <td>{{ $item->total_rcs }}</td>
+                                    <td>{{ $item->total_paidrcs }}</td>
+                                    <td>{{ $item->total_duercs }}</td>
+                                </tr>
+                                @endforeach
+                            @endisset                                                                  
                         </tbody>
                             <tfoot>
                             <tr>

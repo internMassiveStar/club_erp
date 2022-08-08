@@ -1,6 +1,7 @@
-@extends('layouts.master') 
+@extends('layouts.master')
+@section('title') {{'RCS Operation'}} @endsection
 @section('main-content')
-@section('title') {{'Rcs'}} @endsection
+
 
 <div class="col-lg-12">
     <div class="card">

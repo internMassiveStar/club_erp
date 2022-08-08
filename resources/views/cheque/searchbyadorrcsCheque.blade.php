@@ -1,4 +1,9 @@
 @extends('layouts.master') 
+
+@section('title')
+    Search By AD or RCS
+@endsection 
+
 @section('main-content')
 
 

@@ -1,4 +1,8 @@
 @extends('layouts.master') 
+@section('title')
+    Search By Date
+@endsection 
+
 @section('main-content')
 
 <div class="row">
