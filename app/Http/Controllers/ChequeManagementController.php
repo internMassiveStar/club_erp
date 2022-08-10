@@ -75,8 +75,9 @@ class ChequeManagementController extends Controller
 
         }
         $honored = $req->get('honored_date');  
-        $dishonored = $req->get('dishonored_date');  
-        $db->member_id = $req->get('member_id');
+        $dishonored = $req->get('dishonored_date');
+        $receiving_amount = $req->get('receiving_amount');
+
         $db->ad_rcs = $req->get('ad_rcs');
         $db->type = $req->get('type');
         $db->bank_name = $req->get('bank_name');
@@ -96,6 +97,22 @@ class ChequeManagementController extends Controller
         elseif($honored || $dishonored){
             $db->status = 1;
             $db->process = 1;
+        }
+        if($honored){
+            if($db->ad_rcs == 'AD'){
+                $dbad = Adrcstotal::findorFail($id);
+                $dbad->cheque_ad = $receiving_amount;
+                $dbad->total_paidad += $receiving_amount;
+                $dbad->total_duead -= $receiving_amount;
+                $dbad->update();
+            }
+            else{
+                $dbrcs = Adrcstotal::findorFail($id);
+                $dbrcs->cheque_rcs = $receiving_amount;
+                $dbrcs->total_paidrcs += $receiving_amount;
+                $dbrcs->total_duercs -= $receiving_amount;
+                $dbrcs->update();
+            }
         }
 
         

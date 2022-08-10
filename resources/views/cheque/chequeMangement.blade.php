@@ -14,10 +14,7 @@
                     <form class="mt-5 mb-5 login-input" method="post" action=" {{@$editData ? route('cheque-managementUpdate',$editData->id) : route('cheque-management') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="form-row">
-                            <!--  <div class="form-group col-md-8">
-                                <h6>Cheque ID :</h6>
-                             </div>
--->
+                            
 
                             <div class="form-group col-md-4">
                                 <h6><b>Member ID</b></h6>
@@ -90,10 +87,6 @@
                                 <h6><b>Cheque In By</b></h6>
                                 <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder=" Cheque In By" name="cheque_inby" id="cheque_inby"  value='{{ @$editData->cheque_inby }}' required>
                             </div> 
-                             <!-- <div class="form-group col-md-3">
-                                <h6><b>Cheque Out By</b></h6>
-                                <input style="border: .01px solid #969393;" type="text" class="form-control input-default" placeholder=" Cheque Out By" name="ChequeOutBy" id="ChequeOutBy" required>
-                            </div>  -->
                             
                             <div class="col-lg-12">
                                 
@@ -107,12 +100,13 @@
 
                             
                             <div class="form-group row">
-                            <h6 class="col-lg-4 col-form-label"> Attatchment (Cheque)<span class="text-danger"></span>
-                            </h6>
-                            <div class="col-lg-6">
-                                <input type="file" name="attachment" class="form-control-file" >
+                                <h6 class="col-lg-4 col-form-label"> Attatchment (Cheque)<span class="text-danger"></span>
+                                </h6>
+                                <div class="col-lg-6">
+                                    <input type="file" name="attachment" class="form-control-file" onchange="loadFile(event)">
+                                </div>
+                                <img id="output"  style="width: 1000px;height:400px;"/>
                             </div>
-                    </div>
                         </div>    
                   
                         <button type="submit" class="btn mb-1 btn-success" name="ChequeEntry"> {{ @$editData ? 'Update' : 'Insert' }}</button>
@@ -175,7 +169,7 @@
                                         <td>{{ $item->cheque_managedby }}</td>
                                         <td>{{ $item->cheque_outby }}</td>
                                         <td>{{ $item->Remarks }}</td>
-                                        <td><img src="{{ $item->attachment }}" alt="" height="100px" width="100px">
+                                        <td><img src="{{ $item->attachment }}" alt="" height="100px" width="200px">
                                             </td>
                                         <td>{{ $item->insert_by }}</td>
                                         <td>{{ $item->update_by }}</td>
@@ -223,3 +217,14 @@
     @endisset
     
     @endsection
+
+    <script>
+    var loadFile = function(event) {
+    var reader = new FileReader();
+    reader.onload = function(){
+      var output = document.getElementById('output');
+      output.src = reader.result;
+    };
+    reader.readAsDataURL(event.target.files[0]);
+  };
+    </script>

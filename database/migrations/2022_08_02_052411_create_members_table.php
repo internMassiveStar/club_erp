@@ -29,7 +29,7 @@ return new class extends Migration
             $table->date('joining_date')->nullable();
             $table->string('ad');
             $table->string('msp');
-            $table->string('rcs')->nullable();
+            $table->string('rcs');
             $table->string('reference_id')->nullable();
             $table->string('remarks')->nullable();
             $table->string('a_photo')->nullable();
@@ -42,6 +42,7 @@ return new class extends Migration
             $table->integer('insert_by')->nullable();
             $table->integer('update_by')->nullable();
             $table->integer('status')->default(0);
+            $table->integer('norcs')->default(0);
             $table->integer('role')->default(0);
             $table->rememberToken();
 

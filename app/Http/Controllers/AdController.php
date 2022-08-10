@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Adoperation;
+use App\Models\Adrcstotal;
 use App\Models\Member;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -35,6 +36,14 @@ class AdController extends Controller
         //dd( Session::get('emp_id'));
         
         $db->save();
+
+        if($receiving_tool == 'Cash'){
+            $db = Adrcstotal::findorFail($member_id);
+            $db->cash_ad = $receiving_amount;
+            $db->total_paidad += $receiving_amount;
+            $db->total_duead -= $receiving_amount;
+            $db->update();
+        }
        
 
         return redirect('/ad-operation');
