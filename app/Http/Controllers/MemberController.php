@@ -8,6 +8,8 @@ use App\Models\Member;
 use App\Models\Membereducation;
 use App\Models\Memberpersonal;
 use App\Models\Memberprofession;
+use App\Models\Rcsmaster;
+use App\Models\Adrcstotal;
 use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
@@ -205,7 +207,18 @@ class MemberController extends Controller
         $member->type=$request->type;
         $member->nid=$request->nid;
         $member->joining_date=$request->joining_date;
-        $member->ad=$request->ad;
+        if($member->ad == $request->ad){
+            $member->ad=$request->ad;
+        }
+        else{
+            $member->ad=$request->ad;
+            $total_adrcs = AdRcstotal::findorFail($request->member_id);
+            $total_adrcs->total_ad = $request->ad;
+            $total_adrcs->total_paidad = $total_adrcs->cash_ad+$total_adrcs->cheque_ad;
+            $total_adrcs->total_duead = $request->ad-$total_adrcs->total_paidad;
+            $total_adrcs->update();
+        }
+        
         $member->msp=$request->msp;
         $member->rcs=$request->rcs;
         $member->reference_id=$request->reference_id;
@@ -347,6 +360,10 @@ class MemberController extends Controller
     public function memberCompleteEntry(Request $request){
 
         $member_id=$request->member_id;
+        $member_joiningdate = $request->joining_date;
+        $member_ad=$request->ad;
+        $member_msp=$request->msp;
+        $member_rcs=$request->rcs;
         //attachment photo  
                 $a_photo=$request->file('a_photo');
                 if($a_photo){
@@ -500,25 +517,40 @@ class MemberController extends Controller
             $count_class = count($degree);
      
        
-        for( $i=0; $i <$count_class; $i++){
-           
-            $member_education=new Membereducation();
-            $member_education->member_id= $member_id;
+            for( $i=0; $i <$count_class; $i++){
             
-            $member_education->degree =$degree[$i];
-            $member_education->institute=$institute[$i];
+                $member_education=new Membereducation();
+                $member_education->member_id= $member_id;
+                
+                $member_education->degree =$degree[$i];
+                $member_education->institute=$institute[$i];
+            
+                
+                $member_education->result=$result[$i];
+                $member_education->year=$year[$i];
+                $member_education->insert_by=Session::get('id');
         
-            
-            $member_education->result=$result[$i];
-            $member_education->year=$year[$i];
-            $member_education->insert_by=Session::get('id');
-    
-            $member_education->save();
+                $member_education->save();
 
+            }
         }
-      
-    }
 
+        $rcs_master = new Rcsmaster();
+        $rcs_master->member_id = $member_id; 
+        $rcs_master->rcs_date = date('Y-m-d'); 
+        $rcs_master->rcs_month = date('M'); 
+        $rcs_master->rcs_tobepaid = $member_rcs; 
+        $rcs_master->save();
+
+        $payment_track = new Adrcstotal();
+        $payment_track->member_id = $member_id;
+        $payment_track->total_ad = $member_ad;
+        $payment_track->total_duead = $member_ad;
+        $payment_track->total_rcs = $member_rcs;
+        $payment_track->total_duercs = $member_rcs;
+        $payment_track->save();
+
+        // need some code when old ad and rcs details need.
         
         
         return redirect()->back();

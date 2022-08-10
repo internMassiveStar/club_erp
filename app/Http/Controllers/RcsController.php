@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Rcsoperation;
+use App\Models\Adrcstotal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -20,9 +21,6 @@ class RcsController extends Controller
     }
     public function memberRcsView(){ //id pass hobe member er
         return view('personaldetails.rcsDetails');
-    }
-    public function monthlyProcedure(){
-        return view('rcs.monthlyProcedure');
     }
 
     public function rcsOperationInsert(Request $request){
@@ -42,10 +40,17 @@ class RcsController extends Controller
         $rcs->receiving_tool=$request->receiving_tool;
         $rcs->insert_by= Session::get('id');
         $rcs->save();
+        if($request->receiving_tool == 'Cash'){
+            $db = Adrcstotal::findorFail($request->member_id);
+            $db->cash_rcs = $request->receiving_amount;
+            $db->total_paidrcs += $request->receiving_amount;
+            $db->total_duercs -= $request->receiving_amount;
+            $db->update();
+        }
         return redirect()->back();
 
     }
-    public function rcsUpate($id){
+    public function rcsUpdate($id){
         $editData=Rcsoperation::findOrfail($id);
         return view('rcs.rcsOperation',compact('editData'));
     }

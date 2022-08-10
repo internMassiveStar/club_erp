@@ -104,7 +104,7 @@ Route::group(['middleware' => ['MemberMiddleware']], function () {
               Route::get('/rcs-operation',[RcsController::class,'rcsOperationView'])->name('rcs-operation');
 
               Route::post('/rcs-operation',[RcsController::class,'rcsOperationInsert'])->name('operation-rcs');
-              Route::get('/rcs-update/{id}',[RcsController::class,'rcsUpate'])->name('rcs-update');
+              Route::get('/rcs-update/{id}',[RcsController::class,'rcsUpdate'])->name('rcs-update');
               Route::post('/update-rcs/{id}',[RcsController::class,'updateRcs'])->name('update-rcs');
 
                         
@@ -162,7 +162,11 @@ Route::group(['middleware' => ['MemberMiddleware']], function () {
           
             Route::get('/ad-member_personal',[AdController::class,'memberAdView'])->name('ad-member_personal');
             Route::get('/rcs-member_personal',[RcsController::class,'memberRcsView'])->name('rcs-member_personal');
-            Route::get('/monthly-procedure',[RcsController::class,'monthlyProcedure'])->name('monthly-procedure');
+            Route::get('/monthly-procedure',[TotaladrcsController::class,'monthlyProcedure'])->name('monthly-procedure');
+             Route::get('/monthly-procedure-calculation',[TotaladrcsController::class,'monthlyProcedureCalculation'])->name('monthly-procedure-calculation');
+             Route::get('/norcs',[TotaladrcsController::class,'noRcs'])->name('noRcs');
+             Route::get('/norcs-calculation/{id}',[TotaladrcsController::class,'noRcs_active'])->name('noRcs_active');
+             Route::get('/norcs-calculation/{id}',[TotaladrcsController::class,'noRcs_deactive'])->name('noRcs_deactive');
           });
  
 
