@@ -136,6 +136,11 @@
                 </ul>
             </li>
             @endif
+            <li>
+                <a href="{{ route('change-password') }}" aria-expanded="false">
+                    <i class="icon-badge menu-icon"></i><span class="nav-text">Change Password</span>
+                </a>
+            </li> 
             {{-- <li>
                 <a href="{{ route('change-password') }}" aria-expanded="false">
                     <i class="icon-badge menu-icon"></i><span class="nav-text">Change Password</span>

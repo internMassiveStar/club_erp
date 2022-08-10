@@ -45,7 +45,13 @@ class Kernel extends HttpKernel
         ],
         'MemberMiddleware'=>[
             \App\Http\Middleware\MemberMiddleware::class,   
-        ]
+        ],
+        'EmployeeMiddleware'=>[
+            \App\Http\Middleware\EmployeeMiddleware::class,   
+        ],
+        'AllAcessMiddleware'=>[
+            \App\Http\Middleware\AllAcessMiddleware::class,   
+        ],
     ];
 
     /**

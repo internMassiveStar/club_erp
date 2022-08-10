@@ -351,6 +351,68 @@ class MemberController extends Controller
     public function changePassword(){
         return view('member.changePassword');
     }
+    
+    public function passwordChange(Request $request){
+       
+        $validateData = $request->validate([
+            'newpassword' => 'required'
+
+        ]);
+
+        if(Auth::guard('member')->check()){
+
+        
+      
+            
+                $changepass=Member::select('password','id')->where('email',Auth::guard('member')->user()->email)->first();
+                
+                if (Hash::check($request->oldpassword,$changepass->password)) {
+                    $updatepass=Member::findOrfail($changepass->id);
+                    $updatepass->password=Hash::make($request->newpassword);
+                    $updatepass->update();
+                    return redirect('/dashboard'); 
+            }else{
+                return redirect()->back()->withErrors(['Invalid Old Password']);
+
+            }
+          
+    
+            
+
+        }  else if(Auth::guard('admin')->check()){
+         
+            $changepass=Member::select('password','id')->where('email',$request->email)->first();
+ 
+            if (Hash::check($request->oldpassword,$changepass->password)) {
+                $updatepass=Member::findOrfail($changepass->id);
+                $updatepass->password=Hash::make($request->newpassword);
+                $updatepass->update();
+                return redirect('/dashboard'); 
+        }else{
+            return redirect()->back()->withErrors(['Invalid Old Password']);
+        }
+    
+
+        return redirect()->back()->withErrors(['Invalid email']);
+        
+    }else{
+
+            $changepass=Employee::select('password','id')->where('email',Auth::guard('employee')->user()->email)->first();
+            
+            if (Hash::check($request->oldpassword,$changepass->password)) {
+                $updatepass=Member::findOrfail($changepass->id);
+                $updatepass->password=Hash::make($request->newpassword);
+                $updatepass->update();
+                return redirect('/dashboard'); 
+        }else{
+
+            return redirect()->back()->withErrors(['Invalid Old Password']);
+
+        }
+      
+        
+    }
+}
 //   public function insertEduction(Request $request){
 //     $count_class = count($request->degree);
 
@@ -557,6 +619,11 @@ class MemberController extends Controller
 
 
 
+    }
+
+    //ajax requst for photo
+    public function memberDetail($id){
+        return Member::findOrFail($id);
     }
 
 

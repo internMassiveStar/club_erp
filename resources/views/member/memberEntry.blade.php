@@ -305,105 +305,36 @@
                 <div class="basic-form">
                 
                         <div class="form-row">
-                            <div class="card-body">
+                            <div class="card-body" id="addrow">
                         
-                                <div class="row" id="addrow">
+                                <div class="row">
                                     <div class="form-group col-md-2">
-                                        <h6><b>Member Education Degree-1</b></h6>
+                                        <h6><b>Member Education Degree</b></h6>
                                         <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="  Member Education Degree" name="degree[]" >
                                     </div>
                                     <div class="form-group col-md-2">
-                                        <h6><b>Member Education Institute-1</b></h6>
+                                        <h6><b>Member Education Institute</b></h6>
                                         <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="  Member Education Institute" name="institute[]">
                                     </div>
                                     <div class="form-group col-md-2">
-                                        <h6><b>Member Education Result-1</b></h6>
+                                        <h6><b>Member Education Result</b></h6>
                                         <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="  Member Education Result" name="result[]">
                                     </div>
                                     <div class="form-group col-md-2">
-                                        <h6><b>Member Education Year-1</b></h6>
+                                        <h6><b>Member Education Year</b></h6>
                                         <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="  Member Education Year" name="year[]">
                                     </div>
                                    
                                 </div>
-                                <div id="1" style="display:none;">
-                                <div class="row"  >
-                                    <div class="form-group col-md-2">
-                                      
-                                        <input style="border: .01px solid #969393;" type="text" class="form-control"  name="degree[]" >
-                                    </div>
-                                    <div class="form-group col-md-2">
-                                   
-                                        <input style="border: .01px solid #969393;" type="text" class="form-control" name="institute[]">
-                                    </div>
-                                    <div class="form-group col-md-2">
-                                        
-                                        <input style="border: .01px solid #969393;" type="text" class="form-control" name="result[]">
-                                    </div>
-                                    <div class="form-group col-md-2">
-                                     
-                                        <input style="border: .01px solid #969393;" type="text" class="form-control"  name="year[]">
-                                    </div>
-                                   
-                                </div>
-                                </div>
-                                 <div id="2" style="display:none;">
-                                    <div class="row"  >
-                                        <div class="form-group col-md-2">
-                                          
-                                            <input style="border: .01px solid #969393;" type="text" class="form-control"  name="degree[]" >
-                                        </div>
-                                        <div class="form-group col-md-2">
-                                       
-                                            <input style="border: .01px solid #969393;" type="text" class="form-control" name="institute[]">
-                                        </div>
-                                        <div class="form-group col-md-2">
-                                            
-                                            <input style="border: .01px solid #969393;" type="text" class="form-control"  name="result[]">
-                                        </div>
-                                        <div class="form-group col-md-2">
-                                         
-                                            <input style="border: .01px solid #969393;" type="text" class="form-control" name="year[]">
-                                        </div>
-                                       
-                                    </div>
-                                    </div> 
-                                    <div id="3" style="display:none;">
-                                        <div class="row"  >
-                                            <div class="form-group col-md-2">
-                                              
-                                                <input style="border: .01px solid #969393;" type="text" class="form-control"  name="degree[]" >
-                                            </div>
-                                            <div class="form-group col-md-2">
-                                           
-                                                <input style="border: .01px solid #969393;" type="text" class="form-control"  name="institute[]">
-                                            </div>
-                                            <div class="form-group col-md-2">
-                                                
-                                                <input style="border: .01px solid #969393;" type="text" class="form-control"  name="result[]">
-                                            </div>
-                                            <div class="form-group col-md-2">
-                                             
-                                                <input style="border: .01px solid #969393;" type="text" class="form-control"  name="year[]">
-                                            </div>
-                                           
-                                        </div>
+                         
+                                 
                                         </div>
     
                                 </div> 
 
-                               
-                                 {{-- <div class="myDiv">
-    
-                                </div>
-                                <div class="myDiv">
-    
-                                </div>
-                                <div class="myDiv">
-    
-                                </div>  --}}
+                          
                       
-                                <a class="btn mb-1 btn-success"  onclick="rowAdd()" >Add Row </a> 
+                                <a class="btn mb-1 btn-success"   onclick="rowAdd()" >Add Row </a> 
                                 </div>
                                 
                             </div>
@@ -417,7 +348,7 @@
                             
                        
                        
-                </div>
+        
             
      
  </details>
@@ -486,30 +417,43 @@
 
 
 <script>
-var clicks=0;
+
 function rowAdd(){
-    clicks += 1;
-    if(clicks==1){
-     
-    var x = document.getElementById("1");
-    if (x.style.display === "none") {
-    x.style.display = "inline";
-    }
-    
-  }
-  if(clicks==2){
-    var y = document.getElementById("2");
-    if (y.style.display === "none") {
-    y.style.display = "inline";
-  }
+                 $(`<div class="row" >
+                                    <div class="form-group col-md-2">
+                                        <h6><b>Member Education Degree</b></h6>
+                                  <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="  Member Education Degree" name="degree[]" >
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                        <h6><b>Member Education Institute</b></h6>
+                                        <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="  Member Education Institute" name="institute[]">
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                        <h6><b>Member Education Result</b></h6>
+                                        <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="  Member Education Result" name="result[]">
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                        <h6><b>Member Education Year</b></h6>
+                                        <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="  Member Education Year" name="year[]">
+                                    </div>
+                                   
+                                </div>
+                         `)
+                
+                .appendTo("#addrow");  
+//   if(clicks==2){
+//     var y = document.getElementById("2");
+//     if (y.style.display === "none") {
+//     y.style.display = "inline";
+//   }
  
-}
-if(clicks==3){
-    var z= document.getElementById("3");
-    if (z.style.display === "none") {
-    z.style.display = "inline";
-  }
-  }
+// }
+// if(clicks==3){
+//     var z= document.getElementById("3");
+//     if (z.style.display === "none") {
+//     z.style.display = "inline";
+//   }
+//   }
 }
 
 

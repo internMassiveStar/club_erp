@@ -9,6 +9,8 @@
                 <a class="text-center">
                     <h4>Member Table</h4>
                 </a>
+
+              
                 <div class="table-responsive">
                     <table class="table table-striped table-bordered zero-configuration"
                         id="Membertable">
@@ -57,18 +59,23 @@
                             <td>{{ $item->rcs }}</td>
                             <td>{{ $item->reference_id }}</td>
                             <td>{{ $item->Remarks }}</td>
-                            <td>
-                           
-                        <a href="{{ @$item->a_photo ? url('/' . $item->a_photo) : url('a_photo/no-image.png') }}">
-                           <img style="width: 50px;height:50px;" 
-                           src="{{ @$item->a_photo ? url('/' . $item->a_photo) : url('a_photo/no-image.png') }}"
-                           alt="">
-                        </a>
+                     
+
+
+
+                            <td> 
+                               
+                              
+                                <button class="detail" data-toggle="modal" data-target="#myModal" data-id="{{ $item->id }}">  <img style="width: 50px;height:50px;"
+                                    src="{{ @$item->a_photo ? url('/' . $item->a_photo) : url('a_photo/no-image.png') }}"
+                                    alt=""></button>
+                               
                             </td>
+                      
                             <td>
-                                <img style="width: 50px;height:50px;"
-                                src="{{ @$item->a_nid ? url('/' . $item->a_nid) : url('a_nid/no-image.png') }}"
-                                alt="">
+                                 <button class="detail1" data-toggle="modal" data-target="#myModal1" n-id="{{ $item->id }}">  <img style="width: 50px;height:50px;"
+                                    src="{{ @$item->a_nid ? url('/' . $item->a_nid) : url('a_nid/no-image.png') }}"
+                                    alt=""></button>
                                
                                 </td>
                             <td>
@@ -84,6 +91,61 @@
                         </tbody>
                       
                     </table>
+
+
+                    <div class="modal" tabindex="-1" id="myModal">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                            
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                                <img id="member_photo"  style="width: 80%;height:70%;" />
+                               
+                              <p id="product-desc">
+                               
+
+                              </p>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="modal" tabindex="-1" id="myModal1">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                            
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                                
+                                <img id="member_nid"  style="width: 80%;height:70%;" />
+                              <p id="product-desc">
+                               
+
+                              </p>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+
+
+
+
                 </div>
 @isset($editData)
     
@@ -316,6 +378,67 @@
 
 @endsection
 
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
+
+
+<script>
+    $('#myModal').modal('hide');
+    $(document).ready(function() {
+      $('.detail').click(function() {
+        const id = $(this).attr('data-id');
+        $.ajax({
+          url: 'member-detail/'+id,
+          type: 'GET',
+         
+          data: {
+            "id": id
+          },
+          success:function(data) {
+            console.log(data);
+            // $('#product-title').html(data.name);
+            // $('#product-desc').html(data.member_id);
+            $('#member_photo').attr('src', data.a_photo);
+            //  $('#member_nid').attr('src', data.a_nid);
+          }
+        })
+      
+      });
+    })
+
+
+  
+</script>
+
+<script>
+    $('#myModal1').modal('hide');
+    $(document).ready(function() {
+      $('.detail1').click(function() {
+        const id = $(this).attr('n-id');
+        $.ajax({
+          url: 'member-detail/'+id,
+          type: 'GET',
+        
+          data: {
+            "id": id
+          },
+          success:function(data) {
+            console.log(data);
+            // $('#product-title').html(data.name);
+            // $('#product-desc').html(data.member_id);
+          
+             $('#member_nid').attr('src', data.a_nid);
+          }
+        })
+      
+      });
+    })
+
+
+  
+</script>
+
+
 <script>
 
 
@@ -376,6 +499,7 @@ var loadFile = function(event) {
     reader.readAsDataURL(event.target.files[0]);
   };
    
+
 </script>
     <script>
         $(document).ready(function () {
