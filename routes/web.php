@@ -54,13 +54,13 @@ Route::post('/login-member',[MemberController::class,'loginMember'])->name('logi
 
 
 
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
 
-Route::group(['middleware' => ['MemberMiddleware']], function () {
-    if(['middleware' => ['auth:employee']] || ['middleware' => ['auth:admin']]){
-        Route::group([], function(){
+
+
+
+
+Route::group(['middleware' => ['EmployeeMiddleware']], function () {
+   
        
           
             Route::get('/member-entry', [MemberController::class, 'memberEntry'])->name('member-entry');
@@ -82,6 +82,7 @@ Route::group(['middleware' => ['MemberMiddleware']], function () {
             Route::post('member-complete-entry',[MemberController::class,'memberCompleteEntry'])->name('member-complete-entry');
             Route::get('member-update/{id}',[MemberController::class,'memberUpdate'])->name('member-update');
             Route::post('update-member/{id}',[MemberController::class,'updateMember'])->name('update-member');
+            Route::get('member-detail/{id}',[MemberController::class,'memberDetail'])->name('member-detail');
 
             
                   
@@ -136,34 +137,59 @@ Route::group(['middleware' => ['MemberMiddleware']], function () {
                 Route::post('/chequeQueueUpdate-cheque',[ChequeManagementController::class,'chequeQueueUpdate'])->name('chequeQueueUpdate-cheque');
                 
               
-           
+                
          
-                 Route::get('/change-password', [MemberController::class, 'changePassword'])->name('change-password');
-                     
+                //  Route::get('/change-password', [MemberController::class, 'changePassword'])->name('change-password');
+                //  Route::post('/password-change', [MemberController::class, 'passwordChange'])->name('password-change');  
+
                 //  Route::get('/ad-member_personal',[AdController::class,'memberAdView'])->name('ad-member_personal');
                 //  Route::get('/rcs-member_personal',[RcsController::class,'memberRcsView'])->name('rcs-member_personal');
             
-          });
-    } 
+    
+    
     });
 
-        Route::group(['middleware' => ['auth:member']], function(){
+
+
+
+    Route::group(['middleware' => ['MemberMiddleware']], function () {
+      
+        Route::get('/ad-member_personal',[AdController::class,'memberAdView'])->name('ad-member_personal');
+        Route::get('/rcs-member_personal',[RcsController::class,'memberRcsView'])->name('rcs-member_personal');
+
+
+        });
+
+    // if(['middleware' => ['auth:member']] || ['middleware' => ['auth:admin']]){
+
+    //        Route::group([], function(){
        
-            Route::get('/change-password', [MemberController::class, 'changePassword'])->name('change-password');
-            
-            //Member personal Ad & Rcs cash & cheque details
-            Route::get('/ad-member_personal',[AdController::class,'memberAdView'])->name('ad-member_personal');
-            Route::get('/rcs-member_personal',[RcsController::class,'memberRcsView'])->name('rcs-member_personal');
-          });
+          
+    //       });
+    // }
+
     
 
 
           Route::group(['middleware' => ['auth:admin']], function(){
-          
-            Route::get('/ad-member_personal',[AdController::class,'memberAdView'])->name('ad-member_personal');
-            Route::get('/rcs-member_personal',[RcsController::class,'memberRcsView'])->name('rcs-member_personal');
+        
             Route::get('/monthly-procedure',[RcsController::class,'monthlyProcedure'])->name('monthly-procedure');
+           
           });
+
+
+          
+          Route::group(['middleware' => ['AllAcessMiddleware']], function(){
+            
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+        
+          
+            Route::get('/change-password', [MemberController::class, 'changePassword'])->name('change-password');
+            Route::post('/password-change', [MemberController::class, 'passwordChange'])->name('password-change');  
+          });
+ 
  
 
 

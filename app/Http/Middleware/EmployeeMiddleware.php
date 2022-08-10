@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class MemberMiddleware
+class EmployeeMiddleware
 {
     /**
      * Handle an incoming request.
@@ -15,16 +15,16 @@ class MemberMiddleware
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
-
- 
     public function handle(Request $request, Closure $next)
-    
     {
-        if (Auth::guard('admin')->check() || Auth::guard('member')->check()) 
+        
+    {
+        if (Auth::guard('admin')->check() || Auth::guard('employee')->check()) 
         return $next($request);
        
         else
         return redirect('/');
         return $next($request);
+    }
     }
 }
