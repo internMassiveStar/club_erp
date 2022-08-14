@@ -66,15 +66,19 @@ Route::group(['middleware' => ['EmployeeMiddleware']], function () {
             Route::get('/member-entry', [MemberController::class, 'memberEntry'])->name('member-entry');
             
             Route::get('/member-table', [MemberController::class, 'memberTable'])->name('member-table');
+
             Route::get('/Professional-information', [MemberController::class, 'professionalInfo'])->name('professional-info');
+            Route::post('/Professional-information', [MemberController::class, 'professionalInfoEntry'])->name('professional-info-entry');
             Route::get('/update-profession/{id}', [MemberController::class, 'updateprofessionalInfo'])->name('update-profession');
             Route::post('/profession-update/{id}', [MemberController::class, 'professionalInfoUpdate'])->name('profession-update');
 
             Route::get('/personal-information', [MemberController::class, 'personalInfo'])->name('personal-info');
-
+            Route::post('/personal-information', [MemberController::class, 'personalInfoEntry'])->name('personal-info-entry');
             Route::get('/update-personal/{id}', [MemberController::class, 'updatepersonalInfo'])->name('update-personal');
             Route::post('/personal-update/{id}', [MemberController::class, 'personalInfoUpdate'])->name('personal-update');
+
             Route::get('/eduction-info', [MemberController::class, 'educationInfo'])->name('education-info');
+            Route::post('/eduction-info-entry', [MemberController::class, 'educationInfoEntry'])->name('education-info-entry');
             Route::get('/update-education/{id}', [MemberController::class, 'updateEducation'])->name('update-education');
             Route::post('/education-update/{id}', [MemberController::class, 'educationUpdate'])->name('education-update');
 
@@ -171,24 +175,24 @@ Route::group(['middleware' => ['EmployeeMiddleware']], function () {
     
 
 
-          Route::group(['middleware' => ['auth:admin']], function(){
+        Route::group(['middleware' => ['auth:admin']], function(){
 
         
-             Route::get('/monthly-procedure',[RcsController::class,'monthlyProcedure'])->name('monthly-procedure');
-             Route::get('/monthly-procedure-calculation',[TotaladrcsController::class,'monthlyProcedureCalculation'])->name('monthly-procedure-calculation');
-             Route::get('/norcs',[TotaladrcsController::class,'noRcs'])->name('noRcs');
-             Route::get('/norcs-calculation/{id}',[TotaladrcsController::class,'noRcs_active'])->name('noRcs_active');
-             Route::get('/norcs-calculation/{id}',[TotaladrcsController::class,'noRcs_deactive'])->name('noRcs_deactive');
+            Route::get('/monthly-procedure',[TotaladrcsController::class,'monthlyProcedure'])->name('monthly-procedure');
+            Route::get('/monthly-procedure-calculation',[TotaladrcsController::class,'monthlyProcedureCalculation'])->name('monthly-procedure-calculation');
+            Route::get('/norcs',[TotaladrcsController::class,'noRcs'])->name('noRcs');
+            Route::get('/norcs/{id}',[TotaladrcsController::class,'noRcs_active'])->name('noRcs_active');
+            Route::get('/norcs-calculation/{id}',[TotaladrcsController::class,'noRcs_deactive'])->name('noRcs_deactive');
 
-          });
+        });
 
 
           
-          Route::group(['middleware' => ['AllAcessMiddleware']], function(){
+        Route::group(['middleware' => ['AllAcessMiddleware']], function(){
             
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+            Route::get('/dashboard', function () {
+                return view('dashboard');
+            })->name('dashboard');
         
           
             Route::get('/change-password', [MemberController::class, 'changePassword'])->name('change-password');

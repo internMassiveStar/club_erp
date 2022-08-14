@@ -257,6 +257,27 @@ class MemberController extends Controller
        
         return view('member.professionalInfo',compact('data'));
     }
+    public function professionalInfoEntry(Request $request){
+
+        $member_id = Session::get("insert_member_id");
+        if($member_id){
+            $member_profession=new Memberprofession();
+            $member_profession->member_id=  $member_id;
+            $member_profession->member_profession=$request->member_profession;
+            $member_profession->member_designation=$request->member_designation;
+            $member_profession->office_name=$request->office_name;
+            $member_profession->office_address=$request->office_address;
+            $member_profession->insert_by=Session::get('id');
+            $member_profession->save();
+            Session::flash('success',"Member Professional Info Insert Done");
+        }
+        else{
+            Session::flash('error',"Member Professional Info Insert Error");
+        }
+        
+        return back();
+        
+    }
     public function updateprofessionalInfo($id){
         $data=DB::table('memberprofessions')
                  ->leftjoin('members','members.member_id','memberprofessions.member_id')
@@ -286,6 +307,33 @@ class MemberController extends Controller
       
         return view('member.personalInfo',compact('data'));
     }
+
+    public function personalInfoEntry(Request $request){
+
+        $member_id = Session::get("insert_member_id");
+        if($member_id){
+            $member_personal=new Memberpersonal();
+            $member_personal->member_id=$member_id;
+            $member_personal->sopouse_name=$request->sopouse_name;
+            $member_personal->father_name=$request->father_name;
+            $member_personal->mother_name=$request->mother_name;
+            $member_personal->children_name_1=$request->children_name_1;
+            $member_personal->children_name_2=$request->children_name_2;
+            $member_personal->children_name_3=$request->children_name_3;
+            $member_personal->date_birth=$request->date_birth;
+            $member_personal->home_district=$request->home_district;
+            $member_personal->insert_by=Session::get('id');
+            $member_personal->save();
+            Session::flash('success',"Member Personal Info Insert Done");
+        }
+        else{
+            Session::flash('error',"Member Personal Info Insert Error");
+        }
+        
+        return back();
+        
+    }
+
     public function updatepersonalInfo($id){
         $data=DB::table('memberpersonals')
         ->leftjoin('members','members.member_id','memberpersonals.member_id')
@@ -312,6 +360,8 @@ class MemberController extends Controller
         $member_personal->update();
         return redirect()->back();
     }
+
+
     public function educationInfo(){
         $data=DB::table('membereducations')
                   ->leftJoin('members','members.member_id','membereducations.member_id')
@@ -321,6 +371,44 @@ class MemberController extends Controller
            
         return view('member.educationInfo',compact('data'));
     }
+
+    public function educationInfoEntry(Request $request){
+
+        $member_id = Session::get("insert_member_id");
+         if($member_id && $request->degree != null){
+            $degree = $request->degree;
+            $institute = $request->institute;
+            $result = $request->result;
+            $year = $request->year;
+            // dd($request->all());
+            // dd(count($degree));
+       
+            for( $i=0; $i < count($degree); $i++){
+            
+                $member_education=new Membereducation();
+                $member_education->member_id= $member_id;
+                
+                $member_education->degree =$degree[$i];
+                $member_education->institute=$institute[$i];
+            
+                
+                $member_education->result=$result[$i];
+                $member_education->year=$year[$i];
+                $member_education->insert_by=Session::get('id');
+        
+                $member_education->save();
+
+            }
+            Session::flash('success',"Member Education Info Insert Done");
+        }
+        else{
+            Session::flash('error',"Member Education Info Insert Error");
+        }
+        
+        return back();
+        
+    }
+
     public function updateEducation($id){
         $editData=Membereducation::findOrfail($id);
         $data=DB::table('membereducations')
@@ -543,59 +631,16 @@ class MemberController extends Controller
         }
         $member->save();
 
-        $member_profession=new Memberprofession();
-        $member_profession->member_id=  $member_id;
-        $member_profession->member_profession=$request->member_profession;
-        $member_profession->member_designation=$request->member_designation;
-        $member_profession->office_name=$request->office_name;
-        $member_profession->office_address=$request->office_address;
-        $member_profession->insert_by=Session::get('id');
-        $member_profession->save();
+        
 
-        $member_personal=new Memberpersonal();
-        $member_personal->member_id=$member_id;
-        $member_personal->sopouse_name=$request->sopouse_name;
-        $member_personal->father_name=$request->father_name;
-        $member_personal->mother_name=$request->mother_name;
-        $member_personal->children_name_1=$request->children_name_1;
-        $member_personal->children_name_2=$request->children_name_2;
-        $member_personal->children_name_3=$request->children_name_3;
-        $member_personal->date_birth=$request->date_birth;
-        $member_personal->home_district=$request->home_district;
-        $member_personal->insert_by=Session::get('id');
-        $member_personal->save();
+        
 
 
 
 
     
   
-        if($request->degree != null){
-            $degree = array_values(array_filter($request->degree));
-            $institute = array_values(array_filter($request->institute));
-            $result = array_values(array_filter($request->result));
-            $year = array_values(array_filter($request->year));
-
-            $count_class = count($degree);
-     
        
-            for( $i=0; $i <$count_class; $i++){
-            
-                $member_education=new Membereducation();
-                $member_education->member_id= $member_id;
-                
-                $member_education->degree =$degree[$i];
-                $member_education->institute=$institute[$i];
-            
-                
-                $member_education->result=$result[$i];
-                $member_education->year=$year[$i];
-                $member_education->insert_by=Session::get('id');
-        
-                $member_education->save();
-
-            }
-        }
 
         $rcs_master = new Rcsmaster();
         $rcs_master->member_id = $member_id; 
@@ -613,8 +658,8 @@ class MemberController extends Controller
         $payment_track->save();
 
         // need some code when old ad and rcs details need.
-        
-        
+        Session::put("insert_member_id",$member_id);
+        Session::flash('success',"Member Info Insert Done");
         return redirect()->back();
 
 

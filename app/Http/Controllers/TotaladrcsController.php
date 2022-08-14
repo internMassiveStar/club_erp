@@ -88,10 +88,12 @@ class TotaladrcsController extends Controller
                             ->where('norcs','=','0')
                             ->get();
             foreach ($member as $key => $value) {
-                $rcs_master = new Rcsmaster();$rcs_master->member_id = $value->member_id;
+                $rcs_master = new Rcsmaster();
+                $rcs_master->member_id = $value->member_id;
                 $rcs_master->rcs_date = $date;
                 $rcs_master->rcs_month = $month;
                 $rcs_master->rcs_tobepaid = $value->rcs;
+                $rcs_master->save();
             }
             
             $rcs_masterinfo = DB::table('rcsmasters')

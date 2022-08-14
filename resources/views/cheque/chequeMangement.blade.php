@@ -105,7 +105,7 @@
                                 <div class="col-lg-6">
                                     <input type="file" name="attachment" class="form-control-file" onchange="loadFile(event)">
                                 </div>
-                                <img id="output"  style="width: 1000px;height:400px;"/>
+                                <img id="output"  style="width: 100%;height:80%;"/>
                             </div>
                         </div>    
                   
