@@ -305,7 +305,8 @@
                 <div class="basic-form">
                 
                         <div class="form-row">
-                            <div class="card-body" id="addrow">
+                            <div class="card-body" >
+                                <div class="wraper-input">
                         
                                 <div class="row">
                                     <div class="form-group col-md-2">
@@ -329,6 +330,7 @@
                          
                                  
                                         </div>
+                                    </div>
     
                                 </div> 
 
@@ -417,30 +419,51 @@
 
 
 <script>
+    var clicks = 0;
 
 function rowAdd(){
+
+    clicks += 1;
+  
                  $(`<div class="row" >
                                     <div class="form-group col-md-2">
                                         <h6><b>Member Education Degree</b></h6>
-                                  <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="  Member Education Degree" name="degree[]" >
+                                  <input style="border: .01px solid #969393;" type="text"  data-id="${clicks+1}" class="form-control" placeholder="Member Education Degree"  name="degree[]" >
                                     </div>
                                     <div class="form-group col-md-2">
                                         <h6><b>Member Education Institute</b></h6>
-                                        <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="  Member Education Institute" name="institute[]">
+                                        <input style="border: .01px solid #969393;" type="text" data-id="${clicks+2}" class="form-control" placeholder="  Member Education Institute" name="institute[]">
                                     </div>
                                     <div class="form-group col-md-2">
                                         <h6><b>Member Education Result</b></h6>
-                                        <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="  Member Education Result" name="result[]">
+                                        <input style="border: .01px solid #969393;" type="text" data-id="${clicks+3}" class="form-control" placeholder="  Member Education Result" name="result[]">
                                     </div>
                                     <div class="form-group col-md-2">
                                         <h6><b>Member Education Year</b></h6>
-                                        <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="  Member Education Year" name="year[]">
+                                        <input style="border: .01px solid #969393;" type="text" data-id="${clicks+4}" class="form-control" placeholder="  Member Education Year" name="year[]">
                                     </div>
                                    
                                 </div>
                          `)
                 
-                .appendTo("#addrow");  
+                .appendTo(".wraper-input");  
+
+
+                // var html = '';
+                // html +=' <div class="row" '
+                // html +=' <div class="form-group col-md-2">'
+                // html +=' <input  style="border: .01px solid #969393;" type="text" class="form-control"  name="agree" >'
+                // html +='</div>'
+                // html +='</div>'
+                // $('#addrow').append(html);
+
+
+             
+
+
+
+
+
 //   if(clicks==2){
 //     var y = document.getElementById("2");
 //     if (y.style.display === "none") {

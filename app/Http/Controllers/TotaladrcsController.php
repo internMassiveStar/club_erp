@@ -66,12 +66,12 @@ class TotaladrcsController extends Controller
         //     dd($users);                    
 
         // }
-        $press = !$press_active;
-        if(date('d')=='1' && $press == false){
-            $press_active = false;
-            calculation();
-            return view('rcs.monthlyProcedure');
-        }
+        // $press = !$press_active;
+        // if(date('d')=='1' && $press == false){
+        //     $press_active = false;
+        //     calculation();
+        //     return view('rcs.monthlyProcedure');
+        // }
         // elseif (date('d')=='2' && $press == false) {
         //     $press_active = false;
         //     calculation();
@@ -81,6 +81,8 @@ class TotaladrcsController extends Controller
         
     }
     public function calculation(){
+
+
             $month = date('M');
             $date = date('Y-m-d');
             $member = DB::table('members')
@@ -88,10 +90,12 @@ class TotaladrcsController extends Controller
                             ->where('norcs','=','0')
                             ->get();
             foreach ($member as $key => $value) {
-                $rcs_master = new Rcsmaster();$rcs_master->member_id = $value->member_id;
+                $rcs_master = new Rcsmaster();
+                $rcs_master->member_id = $value->member_id;
                 $rcs_master->rcs_date = $date;
                 $rcs_master->rcs_month = $month;
                 $rcs_master->rcs_tobepaid = $value->rcs;
+                $rcs_master->save();
             }
             
             $rcs_masterinfo = DB::table('rcsmasters')

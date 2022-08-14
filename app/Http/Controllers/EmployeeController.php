@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Employee;
+use App\Models\AdRcstotal;
+
+
+
 use Illuminate\Support\Facades\Session;
 
 use Illuminate\Http\Request;
@@ -16,14 +20,10 @@ class EmployeeController extends Controller
 {
     public function employeeRegister(){
     
-    //   $a= Auth::guard('employee')->user()->name;
-    //   dd($a);
-    
+            $data=Employee::get();
 
-    $data=Employee::get();
-
- 
-        return view('employee.employeeRegister',compact('data'));
+        
+         return view('employee.employeeRegister',compact('data'));
     }
 
     public function registerEmployee(Request $request){
@@ -122,5 +122,9 @@ class EmployeeController extends Controller
         $employee->update();
         return redirect(route('rcs-operation'));
 
+    }
+
+    public function employeeDetail($id){
+        return Employee::findOrFail($id);
     }
 }

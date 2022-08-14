@@ -19,8 +19,8 @@ class RcsController extends Controller
                 // dd($data);
         return view('rcs.rcsOperation',compact('data'));
     }
-    public function memberRcsView(){ //id pass hobe member er
-        return view('personaldetails.rcsDetails');
+    public function monthlyProcedure(){ 
+        return view('rcs.monthlyProcedure');
     }
 
     public function rcsOperationInsert(Request $request){
@@ -40,15 +40,20 @@ class RcsController extends Controller
         $rcs->receiving_tool=$request->receiving_tool;
         $rcs->insert_by= Session::get('id');
         $rcs->save();
-        if($request->receiving_tool == 'Cash'){
-            $db = Adrcstotal::findorFail($request->member_id);
-            $db->cash_rcs = $request->receiving_amount;
-            $db->total_paidrcs += $request->receiving_amount;
-            $db->total_duercs -= $request->receiving_amount;
-            $db->update();
-        }
+     
         return redirect()->back();
 
+    }
+    public function rcsConfirm($id){
+        $rcs=Rcsoperation::findOrfail($id);
+        $db = Adrcstotal::where('member_id',$rcs->member_id)->first();
+            $db->cash_rcs += $rcs->receiving_amount;
+            $db->total_paidrcs += $rcs->receiving_amount;
+            $db->total_duercs -= $rcs->receiving_amount;
+            $db->update();
+        $rcs->status=1;
+        $rcs->update();
+        return redirect()->back();    
     }
     public function rcsUpdate($id){
         $editData=Rcsoperation::findOrfail($id);
@@ -68,9 +73,25 @@ class RcsController extends Controller
         $rcs->receiving_amount=$request->receiving_amount;
         $rcs->receiving_tool=$request->receiving_tool;
         $rcs->update_by= Session::get('id');
+       
+      
         $rcs->update();
+
         return redirect(route('rcs-operation'));
 
     }
-   
+   public function memberRcsView(){
+
+    $data=DB::table('rcsoperations')->where('receiving_tool','Cash')->where('member_id',Session::get('id'))->get();
+    $cheques_data=DB::table('rcsoperations')
+                      ->join('cheques','cheques.member_id','rcsoperations.member_id')
+                      ->select('cheques.*','rcsoperations.receiving_tool','rcsoperations.receiving_date')
+                      ->where('rcsoperations.receiving_tool','Cheque')
+                      ->where('cheques.ad_rcs','RCS')
+                      ->where('rcsoperations.member_id',Session::get('id'))
+                      ->get();
+                   
+
+    return view('personaldetails.rcsdetails',compact('data','cheques_data'));
+   }
 }

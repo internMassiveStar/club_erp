@@ -31,7 +31,7 @@ class MemberController extends Controller
           
             if (Hash::check($request->password,$password->password) && $password->role==0) {
                 Auth::guard('member')->attempt(['email' => $request->email, 'password' => $request->password],$request->get('remember'));
-
+                Session::put('id',Auth::guard('member')->user()->member_id);
                 return redirect('/dashboard');     
             }else if(Hash::check($request->password,$password->password) && $password->role==1){
                 Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password],$request->get('remember'));
@@ -421,7 +421,7 @@ class MemberController extends Controller
     
     public function memberCompleteEntry(Request $request){
 
-        $member_id=$request->member_id;
+         $member_id=$request->member_id;
         $member_joiningdate = $request->joining_date;
         $member_ad=$request->ad;
         $member_msp=$request->msp;
@@ -569,7 +569,7 @@ class MemberController extends Controller
 
 
     
-  
+      
         if($request->degree != null){
             $degree = array_values(array_filter($request->degree));
             $institute = array_values(array_filter($request->institute));
@@ -577,7 +577,7 @@ class MemberController extends Controller
             $year = array_values(array_filter($request->year));
 
             $count_class = count($degree);
-     
+        
        
             for( $i=0; $i <$count_class; $i++){
             

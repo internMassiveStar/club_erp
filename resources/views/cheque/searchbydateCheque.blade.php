@@ -52,7 +52,14 @@
                                 <td>{{ $item->cheque_managedby }}</td>
                                 <td>{{ $item->cheque_outby }}</td>
                                 <td>{{ $item->Remarks }}</td>
-                                <td>{{ $item->attachment }}</td>
+                                <td> 
+                               
+                              
+                                    <button class="detail" data-toggle="modal" data-target="#myModal" data-id="{{ $item->id }}">  <img style="width: 100px;height:50px;"
+                                        src="{{ @$item->attachment ? url('/' . $item->attachment) : url('a_photo/no-image.png') }}"
+                                        alt=""></button>
+                                   
+                                </td>
                             </tr>
                                 
                             @endforeach
@@ -87,6 +94,7 @@
     </div>
 </div>
 
+@include('layouts.modal.modal')
 
 
 @endsection

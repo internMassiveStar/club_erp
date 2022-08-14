@@ -1,4 +1,6 @@
 @extends('layouts.master')
+@section('title') {{'Ad Details '}} @endsection
+
 @section('main-content')
 
 
@@ -11,22 +13,32 @@
                         <table class="table table-striped table-bordered zero-configuration" id="Mytable">
                             <thead>
                                 <tr>
-                                    <th>MemberID</th>
-                                    <th>Member Name</th>
+                            
+                             
                                     <th>ReceivingDate</th>
+                                    <th>ReceivingTime</th>
                                     <th>ReceivingAmount</th>
-                                    <th>EmployeeID</th>
+                                    <th>Receipt By</th>
                                 </tr>
                             </thead>
                             <tbody>   
+                                <tr>
+                                    @foreach ($data as $item )
+                                    <td>{{ $item->receiving_date }}</td>
+                                    <td>{{ \Carbon\Carbon::parse( $item->receiving_date)->diffForHumans() }}</td>
+                                    <td>{{ $item->receiving_amount }}</td>
+                                    <td>{{ $item->insert_emp_id }}</td>
+
+                                   
+                                        
+                                  
+                                </tr>
+                                @endforeach
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th>MemberID</th>
-                                    <th>Member Name</th>
-                                    <th>ReceivingDate</th>
-                                    <th>ReceivingAmount</th>
-                                    <th>EmployeeID</th>
+                                    <th>Total Ad Cash</th>
+                                    <th>{{ $data->sum('receiving_amount') }}</th>
                                 </tr>
                             </tfoot>
                         </table>
@@ -46,27 +58,37 @@
                             <tr>
                                     <th>Cheque No</th>
                                     <th>Cheque Type</th>
-                                    <th>Bank Name</th>
+                                    
                                     <th>Cheque Amount</th>
+                                    <th>Bank Name</th>
                                     <th>Cheque ReceivingDate</th>
                                     <th>Cheque Date</th>
                                     <th>Honored Date</th>
                                     <th>Dishonored Date</th>
+                                    <th>Reciept By</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                <tr>
+                                @foreach ($cheques_data as $item )
+                                <td>{{ $item->cheque_no }}</td>
+                                <td>{{ $item->type }}</td>
+                                <td>{{ $item->receiving_amount }}</td>
+                                <td>{{ $item->bank_name }}</td>
+                                <td>{{ $item->receiving_date }}</td>
+                                <td>{{ $item->cheque_date }}</td>
+                                <td>{{ $item->honored_date }}</td>
+                                <td>{{ $item->dishonored_date }}</td>
+                                <td>{{ $item->cheque_inby }}</td>
+                              
+                            </tr>
+                            @endforeach
                             </tbody>
                             <tfoot>
                                 <tr>
                                     
-                                    <th>Cheque No</th>
-                                    <th>Cheque Type</th>
-                                    <th>Bank Name</th>
-                                    <th>Cheque Amount</th>
-                                    <th>Cheque ReceivingDate</th>
-                                    <th>Cheque Date</th>
-                                    <th>Honored Date</th>
-                                    <th>Dishonored Date</th>
+                                    <th>Total RCS Cheque</th>
+                                    <th>{{ $cheques_data->sum('receiving_amount') }}</th>
                                     
                                 </tr>
                             </tfoot>
