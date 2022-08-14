@@ -102,10 +102,22 @@
                             <div class="form-group row">
                                 <h6 class="col-lg-4 col-form-label"> Attatchment (Cheque)<span class="text-danger"></span>
                                 </h6>
-                                <div class="col-lg-6">
+                        
+  
+                              
+                                @if(@isset($editData)) 
+                                <div class="col-lg-6"> 
                                     <input type="file" name="attachment" class="form-control-file" onchange="loadFile(event)">
                                 </div>
-                                <img id="output"  style="width: 100%;height:80%;"/>
+                                <img id="output" style="width: 1000px;height:400px;" src=" {{ url('/' . $editData->attachment)  }}" />  
+   
+                                @else
+                                <div class="col-lg-6"> 
+                                    <input type="file" name="attachment" class="form-control-file" onchange="loadFile(event)">
+                                </div>
+                                <img id="output"  style="width: 1000px;height:400px;"/>
+                               
+                                @endif
                             </div>
                         </div>    
                   
@@ -152,7 +164,7 @@
                             <tbody>
                                 @foreach ($data as $item)
                                 <tr>
-                                    <form action="{{ route('cheque-managementEdit',$item->id)}}" method="get">
+                                    {{-- <form action="{{ route('cheque-managementEdit',$item->id)}}" method="get"> --}}
                                         <td>{{ $item->member_id }}</td>
                                         <td>{{ $item->name }}</td>
                                         <td>{{ $item->ad_rcs }}</td>
@@ -167,16 +179,25 @@
                                         <td>{{ $item->oldcheque_no }}</td>
                                         <td>{{ $item->cheque_inby }}</td>
                                         <td>{{ $item->cheque_managedby }}</td>
-                                        <td>{{ $item->cheque_outby }}</td>
+                                        <td>{{ $item->cheque_outby }}</td> 
                                         <td>{{ $item->Remarks }}</td>
-                                        <td><img src="{{ $item->attachment }}" alt="" height="100px" width="200px">
-                                            </td>
+                                        <td> 
+                               
+                              
+                                            <button class="detail" data-toggle="modal" data-target="#myModal" data-id="{{ $item->id }}">  <img style="width: 100px;height:50px;"
+                                                src="{{ @$item->attachment ? url('/' . $item->attachment) : url('a_photo/no-image.png') }}"
+                                                alt=""></button>
+                                           
+                                        </td>
+                                        
                                         <td>{{ $item->insert_by }}</td>
                                         <td>{{ $item->update_by }}</td>
-                                        <td><input type="submit" 
-                                            class="btn btn-outline-danger rounded-pill"
-                                            value="Edit" name="edit"></td>
-                                    </form>
+
+                                        <td>
+                                            <a class="btn btn-danger btn-sm"
+                                            href="{{ route('cheque-managementEdit',$item->id) }}">update</a>
+                                        </td>
+                                    {{-- </form> --}}
                                     
                                 </tr>
                                 @endforeach
@@ -214,10 +235,37 @@
         </div>
     </div>
 
+    <div class="modal" tabindex="-1" id="myModal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+            
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <img id="attachment"  style="width: 95%;height:70%;" />
+               
+              <p id="product-desc">
+               
+    
+              </p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            
+            </div>
+          </div>
+        </div>
+      </div>
+
     @endisset
     
     @endsection
-
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
+    
     <script>
     var loadFile = function(event) {
     var reader = new FileReader();
@@ -227,4 +275,31 @@
     };
     reader.readAsDataURL(event.target.files[0]);
   };
+    </script>
+    <script>
+        $('#myModal').modal('hide');
+        $(document).ready(function() {
+          $('.detail').click(function() {
+            const id = $(this).attr('data-id');
+            $.ajax({
+              url: 'cheque-detail/'+id,
+              type: 'GET',
+             
+              data: {
+                "id": id
+              },
+              success:function(data) {
+                console.log(data);
+                // $('#product-title').html(data.name);
+                // $('#product-desc').html(data.member_id);
+                $('#attachment').attr('src', data.attachment);
+                //  $('#member_nid').attr('src', data.a_nid);
+              }
+            })
+          
+          });
+        })
+    
+    
+      
     </script>

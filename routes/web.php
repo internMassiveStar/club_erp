@@ -98,10 +98,13 @@ Route::group(['middleware' => ['EmployeeMiddleware']], function () {
              Route::post('/employee-register',[EmployeeController::class,'registerEmployee'])->name('register-employee');
              Route::get('/employee-update/{id}',[EmployeeController::class,'employeeUpdate'])->name('employee-update');
              Route::post('/update-employee/{id}',[EmployeeController::class,'updateEmployee'])->name('update-employee');
+             Route::get('/employee-detail/{id}',[EmployeeController::class,'employeeDetail']);
 
             //ad
             Route::get('/ad-operation',[AdController::class,'adOperationView'])->name('ad-operation');
             Route::post('/ad-operation',[AdController::class,'adOperationInsert'])->name('ad-operation');  
+            Route::get('/ad-confirm/{id}',[AdController::class,'adConfirm'])->name('ad-confirm');
+
             Route::get('/ad-operation/{id}',[AdController::class,'adOperationEdit'])->name('ad-operationEdit');  
             Route::post('/ad-operation/{id}',[AdController::class,'adOperationUpdate'])->name('ad-operationUpdate'); 
 
@@ -109,6 +112,8 @@ Route::group(['middleware' => ['EmployeeMiddleware']], function () {
               Route::get('/rcs-operation',[RcsController::class,'rcsOperationView'])->name('rcs-operation');
 
               Route::post('/rcs-operation',[RcsController::class,'rcsOperationInsert'])->name('operation-rcs');
+              Route::get('/rcs-confirm/{id}',[RcsController::class,'rcsConfirm'])->name('rcs-confirm');
+
               Route::get('/rcs-update/{id}',[RcsController::class,'rcsUpdate'])->name('rcs-update');
               Route::post('/update-rcs/{id}',[RcsController::class,'updateRcs'])->name('update-rcs');
 
@@ -128,17 +133,17 @@ Route::group(['middleware' => ['EmployeeMiddleware']], function () {
             Route::post('/cheque-management',[ChequeManagementController::class,'chequeMangementInsert'])->name('cheque-management');
             Route::get('/cheque-management/{id}',[ChequeManagementController::class,'chequeMangementEdit'])->name('cheque-managementEdit');
             Route::post('/cheque-management/{id}',[ChequeManagementController::class,'chequeMangementUpdate'])->name('cheque-managementUpdate');
-
-                Route::get('/all-cheque',[ChequeManagementController::class,'allCheque'])->name('all-cheque');
-                Route::get('/today-cheque',[ChequeManagementController::class,'todayCheque'])->name('today-cheque');
-                Route::get('/tomorrow-cheque',[ChequeManagementController::class,'tomorrowCheque'])->name('tomorrow-cheque');
-                Route::get('/searchbydate-cheque',[ChequeManagementController::class,'searchbydateCheque'])->name('searchbydate-cheque');
-                Route::get('/searchbyadorrcsCheque-cheque',[ChequeManagementController::class,'searchbyadorrcsCheque'])->name('searchbyadorrcs-cheque');
-                
-                //Cheque Queue
-                Route::get('/chequeQueue-cheque',[ChequeManagementController::class,'chequeQueue'])->name('chequeQueue-cheque');
-                Route::get('/chequeQueueProcess-cheque/{id}',[ChequeManagementController::class,'chequeQueueProcess'])->name('chequeQueueProcess-cheque');
-                Route::post('/chequeQueueUpdate-cheque',[ChequeManagementController::class,'chequeQueueUpdate'])->name('chequeQueueUpdate-cheque');
+            Route::get('/cheque-detail/{id}',[ChequeManagementController::class,'chequeDetail']);
+            Route::get('/all-cheque',[ChequeManagementController::class,'allCheque'])->name('all-cheque');
+            Route::get('/today-cheque',[ChequeManagementController::class,'todayCheque'])->name('today-cheque');
+            Route::get('/tomorrow-cheque',[ChequeManagementController::class,'tomorrowCheque'])->name('tomorrow-cheque');
+            Route::get('/searchbydate-cheque',[ChequeManagementController::class,'searchbydateCheque'])->name('searchbydate-cheque');
+            Route::get('/searchbyadorrcsCheque-cheque',[ChequeManagementController::class,'searchbyadorrcsCheque'])->name('searchbyadorrcs-cheque');
+            
+            //Cheque Queue
+            Route::get('/chequeQueue-cheque',[ChequeManagementController::class,'chequeQueue'])->name('chequeQueue-cheque');
+            Route::get('/chequeQueueProcess-cheque/{id}',[ChequeManagementController::class,'chequeQueueProcess'])->name('chequeQueueProcess-cheque');
+            Route::post('/chequeQueueUpdate-cheque',[ChequeManagementController::class,'chequeQueueUpdate'])->name('chequeQueueUpdate-cheque');
                 
               
                 

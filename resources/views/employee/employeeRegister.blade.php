@@ -1,6 +1,7 @@
 @extends('layouts.master') 
 @section('main-content')
 
+@section('title') {{'Employee '}} @endsection
 <div class="col-lg-12">
     <h6></h6>
     <div class="card">
@@ -83,8 +84,14 @@
                         <div class="form-group row">
                                 <h6 class="col-lg-4 col-form-label"> Attatchment (Certificate-1)<span class="text-danger"></span>
                                 </h6>
+                                @if(@isset($editData)) 
+                                <img id="output"  style="width: 50px;height:50px;" src=" {{ url('/' . $editData->certificate)  }}" />  
+                          
+                                @else
+                                <img id="output"  style="width: 50px;height:50px;" />
+                                @endif
                                 <div class="col-lg-6">
-                                    <input type="file" name="certificate" class="form-control-file" >
+                                    <input type="file" name="certificate" class="form-control-file" accept="image/*" onchange="loadFile(event)" >
                                 </div>
                         </div>
 
@@ -119,6 +126,7 @@
                                     <th>Institute</th>
                                     <th>Result</th>
                                     <th>passing Year</th>
+                                    <th>Certificate</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -133,6 +141,14 @@
                                         <td>{{ $item->last_institute }}</td>
                                         <td>{{ $item->last_result }}</td>
                                         <td>{{ $item->last_year }}</td>
+                                        <td> 
+                               
+                              
+                                            <button class="detail" data-toggle="modal" data-target="#myModal" data-id="{{ $item->id }}">  <img style="width: 50px;height:50px;"
+                                                src="{{ @$item->certificate ? url('/' . $item->certificate) : url('a_photo/no-image.png') }}"
+                                                alt=""></button>
+                                           
+                                        </td>
                                         <td>
                                             <a class="btn btn-danger btn-sm"
                                              href="{{ route('employee-update',$item->id) }}">update</a>
@@ -149,5 +165,69 @@
         </div>
     </div>
 </div>
+<div class="modal" tabindex="-1" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+        
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <img id="certificate"  style="width: 80%;height:70%;" />
+           
+          <p id="product-desc">
+           
+
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        
+        </div>
+      </div>
+    </div>
+  </div>
 @endisset
 @endsection
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
+
+<script>
+    $('#myModal').modal('hide');
+    $(document).ready(function() {
+      $('.detail').click(function() {
+        const id = $(this).attr('data-id');
+        $.ajax({
+          url: 'employee-detail/'+id,
+          type: 'GET',
+         
+          data: {
+            "id": id
+          },
+          success:function(data) {
+            console.log(data);
+            // $('#product-title').html(data.name);
+            // $('#product-desc').html(data.member_id);
+            $('#certificate').attr('src', data.certificate);
+            //  $('#member_nid').attr('src', data.a_nid);
+          }
+        })
+      
+      });
+    })
+
+
+  
+</script>
+<script>
+      var loadFile = function(event) {
+    var reader = new FileReader();
+    reader.onload = function(){
+      var output = document.getElementById('output');
+      output.src = reader.result;
+    };
+    reader.readAsDataURL(event.target.files[0]);
+  };
+</script>

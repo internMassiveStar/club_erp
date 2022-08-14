@@ -22,7 +22,7 @@ class ChequeManagementController extends Controller
     public function chequeMangementInsert(Request $req){
         $member_id = $req->get('member_id');
         $attachment = $req->file('attachment');
-        if ($attachment) {
+        if($attachment) {
             $name_gen = hexdec(uniqid());
             $img_ext = strtolower($attachment->getClientOriginalExtension());
             $img_name = $name_gen . "." . $img_ext;
@@ -42,7 +42,7 @@ class ChequeManagementController extends Controller
         $db->cheque_date = $req->get('cheque_date');
         $db->oldcheque_no = $req->get('oldcheque_no');
         $db->cheque_inby = $req->get('cheque_inby');
-        if($attachment){
+        if($attachment){ 
             $db->attachment=$last_img; 
         }
         $db->insert_by = Session::get('id');
@@ -245,6 +245,9 @@ class ChequeManagementController extends Controller
             }
         }
         return redirect()->back();
+    }
+    public function chequeDetail($id){
+        return Cheque::select('attachment')->where('id',$id)->first();
     }
     
 }

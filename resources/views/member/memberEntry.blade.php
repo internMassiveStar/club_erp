@@ -307,6 +307,7 @@
             <div class="card-body">
                 <h2 class="text-center">Member Education Information</h2>
                 <div class="basic-form">
+
                     <form class="form-valide" action="{{ route('education-info-entry') }}" method="post" enctype="multipart/form-data">
                         @csrf
                           <table class="table table-striped table-inverse table-responsive" style="border: 1px solid black">
@@ -334,6 +335,7 @@
                     </form>  
                         
                 </div>
+
                                 
             </div>
                             
@@ -411,8 +413,8 @@
 
 
 <script>
+    var clicks = 0;
 
-   
     function create_tr(table_id){
         //console.log(table_body);
         let table_body = document.getElementById(table_id);
@@ -447,6 +449,7 @@
         }
     }
     
+
 //   if(clicks==2){
 //     var y = document.getElementById("2");
 //     if (y.style.display === "none") {

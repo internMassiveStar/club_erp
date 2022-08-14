@@ -19,6 +19,7 @@ return new class extends Migration
             $table->date('receiving_date');
             $table->integer('receiving_amount');
             $table->string('receiving_tool');
+            $table->integer('status')->default(0);
             $table->integer('insert_by')->nullable();
             $table->integer('update_by')->nullable();
             $table->timestamps();

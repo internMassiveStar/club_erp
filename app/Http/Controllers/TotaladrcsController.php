@@ -66,12 +66,12 @@ class TotaladrcsController extends Controller
         //     dd($users);                    
 
         // }
-        $press = !$press_active;
-        if(date('d')=='1' && $press == false){
-            $press_active = false;
-            calculation();
-            return view('rcs.monthlyProcedure');
-        }
+        // $press = !$press_active;
+        // if(date('d')=='1' && $press == false){
+        //     $press_active = false;
+        //     calculation();
+        //     return view('rcs.monthlyProcedure');
+        // }
         // elseif (date('d')=='2' && $press == false) {
         //     $press_active = false;
         //     calculation();
@@ -81,6 +81,8 @@ class TotaladrcsController extends Controller
         
     }
     public function calculation(){
+
+
             $month = date('M');
             $date = date('Y-m-d');
             $member = DB::table('members')

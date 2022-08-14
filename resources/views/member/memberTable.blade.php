@@ -34,6 +34,11 @@
                                 <th>Remarks</th>
                                 <th> Photo </th>
                                 <th>Nid</th>
+                                <th>Form</th>
+                                <th>Noc</th>
+                                <th>Certificate 1</th>
+                                <th>Certificate 2</th>
+                                <th>Certificate 3</th>
                                 <th>Action</th>
                                 
                             </tr>
@@ -78,7 +83,38 @@
                                     alt=""></button>
                                
                                 </td>
-                            <td>
+                          
+                              <td>
+                                <button class="detail2" data-toggle="modal" data-target="#myModal2" form-id="{{ $item->id }}">  <img style="width: 50px;height:50px;"
+                                   src="{{ @$item->a_form ? url('/' . $item->a_form) : url('a_nid/no-image.png') }}"
+                                   alt=""></button>
+                              
+                               </td>
+                               <td>
+                                <button class="detail3" data-toggle="modal" data-target="#myModal3" noc-id="{{ $item->id }}">  <img style="width: 50px;height:50px;"
+                                   src="{{ @$item->a_noc ? url('/' . $item->a_noc) : url('a_nid/no-image.png') }}"
+                                   alt=""></button>
+                              
+                               </td>
+                               <td>
+                                <button class="detail4" data-toggle="modal" data-target="#myModal4" certificate1-id="{{ $item->id }}">  <img style="width: 50px;height:50px;"
+                                   src="{{ @$item->a_certifacte_1 ? url('/' . $item->a_certifacte_1) : url('a_nid/no-image.png') }}"
+                                   alt=""></button>
+                              
+                               </td>
+                               <td>
+                                <button class="detail5" data-toggle="modal" data-target="#myModal5" certificate2-id="{{ $item->id }}">  <img style="width: 50px;height:50px;"
+                                   src="{{ @$item->a_certifacte_2 ? url('/' . $item->a_certifacte_2) : url('a_nid/no-image.png') }}"
+                                   alt=""></button>
+                              
+                               </td>
+                               <td>
+                                <button class="detail6" data-toggle="modal" data-target="#myModal6" certificate3-id="{{ $item->id }}">  <img style="width: 50px;height:50px;"
+                                   src="{{ @$item->a_certifacte_2 ? url('/' . $item->a_certifacte_3) : url('a_nid/no-image.png') }}"
+                                   alt=""></button>
+                              
+                               </td>
+                           <td>
                                 <a class="btn btn-danger btn-sm"
                                  href="{{ route('member-update',$item->id) }}">update</a>
                            
@@ -141,7 +177,131 @@
                           </div>
                         </div>
                       </div>
+                      <div class="modal" tabindex="-1" id="myModal2">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                            
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                                
+                                <img id="member_form"  style="width: 80%;height:70%;" />
+                              <p id="product-desc">
+                               
 
+                              </p>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="modal" tabindex="-1" id="myModal3">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                            
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body"> 
+                                
+                                <img id="member_noc"  style="width: 80%;height:70%;" />
+
+                              <p id="product-desc">
+                               
+
+                              </p>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="modal" tabindex="-1" id="myModal4">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                            
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body"> 
+                                
+
+                                <img id="member_certificate1"  style="width: 80%;height:70%;" />
+                              <p id="product-desc">
+                               
+
+                              </p>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="modal" tabindex="-1" id="myModal5">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                            
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body"> 
+                                
+
+                                <img id="member_certificate2"  style="width: 80%;height:70%;" />
+                              <p id="product-desc">
+                               
+
+                              </p>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="modal" tabindex="-1" id="myModal6">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                            
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body"> 
+                                
+
+                                <img id="member_certificate3"  style="width: 80%;height:70%;" />
+                              <p id="product-desc">
+                               
+
+                              </p>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            
+                            </div>
+                          </div>
+                        </div>
+                      </div>
 
 
 
@@ -381,7 +541,6 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
 
-
 <script>
     $('#myModal').modal('hide');
     $(document).ready(function() {
@@ -437,7 +596,146 @@
 
   
 </script>
+<script>
+  $('#myModal2').modal('hide');
+  $(document).ready(function() {
+    $('.detail2').click(function() {
+      const id = $(this).attr('form-id');
+      $.ajax({
+        url: 'member-detail/'+id,
+        type: 'GET',
+      
+        data: {
+          "id": id
+        },
+        success:function(data) {
+          
+          // $('#product-title').html(data.name);
+          // $('#product-desc').html(data.member_id);
+        
+           $('#member_form').attr('src',data.a_form);
+        }
+      })
+    
+    });
+  })
 
+
+
+</script>
+
+<script>
+  $('#myModal3').modal('hide');
+  $(document).ready(function() {
+    $('.detail3').click(function() {
+      const id = $(this).attr('noc-id');
+      $.ajax({
+        url: 'member-detail/'+id,
+        type: 'GET',
+      
+        data: {
+          "id": id
+        },
+        success:function(data) {
+          
+          // $('#product-title').html(data.name);
+          // $('#product-desc').html(data.member_id);
+           
+          
+           $('#member_noc').attr('src',data.a_noc);
+        }
+      })
+    
+    });
+  })
+
+
+
+</script>
+<script>
+  $('#myModal4').modal('hide');
+  $(document).ready(function() {
+    $('.detail4').click(function() {
+      const id = $(this).attr('certificate1-id');
+      $.ajax({
+        url: 'member-detail/'+id,
+        type: 'GET',
+      
+        data: {
+          "id": id
+        },
+        success:function(data) {
+          
+          // $('#product-title').html(data.name);
+          // $('#product-desc').html(data.member_id);
+           
+        
+           $('#member_certificate1').attr('src',data.a_certifacte_1);
+        }
+      })
+    
+    });
+  })
+
+
+
+</script>
+<script>
+  $('#myModal5').modal('hide');
+  $(document).ready(function() {
+    $('.detail5').click(function() {
+      const id = $(this).attr('certificate2-id');
+      $.ajax({
+        url: 'member-detail/'+id,
+        type: 'GET',
+      
+        data: {
+          "id": id
+        },
+        success:function(data) {
+          
+          // $('#product-title').html(data.name);
+          // $('#product-desc').html(data.member_id);
+           
+        
+           $('#member_certificate2').attr('src',data.a_certifacte_2);
+        }
+      })
+    
+    });
+  })
+
+
+
+</script>
+<script>
+  $('#myModal6').modal('hide');
+  $(document).ready(function() {
+    $('.detail6').click(function() {
+      const id = $(this).attr('certificate3-id');
+      $.ajax({
+        url: 'member-detail/'+id,
+        type: 'GET',
+      
+        data: {
+          "id": id
+        },
+        success:function(data) {
+          
+          // $('#product-title').html(data.name);
+          // $('#product-desc').html(data.member_id);
+           
+        
+           $('#member_certificate3').attr('src',data.a_certifacte_3);
+        }
+      })
+    
+    });
+  })
+
+
+
+</script>
 
 <script>
 

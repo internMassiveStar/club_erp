@@ -15,17 +15,17 @@ return new class extends Migration
     {
         Schema::create('ad_rcstotals', function (Blueprint $table) {
             $table->id();
-            $table->integer('member_id')->unique();
-            $table->integer('total_ad');
-            $table->integer('cash_ad')->default(0);
-            $table->integer('cheque_ad')->default(0);
-            $table->integer('total_paidad')->default(0);
-            $table->integer('total_duead')->default(0);
-            $table->integer('total_rcs');
-            $table->integer('cash_rcs')->default(0);
-            $table->integer('cheque_rcs')->default(0);
-            $table->integer('total_paidrcs')->default(0);
-            $table->integer('total_duercs')->default(0);
+            $table->string('member_id')->unique();
+            $table->string('total_ad');
+            $table->string('cash_ad')->default(0);
+            $table->string('cheque_ad')->default(0);
+            $table->string('total_paidad')->default(0);
+            $table->string('total_duead')->default(0);
+            $table->string('total_rcs');
+            $table->string('cash_rcs')->default(0);
+            $table->string('cheque_rcs')->default(0);
+            $table->string('total_paidrcs')->default(0);
+            $table->string('total_duercs')->default(0);
             $table->timestamps();
         });
     }

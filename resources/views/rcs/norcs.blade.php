@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('title')
-    Monthly Procedure    
+    Rcs Active and Deactive member    
 @endsection 
 @section('main-content')
     <div class="row">
