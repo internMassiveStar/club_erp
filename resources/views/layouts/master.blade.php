@@ -10,7 +10,12 @@
         <title>MCL-ERP - @yield('title')</title>
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.0.1/css/buttons.dataTables.min.css">
+
         <link href="{{ asset('media/css/jquery.dataTables.min.css') }}" rel="stylesheet">
+
+
+    
+
           <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/mcllogo.jpg') }}">
     <link href="{{ asset('media/css/jquery.dataTables.min.css') }}" rel="stylesheet">
@@ -19,7 +24,7 @@
 
       
       
-    <script>
+    {{-- <script>
         $(document).ready(function () {
             $("#Membertable").dataTable();
         });
@@ -44,7 +49,7 @@
             $("#Mptable").dataTable();
         });
 
-    </script>
+    </script> --}}
        
         
     </head>
