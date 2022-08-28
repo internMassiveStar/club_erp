@@ -6,9 +6,31 @@
 
 @section('main-content')
 
-<div class="col-lg-12">
+
     <div class="card">
         <div class="card-body">
+            @if(Auth::guard('employee')->check())
+            @isset($flag)
+            <form class="mt-5 mb-5 login-input" method="post" action="{{ route('ad-operation-employee') }}">
+                @csrf
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <h6><b>Pin</b></h6>
+                        <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="Ad Operation" name="pin" id="pin" value='' required>
+                    </div>
+                    
+                    <input type="hidden" value="ad-operation" name="page_name">
+            
+                                                            
+                </div>    
+               <button type="submit" class="btn mb-1 btn-success" name="AdoptEntry"> Submit Pin</button>
+            </form>
+            @endisset
+            @endif
+
+
+            @if(Auth::guard('admin')->check() || @isset($pin))
+  
             <h2 class="text-center">Asset Deposit Operation</h2>
             <div class="basic-form">
                 <form class="mt-5 mb-5 login-input" method="post" action="{{ @$editData ? route('ad-operationUpdate',$editData->id): route('ad-operation') }}" enctype="multipart/form-data">
@@ -42,17 +64,85 @@
                    <button type="submit" class="btn mb-1 btn-success" name="AdoptEntry"> {{ @$editData ? 'Update' : 'Insert' }}</button>
                 </form>
             </div>
+            @endif
         </div>
     </div>
+
+@isset($last)
+
+<div class="table-responsive">
+    <table class="table table-striped table-bordered zero-configuration" id="adopttable">
+        <thead>
+            <tr>
+                <th>MemberID</th>
+                <th>Member Name</th>
+                <th>ReceivingDate</th>
+                <th>ReceivingAmount</th>
+                <th>ReceivingTool</th>
+                <th>Insert by ID</th>
+       
+          
+            </tr>
+        </thead>
+        <tbody> 
+       
+                <tr>
+                  
+                    <td>{{ $last->member_id }}</td>
+                    <td>{{ $last->name }}</td>
+                    <td>{{ $last->receiving_date }}</td>
+                    <td>{{ $last->receiving_amount }}</td>
+                    <td>{{ $last->receiving_tool }}</td>
+                    <td>{{ $last->insert_emp_id }}</td>
+               
+                    
+                </tr>
+      
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>MemberID</th>
+                <th>Member Name</th>
+                <th>ReceivingDate</th>
+                <th>ReceivingAmount</th>
+                <th>ReceivingTool</th>
+                <th>Insert By</th>
+               
+            </tr>
+        </tfoot>
+    </table>
 </div>
+    
+@endisset
 
 @isset($data)
 
-<div class="container-fluid">
+
     <div class="row">
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
+                    @if(Auth::guard('employee')->check())
+                    @isset($flag)
+                    <form class="mt-5 mb-5 login-input" method="post" action="{{ route('ad-operation-table') }}">
+                        @csrf
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <h6><b>Pin</b></h6>
+                                <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="Pin" name="pin" id="pin" value='' required>
+                            </div>
+                            
+                            <input type="hidden" value="ad-operation-table" name="page_name">
+                    
+                                                                    
+                        </div>    
+                       <button type="submit" class="btn mb-1 btn-success" name="AdoptEntry"> Submit Pin</button>
+                    </form>
+                    @endisset
+                    @endif
+
+                    @if(Auth::guard('admin')->check() || @isset($pinTable))
+                  
                     <a class="text-center"><h4>AD Operation Table</h4></a>
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered zero-configuration" id="adopttable">
@@ -104,11 +194,11 @@
             </div>
         </div>
     </div>
-</div> 
 
+@endif
 
 @if(Auth::guard('admin')->check())
-<div class="container-fluid">
+
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -157,7 +247,7 @@
             </div>
         </div>
     </div>
-</div>
+
 @endif
 @endisset
      

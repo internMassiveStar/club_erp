@@ -5,8 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Cheque;
 use App\Models\Member;
+use App\Models\Pin;
+
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+
 
 class ChequeManagementController extends Controller
 {
@@ -15,9 +19,9 @@ class ChequeManagementController extends Controller
                     ->select('cheques.*','members.name')
                     ->leftJoin('members','cheques.member_id','members.member_id')
                     ->get();
-        $data = compact('data');
-        //dd($data);
-        return view('cheque.chequeMangement')->with($data);
+    
+        $flag='true';
+        return view('cheque.chequeMangement',compact('data','flag'));
     }
     public function chequeMangementInsert(Request $req){
         $member_id = $req->get('member_id');
@@ -47,6 +51,21 @@ class ChequeManagementController extends Controller
         }
         $db->insert_by = Session::get('id');
         $db->save();
+
+
+
+        if(Auth::guard('employee')->check()){
+
+         
+
+            $last = DB::table('cheques')
+                     ->select('cheques.*','members.name')
+                    ->leftJoin('members','cheques.member_id','members.member_id')
+                    ->latest()->first();
+
+            return view('cheque.chequeMangement',compact('last'));
+
+        }
         return redirect('/cheque-management');
     }
 
@@ -130,8 +149,8 @@ class ChequeManagementController extends Controller
                     ->select('cheques.*','members.name')
                     ->leftJoin('members','cheques.member_id','members.member_id')
                     ->get();
-        $data = compact('data');
-        return view('cheque.allCheque')->with($data);
+         $flag='true';
+        return view('cheque.allCheque',compact('data','flag'));
     }
     public function todayCheque(){
         $date = date('Y-m-d');
@@ -141,9 +160,9 @@ class ChequeManagementController extends Controller
             ->leftJoin('members','cheques.member_id','members.member_id')
             ->where('cheque_date',$date)
             ->get();
-        $data = compact('data');
+        $flag='true';
         //dd($data);
-        return view('cheque.todayCheque')->with($data);
+        return view('cheque.todayCheque',compact('data','flag'));
     }
     public function tomorrowCheque(){
         $date = date('Y-m-d',strtotime("1 days"));
@@ -153,24 +172,27 @@ class ChequeManagementController extends Controller
             ->leftJoin('members','cheques.member_id','members.member_id')
             ->where('cheque_date',$date)
             ->get();
-        $data = compact('data');
-        return view('cheque.tomorrowCheque')->with($data);
+        $flag='true';
+
+        return view('cheque.tomorrowCheque',compact('data','flag'));
     }
     public function searchbydateCheque(){
         $data = DB::table('cheques')
                     ->select('cheques.*','members.name')
                     ->leftJoin('members','cheques.member_id','members.member_id')
                     ->get();
-        $data = compact('data');
-        return view('cheque.searchbydateCheque')->with($data);
+         $flag='true';
+
+        return view('cheque.searchbydateCheque',compact('data','flag'));
     }
     public function searchbyadorrcsCheque(){
         $data = DB::table('cheques')
                     ->select('cheques.*','members.name')
                     ->leftJoin('members','cheques.member_id','members.member_id')
                     ->get();
-        $data = compact('data');
-        return view('cheque.searchbyadorrcsCheque')->with($data);
+         $flag='true';
+
+        return view('cheque.searchbyadorrcsCheque',compact('data','flag'));
     }
 
 
@@ -249,5 +271,137 @@ class ChequeManagementController extends Controller
     public function chequeDetail($id){
         return Cheque::select('attachment')->where('id',$id)->first();
     }
+
+    public function chequeMangementEmployee(Request $request){
+        $pin=Pin::where('pin',$request->pin)->first();
+       if($pin){
+        if($pin->employee_id == Session::get('id') && $pin->page_name ==$request->page_name){
+    
+            return view('cheque.chequeMangement',compact('pin'));
+        }else{
+            return redirect()->back();
+        }
+       }else{
+        return redirect()->back();
+       }
+    
+    }
+    public function chequeMangementTable(Request $request){
+        $pinTable=Pin::where('pin',$request->pin)->first();
+       if($pinTable){
+        if($pinTable->employee_id == Session::get('id') && $pinTable->page_name ==$request->page_name){
+            $data = DB::table('cheques')
+            ->select('cheques.*','members.name')
+            ->leftJoin('members','cheques.member_id','members.member_id')
+            ->get();
+            return view('cheque.chequeMangement',compact('pinTable','data'));
+        }else{
+            return redirect()->back();
+        }
+       }else{
+        return redirect()->back();
+       }
+    
+    }
+
+
+    public function allChequeEmployee(Request $request){
+        $pin=Pin::where('pin',$request->pin)->first();
+       if($pin){
+        if($pin->employee_id == Session::get('id') && $pin->page_name ==$request->page_name){
+            $data = DB::table('cheques')
+                    ->select('cheques.*','members.name')
+                    ->leftJoin('members','cheques.member_id','members.member_id')
+                    ->get();
+            return view('cheque.allCheque',compact('pin','data'));
+        }else{
+            return redirect()->back();
+        }
+       }else{
+        return redirect()->back();
+       }
+    
+    }
+    public function todayChequeEmployee(Request $request){
+        $pin=Pin::where('pin',$request->pin)->first();
+       if($pin){
+        if($pin->employee_id == Session::get('id') && $pin->page_name ==$request->page_name){
+            $date = date('Y-m-d');
+        
+            $data = DB::table('cheques')
+                ->select('cheques.*','members.name')
+                ->leftJoin('members','cheques.member_id','members.member_id')
+                ->where('cheque_date',$date)
+                ->get();
+            return view('cheque.todayCheque',compact('pin','data'));
+        }else{
+            return redirect()->back();
+        }
+       }else{
+        return redirect()->back();
+       }
+    
+    }
+
+
+    public function tomorrowChequeEmployee(Request $request){
+        $pin=Pin::where('pin',$request->pin)->first();
+       if($pin){
+        if($pin->employee_id == Session::get('id') && $pin->page_name ==$request->page_name){
+            $date = date('Y-m-d');
+        
+            $date = date('Y-m-d',strtotime("1 days"));
+            //dd($date);
+            $data = DB::table('cheques')
+                ->select('cheques.*','members.name')
+                ->leftJoin('members','cheques.member_id','members.member_id')
+                ->where('cheque_date',$date)
+                ->get();
+            return view('cheque.tomorrowCheque',compact('pin','data'));
+        }else{
+            return redirect()->back();
+        }
+       }else{
+        return redirect()->back();
+       }
+    
+    }
+
+    public function searchBydateChequeEmployee(Request $request){
+        $pin=Pin::where('pin',$request->pin)->first();
+       if($pin){
+        if($pin->employee_id == Session::get('id') && $pin->page_name ==$request->page_name){
+            $data = DB::table('cheques')
+            ->select('cheques.*','members.name')
+            ->leftJoin('members','cheques.member_id','members.member_id')
+            ->get();
+            return view('cheque.searchbydateCheque',compact('pin','data'));
+        }else{
+            return redirect()->back();
+        }
+       }else{
+        return redirect()->back();
+       }
+    
+    }
+
+    public function adrcsChequeEmployee(Request $request){
+        $pin=Pin::where('pin',$request->pin)->first();
+       if($pin){
+        if($pin->employee_id == Session::get('id') && $pin->page_name ==$request->page_name){
+            $data = DB::table('cheques')
+            ->select('cheques.*','members.name')
+            ->leftJoin('members','cheques.member_id','members.member_id')
+            ->get();
+            return view('cheque.searchbyadorrcsCheque',compact('pin','data'));
+        }else{
+            return redirect()->back();
+        }
+       }else{
+        return redirect()->back();
+       }
+    
+    }
+    
     
 }

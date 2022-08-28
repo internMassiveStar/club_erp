@@ -7,12 +7,15 @@
 @php
     $success = Session::get('success');
     $error = Session::get('error');
+
 @endphp
 @if ($success)
     <div class="alert alert-success">{{ $success }}</div>
 @elseif ($error)
     <div class="alert alert-danger">{{ $error }}</div>
 @endif
+
+ @if(session()->has('memberEntry') || Auth::guard('admin')->check()) 
  <details>
     <summary>
         Member Information
@@ -407,7 +410,7 @@
  </details>
 </div>
 
-
+@endif
 @endsection
 
 

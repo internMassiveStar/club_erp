@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Employee;
 use App\Models\AdRcstotal;
+use App\Models\Pin;
 
 
 
@@ -20,10 +21,12 @@ class EmployeeController extends Controller
 {
     public function employeeRegister(){
     
+    
             $data=Employee::get();
+            $flag='true';
 
         
-         return view('employee.employeeRegister',compact('data'));
+         return view('employee.employeeRegister',compact('data','flag'));
     }
 
     public function registerEmployee(Request $request){
@@ -70,9 +73,20 @@ class EmployeeController extends Controller
             $employee->certificate=$last_img; 
         }
         $employee->last_year=$request->year;
-        $employee->insert_by=  Session::get('id');
+        $employee->insert_by=Session::get('id');
         $employee->save();
-        return redirect()->back();
+
+        if(Auth::guard('employee')->check()){
+
+         
+
+            $last = DB::table('employees')->latest()->first();
+
+            return view('employee.employeeRegister',compact('last'));
+
+        }
+
+        return redirect('/employee-register');
 
     }
 
@@ -126,5 +140,34 @@ class EmployeeController extends Controller
 
     public function employeeDetail($id){
         return Employee::findOrFail($id);
+    }
+
+    public function employeeentryEmployee(Request $request){
+        $pin=Pin::where('pin',$request->pin)->first();
+       if($pin){
+        if($pin->employee_id == Session::get('id') && $pin->page_name ==$request->page_name){
+            
+            return view('employee.employeeRegister',compact('pin'));
+        }else{
+            return redirect()->back();
+        }
+       }else{
+        return redirect()->back();
+       }
+    
+    }
+    public function employeetableEmployee(Request $request){
+        $pinTable=Pin::where('pin',$request->pin)->first();
+       if($pinTable){
+        if($pinTable->employee_id == Session::get('id') && $pinTable->page_name ==$request->page_name){
+            $data=Employee::get();
+            return view('employee.employeeRegister',compact('pinTable','data'));
+        }else{
+            return redirect()->back();
+        }
+       }else{
+        return redirect()->back();
+       }
+    
     }
 }

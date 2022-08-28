@@ -8,6 +8,29 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
+                @if(Auth::guard('employee')->check())
+                @isset($flag)
+                    
+               
+                <form class="mt-5 mb-5 login-input" method="post" action="{{ route('all-cheque-employee') }}">
+                    @csrf
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <h6><b>Pin</b></h6>
+                            <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="All Cheque" name="pin" id="pin" value='' required>
+                        </div>
+                        
+                        <input type="hidden" value="all-cheque" name="page_name">
+                
+                                                                
+                    </div>    
+                   <button type="submit" class="btn mb-1 btn-success" name="AdoptEntry"> Submit Pin</button>
+                </form>
+                @endisset
+                @endif
+
+                @if(Auth::guard('admin')->check() || @isset($pin))
+
                 <a class="text-center"><h4>Total Cheque Table</h4></a>
                 <div class="table-responsive">
                     <table class="table table-striped table-bordered zero-configuration" id="Cheque">
@@ -92,6 +115,6 @@
         </div>
     </div>
 </div>
-
+@endif
 @include('layouts.modal.modal')
 @endsection
