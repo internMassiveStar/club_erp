@@ -35,13 +35,33 @@
     {{ Auth::guard('admin')->user()->name}}
     @endif
 </li>
+@if(Auth::guard('admin')->check())
+<li>
+    <a href="{{ route('set-pin') }}" aria-expanded="false">
+        <i class="icon-badge menu-icon"></i><span class="nav-text">Pin Set</span>
+    </a>
+</li>
+<li>
+    <a href="{{ route('task') }}" aria-expanded="false">
+        <i class="icon-badge menu-icon"></i><span class="nav-text">Compeleted Task</span>
+    </a>
+</li>
+
+@endif
            
             <li>
                 <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                     <i class="icon-speedometer menu-icon"></i><span class="nav-text">Member</span>
                 </a>
                 <ul aria-expanded="false">
+                    @if(Auth::guard('admin')->check())
                     <li><a href="{{ route('member-entry') }}">Member Entry</a></li>
+                    @endif
+                    @if(Auth::guard('employee')->check())
+                    <li><a href="{{ route('member-entry-emp') }}">Member Entry Employee</a></li>
+                    @endif
+
+            
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <span class="nav-text">Member Table</span>
@@ -110,6 +130,11 @@
             <li>
                 <a href="{{ route('total-ad&rcs') }}" aria-expanded="false">
                     <i class="icon-badge menu-icon"></i><span class="nav-text">Total Ad and RCS</span>
+                </a>
+            </li> 
+            <li>
+                <a href="{{ route('old-total-ad&rcs') }}" aria-expanded="false">
+                    <i class="icon-badge menu-icon"></i><span class="nav-text">Old Total Ad and RCS</span>
                 </a>
             </li> 
          

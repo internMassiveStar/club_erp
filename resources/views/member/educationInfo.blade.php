@@ -6,6 +6,25 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
+                <div class="card-body">
+                    @if(Auth::guard('employee')->check())
+                  <form class="mt-5 mb-5 login-input" method="post" action="{{ route('member-educationInfo-table-employee') }}">
+                      @csrf
+                      <div class="form-row">
+                          <div class="form-group col-md-6">
+                              <h6><b>Pin</b></h6>
+                              <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="education info" name="pin" id="pin" value='' required>
+                          </div>
+                          
+                          <input type="hidden" value="member-education-info-table" name="page_name">
+                  
+                                                                  
+                      </div>    
+                     <button type="submit" class="btn mb-1 btn-success" name="AdoptEntry"> Submit Pin</button>
+                  </form>
+                  @endif
+    
+                  @if(Auth::guard('admin')->check() || @isset($pin))
                 <a class="text-center">
                     <h4> </h4>
                     <h4>Professional Information Table</h4>
@@ -89,5 +108,5 @@
     </div>
 </div>
 @endisset
-           
+@endif
 @endsection

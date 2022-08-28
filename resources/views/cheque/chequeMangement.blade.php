@@ -5,10 +5,31 @@
 @endsection 
 @section('main-content')
 
-    <div class="col-lg-12">
+
         <h4></h4>
         <div class="card">
             <div class="card-body">
+                @if(Auth::guard('employee')->check())
+                @isset($flag)
+                    
+           
+                <form class="mt-5 mb-5 login-input" method="post" action="{{ route('cheque-management-employee') }}">
+                    @csrf
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <h6><b>Pin</b></h6>
+                            <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="Cheque Entry" name="pin" id="pin" value='' required>
+                        </div>
+                        
+                        <input type="hidden" value="cheque-mangement" name="page_name">
+                
+                                                                
+                    </div>    
+                   <button type="submit" class="btn mb-1 btn-success" name="AdoptEntry"> Submit Pin</button>
+                </form>
+                @endisset
+                @endif
+                @if(Auth::guard('admin')->check() || @isset($pin))
                 <h2 class="text-center" style = "color: solid #6577B3;">Cheque Information</h2>
                 <div class="basic-form">
                     <form class="mt-5 mb-5 login-input" method="post" action=" {{@$editData ? route('cheque-managementUpdate',$editData->id) : route('cheque-management') }}" enctype="multipart/form-data">
@@ -126,14 +147,129 @@
                 </div>
             </div>
         </div>
-    </div>
+  
+@endif
+@isset($last)
 
-    @isset($data)
+<div class="table-responsive">
+    <table class="table table-striped table-bordered zero-configuration" id="cheque">
+        <thead>
+            <tr>
+                <th>Member ID</th>
+                <th>Member Name</th>
+                <th>AD or RCS</th>
+                <th>Cheque Type</th>
+                <th>Bank Name</th>
+                <th>Cheque No</th>
+                <th>Cheque Amount</th>
+                <th>Cheque ReceivingDate</th>
+                <th>Cheque Date</th>
+                <th>Honored Date</th>
+                <th>Dishonored Date</th>
+                <th>Old Cheque No</th>
+                <th>Cheque In By</th>
+                <th>Cheque Managed By</th>
+                <th>Cheque Out By</th>
+                <th>Remarks</th>
+                <th>Attatchment</th>
+                <th>Insert By</th>
+              
+            </tr>
+        </thead>
+        <tbody>
+        
+            <tr>
+         
+                    <td>{{ $last->member_id }}</td>
+                    <td>{{ $last->name }}</td>
+                    <td>{{ $last->ad_rcs }}</td>
+                    <td>{{ $last->type }}</td>
+                    <td>{{ $last->bank_name }}</td>
+                    <td>{{ $last->cheque_no  }}</td>
+                    <td>{{ $last->receiving_amount }}</td>
+                    <td>{{ $last->receiving_date }}</td>
+                    <td>{{ $last->cheque_date }}</td>
+                    <td>{{ $last->honored_date }}</td>
+                    <td>{{ $last->dishonored_date }}</td>
+                    <td>{{ $last->oldcheque_no }}</td>
+                    <td>{{ $last->cheque_inby }}</td>
+                    <td>{{ $last->cheque_managedby }}</td>
+                    <td>{{ $last->cheque_outby }}</td> 
+                    <td>{{ $last->Remarks }}</td>
+                    <td> 
+           
+          
+                        <button class="detail" data-toggle="modal" data-target="#myModal" data-id="{{ $last->id }}">  <img style="width: 100px;height:50px;"
+                            src="{{ @$last->attachment ? url('/' . $last->attachment) : url('a_photo/no-image.png') }}"
+                            alt=""></button>
+                       
+                    </td>
+                    
+                    <td>{{ $last->insert_by }}</td>
+                 
+
+                
+             
+                
+            </tr>
+     
+            
+            
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>Member ID</th>
+                <th>Member Name</th>
+                <th>AD or RCS</th>
+                <th>Cheque Type</th>
+                <th>Bank Name</th>
+                <th>Cheque No</th>
+                <th>Cheque Amount</th>
+                <th>Cheque ReceivingDate</th>
+                <th>Cheque Date</th>
+                <th>Honored Date</th>
+                <th>Dishonored Date</th>
+                <th>Old Cheque No</th>
+                <th>Cheque In By</th>
+                <th>Cheque Managed By</th>
+                <th>Cheque Out By</th>
+                <th>Remarks</th>
+                <th>Attatchment</th>
+                <th>Insert By</th>
+               
+            </tr>
+        </tfoot>
+    </table>
+</div>
+    
+@endisset
+   
+@isset($data)
     
     <div class="row">
         <div class="col-12">
+            @if(Auth::guard('employee')->check())
+                    @isset($flag)
+                    <form class="mt-5 mb-5 login-input" method="post" action="{{ route('cheque-management-table') }}">
+                        @csrf
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <h6><b>Pin</b></h6>
+                                <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="Cheque Mangment Table" name="pin" id="pin" value='' required>
+                            </div>
+                            
+                            <input type="hidden" value="cheque-mangement-table" name="page_name">
+                    
+                                                                    
+                        </div>    
+                       <button type="submit" class="btn mb-1 btn-success" name="AdoptEntry"> Submit Pin</button>
+                    </form>
+                    @endisset
+                    @endif
+                    @if(Auth::guard('admin')->check() || @isset($pinTable))
             <div class="card">
                 <div class="card-body">
+                    
                     <a class="text-center"><h4>Cheque Management Table</h4></a>
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered zero-configuration" id="cheque">
@@ -235,6 +371,9 @@
         </div>
     </div>
 
+
+@endif
+    @endisset
     <div class="modal" tabindex="-1" id="myModal">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -259,9 +398,6 @@
           </div>
         </div>
       </div>
-
-    @endisset
-    
     @endsection
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>

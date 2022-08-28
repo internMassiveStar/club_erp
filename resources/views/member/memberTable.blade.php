@@ -6,6 +6,25 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
+
+              @if(Auth::guard('employee')->check())
+              <form class="mt-5 mb-5 login-input" method="post" action="{{ route('member-table-employee') }}">
+                  @csrf
+                  <div class="form-row">
+                      <div class="form-group col-md-6">
+                          <h6><b>Pin</b></h6>
+                          <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="member-table" name="pin" id="pin" value='' required>
+                      </div>
+                      
+                      <input type="hidden" value="member-table" name="page_name">
+              
+                                                              
+                  </div>    
+                 <button type="submit" class="btn mb-1 btn-success" name="AdoptEntry"> Submit Pin</button>
+              </form>
+              @endif
+
+              @if(Auth::guard('admin')->check() || @isset($pin))
                 <a class="text-center">
                     <h4>Member Table</h4>
                 </a>
@@ -535,7 +554,7 @@
         </div>
     </div>
 </div>
-
+@endif
 @endsection
 
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>

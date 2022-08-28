@@ -9,6 +9,8 @@ use App\Models\Membereducation;
 use App\Models\Memberpersonal;
 use App\Models\Memberprofession;
 use App\Models\Rcsmaster;
+use App\Models\Pin;
+
 use App\Models\Adrcstotal;
 use Illuminate\Support\Facades\DB;
 
@@ -64,10 +66,16 @@ class MemberController extends Controller
        
     public function memberEntry(){
 
-     //   dd(Auth::guard('employee')->user()->name);
+    
         return view('member.memberEntry');
-    }
-  
+    
+       
+      }
+       
+    
+  public function memberEntryEmp(){
+    return view('member.pin');
+  }
     public function memberTable(){
         $data=Member::get();
        
@@ -330,7 +338,8 @@ class MemberController extends Controller
             Session::flash('error',"Member Personal Info Insert Error");
         }
         
-        return back();
+        return redirect('/member-entry');
+
         
     }
 
@@ -405,12 +414,14 @@ class MemberController extends Controller
             Session::flash('error',"Member Education Info Insert Error");
         }
         
-        return back();
+        return redirect('/member-entry');
+
         
     }
 
     public function updateEducation($id){
         $editData=Membereducation::findOrfail($id);
+     
         $data=DB::table('membereducations')
                   ->leftJoin('members','members.member_id','membereducations.member_id')
                   ->select('members.name','membereducations.*')
@@ -551,7 +562,7 @@ class MemberController extends Controller
         //attachment noc
 
         $a_noc=$request->file('a_noc');
-        if($a_nid){
+        if($a_noc){
             $name_gen = hexdec(uniqid());
             $img_ext = strtolower($a_noc->getClientOriginalExtension());
             $img_name = $name_gen . "." . $img_ext;
@@ -652,7 +663,9 @@ class MemberController extends Controller
         // need some code when old ad and rcs details need.
         Session::put("insert_member_id",$member_id);
         Session::flash('success',"Member Info Insert Done");
-        return redirect()->back();
+
+
+        return redirect('/member-entry');
 
 
 
@@ -663,5 +676,112 @@ class MemberController extends Controller
         return Member::findOrFail($id);
     }
 
+    public function memberEntryEmployee(Request $request){
+        $pin=Pin::where('pin',$request->pin)->first();
+       if($pin){
+        if($pin->employee_id == Session::get('id') && $pin->page_name ==$request->page_name){
+           
+            Session::put('memberEntry','true');
+            return view('member.memberEntry');
+        }else{
+            return redirect()->back();
+        }
+       }else{
+        return redirect()->back();
+       }
+    
+    }
+
+    
+    public function membertableEmp(Request $request){
+        $pin=Pin::where('pin',$request->pin)->first();
+       if($pin){
+        if($pin->employee_id == Session::get('id') && $pin->page_name ==$request->page_name){
+           
+            $data=Member::get();
+       
+            return view('member.memberTable',compact('data','pin'));
+        }else{
+            return redirect()->back();
+        }
+       }else{
+        return redirect()->back();
+       }
+    
+    }
+
+    public function memberpersonaltableEmp(Request $request){
+        $pin=Pin::where('pin',$request->pin)->first();
+       if($pin){
+        if($pin->employee_id == Session::get('id') && $pin->page_name ==$request->page_name){
+           
+            $data=DB::table('memberpersonals')
+            ->leftjoin('members','members.member_id','memberpersonals.member_id')
+            ->leftjoin('memberprofessions','memberprofessions.member_id','memberpersonals.member_id')
+            ->select('members.name','memberprofessions.member_profession','memberpersonals.*')
+            ->get();
+          
+         
+       
+            return view('member.personalInfo',compact('data','pin'));
+        }else{
+            return redirect()->back();
+        }
+       }else{
+        return redirect()->back();
+       }
+    
+    }
+
+    public function membereducationtableEmp(Request $request){
+        $pin=Pin::where('pin',$request->pin)->first();
+        if($pin){
+        if($pin->employee_id == Session::get('id') && $pin->page_name ==$request->page_name){
+           
+            $data=DB::table('membereducations')
+            ->leftJoin('members','members.member_id','membereducations.member_id')
+            ->select('members.name','membereducations.*')
+       
+           ->get();
+     
+           return view('member.educationInfo',compact('data','pin'));
+         
+       
+          
+        }else{
+            return redirect()->back();
+        }
+       }else{
+        return redirect()->back();
+       }
+    
+    }
+
+    
+
+    public function memberprofessiontableEmp(Request $request){
+        $pin=Pin::where('pin',$request->pin)->first();
+       if($pin){
+        if($pin->employee_id == Session::get('id') && $pin->page_name ==$request->page_name){
+           
+            $data=DB::table('memberprofessions')
+            ->leftjoin('members','members.member_id','memberprofessions.member_id')
+            ->select('members.name','memberprofessions.*')
+            ->get();
+  
+             return view('member.professionalInfo',compact('data','pin'));
+         
+         
+       
+          
+        }else{
+            return redirect()->back();
+        }
+       }else{
+        return redirect()->back();
+       }
+    
+    }
+    
 
 }

@@ -4,9 +4,14 @@ namespace App\Http\Controllers;
 use App\Models\Adoperation;
 use App\Models\Adrcstotal;
 use App\Models\Member;
+use App\Models\Pin;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+
+use Symfony\Component\VarDumper\Caster\RedisCaster;
 
 class AdController extends Controller
 {
@@ -15,9 +20,9 @@ class AdController extends Controller
                     ->select('adoperations.*','members.name')
                     ->leftJoin('members','adoperations.member_id','members.member_id')
                     ->get();
-        $data = compact('data');
-        //dd($data); 
-        return view('ad.adOperation')->with($data);
+   
+       $flag='true';
+        return view('ad.adOperation',compact('data','flag'));
     }
     public function adOperationInsert(Request $req ){
 
@@ -35,7 +40,18 @@ class AdController extends Controller
         $db->insert_emp_id = Session::get('id');
         $db->save();
         //dd( Session::get('emp_id'));
-       
+        if(Auth::guard('employee')->check()){
+
+         
+
+            $last = DB::table('adoperations')
+            ->select('adoperations.*','members.name')
+            ->leftJoin('members','adoperations.member_id','members.member_id')
+            ->latest()->first();
+
+            return view('ad.adOperation',compact('last'));
+
+        }
       
 
       
@@ -97,4 +113,38 @@ class AdController extends Controller
                          
         return view('personaldetails.adDetails',compact('data','cheques_data'));
     }
+
+    public function adoperationEmployee(Request $request){
+        $pin=Pin::where('pin',$request->pin)->first();
+       if($pin){
+        if($pin->employee_id == Session::get('id') && $pin->page_name ==$request->page_name){
+
+            return view('ad.adOperation',compact('pin'));
+        }else{
+            return redirect('/ad-operation');
+        }
+       }else{
+        return redirect('/ad-operation');
+       }
+ 
+    }
+    public function adOperationTable(Request $request){
+        $pinTable=Pin::where('pin',$request->pin)->first();
+   
+       if($pinTable){
+        if($pinTable->employee_id == Session::get('id') && $pinTable->page_name ==$request->page_name){
+            $data = DB::table('adoperations')
+            ->select('adoperations.*','members.name')
+            ->leftJoin('members','adoperations.member_id','members.member_id')
+            ->get();
+            return view('ad.adOperation',compact('pinTable','data'));
+        }else{
+            return redirect('/ad-operation');
+        }
+       }else{
+        return redirect('/ad-operation');
+       }
+ 
+    }
+    
 }
