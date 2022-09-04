@@ -9,4 +9,8 @@ class MspController extends Controller
     public function policyView(){
         
     }
+
+    // public function mspForm(Request $request, $id = null){
+
+    // }
 }
