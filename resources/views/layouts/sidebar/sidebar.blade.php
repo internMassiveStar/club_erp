@@ -92,6 +92,18 @@
             </li>
             <li>
                 <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                    <i class="icon-badge menu-icon"></i> <span class="nav-text">Msp</span>
+                </a>
+                <ul aria-expanded="false">
+                    <li><a href="{{ route('policy') }}">Policy</a></li>
+                    <li><a href="{{ route('today-cheque') }}">Today's Chque</a></li>
+                    <li><a href="{{ route('tomorrow-cheque') }}">Tomorrows Cheque</a></li>
+                    <li><a href="{{ route('searchbydate-cheque') }}">Search by Date</a></li>
+                    <li><a href="{{ route('searchbyadorrcs-cheque') }}">Search by AD/RCS</a></li>
+                </ul>
+            </li>
+            <li>
+                <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                     <i class="icon-grid menu-icon"></i><span class="nav-text">Running Cost Share</span>
                 </a>
                 <ul aria-expanded="false">
