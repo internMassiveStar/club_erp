@@ -69,7 +69,8 @@
     </div>
 
 @isset($last)
-
+<button onclick="printDiv('printMe')" class="btn-btn primary">Print</button>
+<div id='printMe'>
 <div class="table-responsive">
     <table class="table table-striped table-bordered zero-configuration" id="adopttable">
         <thead>
@@ -112,6 +113,7 @@
         </tfoot>
     </table>
 </div>
+</div>
     
 @endisset
 
@@ -142,7 +144,10 @@
                     @endif
 
                     @if(Auth::guard('admin')->check() || @isset($pinTable))
+                    <button onclick="printDiv('printMe')" class="btn-btn primary">Print</button>
+                    <div id='printMe'>
                   
+                     
                     <a class="text-center"><h4>AD Operation Table</h4></a>
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered zero-configuration" id="adopttable">
@@ -189,6 +194,7 @@
                                 </tr>
                             </tfoot>
                         </table>
+                    </div>
                     </div>
                 </div>
             </div>

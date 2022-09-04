@@ -6,6 +6,7 @@ use App\Http\Controllers\MemberController;
 use App\Http\Controllers\RcsController;
 use App\Http\Controllers\AdController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\MspController;
 use App\Http\Controllers\PinController;
 use App\Http\Controllers\TotaladrcsController;
 
@@ -174,7 +175,8 @@ Route::post('/login-member',[MemberController::class,'loginMember'])->name('logi
         Route::get('/chequeQueueProcess-cheque/{id}',[ChequeManagementController::class,'chequeQueueProcess'])->name('chequeQueueProcess-cheque');
         Route::post('/chequeQueueUpdate-cheque',[ChequeManagementController::class,'chequeQueueUpdate'])->name('chequeQueueUpdate-cheque');
             
-          
+        //Msp 
+        Route::get('/policy',[MspController::class,'policyView'])->name('policy');
             
      
             //  Route::get('/change-password', [MemberController::class, 'changePassword'])->name('change-password');

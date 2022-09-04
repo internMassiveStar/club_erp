@@ -46,7 +46,6 @@ class PinController extends Controller
 
 
     public function task(){
-      
         $data=DB::table('tasks')
                   ->join('employees','employees.employee_id','tasks.employee_id')
                   ->select('employees.name','tasks.*')
