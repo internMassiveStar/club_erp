@@ -12,7 +12,8 @@ class MspController extends Controller
 
     }
 
-    // public function mspForm(Request $request, $id = null){
+    public function mspForm(Request $request, $id = null){
 
-    // }
+        return view('msp.msp-form');
+    }
 }
