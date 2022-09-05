@@ -29,14 +29,14 @@
             @endif
       
             @if(Auth::guard('admin')->check() || @isset($pin))
-            <h2 class="text-center">Especial Rcs</h2>
+            <h2 class="text-center">Program Meeting</h2>
             <div class="basic-form">
                 <form class="mt-5 mb-5 login-input" method="post" action="{{ @$editData ? route('update-rcs',$editData->id) : route('operation-rcs') }}">
                     @csrf
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <h6><b>Program/Meeting Name</b></h6>
-                            <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="Policy" name="member_id" id="member_id" value='{{ @$editData->member_id }}' required>
+                            <input style="border: .01px solid #969393;" type="text" class="form-control"  name="member_id" id="member_id" value='{{ @$editData->member_id }}' required>
                         </div>
                         <div class="form-group col-md-6">
                             <h6><b>Program/Meeting Type</b></h6>
@@ -57,7 +57,7 @@
                       
                     
                     </div>    
-                    <button type="submit" class="btn mb-1 btn-success"> {{ @$editData ? 'Updata' :'Insert'}}</button>
+                    <button type="submit" class="btn mb-1 btn-success"> {{ @$editData ? 'Updata' :'Save'}}</button>
                     <!--<button type="submit" class="btn mb-1 btn-danger" name="ADDelete"> Delete</button>-->
                 </form>
             </div>
@@ -145,7 +145,7 @@
             @if(Auth::guard('admin')->check() || @isset($pinTable))
             <div class="card">
                 <div class="card-body">
-                    <a class="text-center"><h4>Especial Rcs Table</h4></a>
+                    <a class="text-center"><h4>Program table</h4></a>
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered zero-configuration" id="Mytable">
                             <thead>

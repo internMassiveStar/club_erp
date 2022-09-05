@@ -43,7 +43,7 @@
                             <input style="border: .01px solid #969393;" type="date" class="form-control" placeholder=" Receiving Date" name="receiving_date" value='{{ @$editData->receiving_date }}' required>
                         </div>
                     </div>    
-                    <button type="submit" class="btn mb-1 btn-success"> {{ @$editData ? 'Updata' :'Insert'}}</button>
+                    <button type="submit" class="btn mb-1 btn-success"> {{ @$editData ? 'Updata' :'Save'}}</button>
                     <!--<button type="submit" class="btn mb-1 btn-danger" name="ADDelete"> Delete</button>-->
                 </form>
             </div>
@@ -79,7 +79,7 @@
                             <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="amount" name="member_id" id="member_id" value='{{ @$editData->member_id }}' required>
                         </div>
                 </div>
-                <button type="submit" class="btn mb-1 btn-success"> {{ @$editData ? 'Updata' :'Insert'}}</button>
+                <button type="submit" class="btn mb-1 btn-success"> {{ @$editData ? 'Updata' :'Save'}}</button>
                 <!--<button type="submit" class="btn mb-1 btn-danger" name="ADDelete"> Delete</button>-->
             </form>
         </div>

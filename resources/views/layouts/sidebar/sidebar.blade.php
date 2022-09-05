@@ -97,12 +97,11 @@
                 <ul aria-expanded="false">
                     <li><a href="{{ route('policy') }}">Policy</a></li>
 
-                    <li><a href="{{ route('today-cheque') }}">Today's Chque</a></li>
-                    <li><a href="{{ route('tomorrow-cheque') }}">Tomorrows Cheque</a></li>
-                    <li><a href="{{ route('searchbydate-cheque') }}">Search by Date</a></li>
+                 
                     <li><a href="{{ url('/msp-form') }}">MSP Form</a></li>
 
-                    <li><a href="{{ route('especialRcs') }}">Especial Rcs</a></li>
+                    <li><a href="{{ route('specialRcs') }}">Special Rcs</a></li>
+                    <li><a href="{{ route('donation') }}">Donation</a></li>
                     <li><a href="{{ route('program') }}">Program/Meeting</a></li>
                  
 
