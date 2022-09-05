@@ -177,6 +177,9 @@ Route::post('/login-member',[MemberController::class,'loginMember'])->name('logi
             
         //Msp 
         Route::get('/policy',[MspController::class,'policyView'])->name('policy');
+        Route::get('/especialRcs',[MspController::class,'especialRcs'])->name('especialRcs');
+        Route::get('/program',[MspController::class,'program'])->name('program');
+
 
         Route::match(['get', 'post'], '/msp-form/{id?}',[MspController::class,'mspForm']);
             
