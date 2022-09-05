@@ -95,14 +95,93 @@
                             </div>
                         </div>
 
-                        <button type="submit" class="btn mb-1 btn-success" name="Member" id ="Member"  >Insert</button>
+                        <button type="submit" class="btn mb-1 btn-success" name="Member" id ="Member"  >save</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
  </details>
+<details>
+    <summary>
+       Donation 
+    </summary>
+    <div class="col-lg-12">
+        <h6></h6>
+        <div class="card">
+            <div class="card-body">
+                <h2 class="text-center">Paid Donation</h2>
+                <div class="basic-form">
 
+                    <form class="form-valide" action=" " method="post" enctype="multipart/form-data">
+                        @csrf
+                          <table class="table table-striped table-inverse table-responsive" style="border: 1px solid black">
+                            <thead class="thead-inverse">
+                                <tr>
+                                    <th>Donation Type</th>
+                                    <th>Amount</th>
+                                    <th><a class="btn mb-1 btn-success" style="margin-top: 30%" onclick="create_tr('table_id')" ><i class="fa fa-plus"></i></a></th>
+                                </tr>
+                                </thead>
+                                <tbody id="table_id">
+                                    <tr>
+                                        <td><input style="border: .01px solid #969393;" type="text" class="form-control" placeholder=" Donation Type" name="degree[]" ></td>
+                                        <td><input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="Amount" name="institute[]"></td>
+                                        
+                                        <td><a class="btn mb-1 btn-danger" style="margin-top: 10%; color:white" onclick="remove_tr(this)" ><i class="fa fa-close"></i></a></td>
+                                        
+                                    </tr>
+                                </tbody>
+                        </table>
+                        <button type="submit" class="btn mb-1 btn-success" name="MemberEducation" id ="MemberEducation"  >Donation save</button> 
+                    </form>  
+                        
+                </div>
+              
+            </div>
+                            
+        </div>
+    </div>
+</details>
+<details>
+    <summary>
+       Special RCS 
+    </summary>
+    <div class="col-lg-12">
+        <h6></h6>
+        <div class="card">
+            <div class="card-body">
+                <h2 class="text-center">Paid Special RCS</h2>
+                <div class="basic-form">
+
+                    <form class="form-valide" action=" " method="post" enctype="multipart/form-data">
+                        @csrf
+                          <table class="table table-striped table-inverse table-responsive" style="border: 1px solid black">
+                            <thead class="thead-inverse">
+                                <tr>
+                                    <th>Special RCS Type</th>
+                                    <th><a class="btn mb-1 btn-success" style="margin-top: 30%" onclick="create_tr('table_id_special_rcs')" ><i class="fa fa-plus"></i></a></th>
+                                </tr>
+                                </thead>
+                                <tbody id="table_id_special_rcs">
+                                    <tr>
+                                        <td><input style="border: .01px solid #969393;" type="text" class="form-control" placeholder=" Special RCS Type" name="degree[]" ></td>
+                                        
+                                        <td><a class="btn mb-1 btn-danger" style="margin-top: 10%; color:white" onclick="remove_tr(this)" ><i class="fa fa-close"></i></a></td>
+                                        
+                                    </tr>
+                                </tbody>
+                        </table>
+                        <button type="submit" class="btn mb-1 btn-success" name="MemberEducation" id ="MemberEducation"  >special rcs save</button> 
+                    </form>  
+                        
+                </div>
+              
+            </div>
+                            
+        </div>
+    </div>
+</details>
   <details>
     <summary>
         Member Club Fund Amount
@@ -144,7 +223,7 @@
                             
                             
                         </div>
-                        <button type="submit" class="btn mb-1 btn-success" name="MemberProfession" id ="MemberProfession"  >Club Fund Insert</button>    
+                        <button type="submit" class="btn mb-1 btn-success" name="MemberProfession" id ="MemberProfession"  >Club Fund Save</button>    
                     </form>
                   
                 </div>
@@ -193,7 +272,7 @@
                             
                             
                         </div>
-                        <button type="submit" class="btn mb-1 btn-success" name="MemberProfession" id ="MemberProfession"  >Club Fund Insert</button>    
+                        <button type="submit" class="btn mb-1 btn-success" name="MemberProfession" id ="MemberProfession"  >Reference Club Fund Save</button>    
                     </form>
                   
                 </div>
@@ -273,7 +352,7 @@
                             </div>    
 
                         </div>    
-                        <button type="submit" class="btn mb-1 btn-success" name="build_value_insert" id ="build_value_insert"  >Buid Value Insert</button>
+                        <button type="submit" class="btn mb-1 btn-success" name="build_value_insert" id ="build_value_insert"  >Build Value Save</button>
                      
                             
                           
