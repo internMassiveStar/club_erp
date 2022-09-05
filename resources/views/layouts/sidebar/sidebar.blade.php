@@ -95,16 +95,11 @@
                     <i class="icon-badge menu-icon"></i> <span class="nav-text">Msp</span>
                 </a>
                 <ul aria-expanded="false">
+                    <li><a href="{{ route('program') }}">Program/Meeting</a></li>
                     <li><a href="{{ route('policy') }}">Policy</a></li>
-
-                 
-                    <li><a href="{{ url('/msp-form') }}">MSP Form</a></li>
-
                     <li><a href="{{ route('specialRcs') }}">Special Rcs</a></li>
                     <li><a href="{{ route('donation') }}">Donation</a></li>
-                    <li><a href="{{ route('program') }}">Program/Meeting</a></li>
-                 
-
+                    <li><a href="{{ url('/msp-form') }}">MSP Form</a></li>
                 </ul>
             </li>
             <li>
