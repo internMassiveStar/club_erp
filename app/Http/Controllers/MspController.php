@@ -12,6 +12,9 @@ class MspController extends Controller
 
     }
 
+
+    public function mspForm(Request $request, $id = null){
+
     public function especialRcs(){
         return view('msp.especialRcs');
     }
@@ -21,5 +24,7 @@ class MspController extends Controller
 
     // public function mspForm(Request $request, $id = null){
 
-    // }
+
+        return view('msp.msp-form');
+    }
 }

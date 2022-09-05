@@ -181,7 +181,7 @@ Route::post('/login-member',[MemberController::class,'loginMember'])->name('logi
         Route::get('/program',[MspController::class,'program'])->name('program');
 
 
-        //Route::match(['get', 'post'], '/msp-form/{id?}',[MspController::class,'mspForm']);
+        Route::match(['get', 'post'], '/msp-form/{id?}',[MspController::class,'mspForm']);
             
      
             //  Route::get('/change-password', [MemberController::class, 'changePassword'])->name('change-password');
