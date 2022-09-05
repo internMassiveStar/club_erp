@@ -96,10 +96,9 @@
                 </a>
                 <ul aria-expanded="false">
                     <li><a href="{{ route('policy') }}">Policy</a></li>
-                    <li><a href="{{ route('today-cheque') }}">Today's Chque</a></li>
-                    <li><a href="{{ route('tomorrow-cheque') }}">Tomorrows Cheque</a></li>
-                    <li><a href="{{ route('searchbydate-cheque') }}">Search by Date</a></li>
-                    <li><a href="{{ route('searchbyadorrcs-cheque') }}">Search by AD/RCS</a></li>
+                    <li><a href="{{ route('especialRcs') }}">Especial Rcs</a></li>
+                    <li><a href="{{ route('program') }}">Program/Meeting</a></li>
+                 
                 </ul>
             </li>
             <li>

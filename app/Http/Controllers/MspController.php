@@ -12,6 +12,13 @@ class MspController extends Controller
 
     }
 
+    public function especialRcs(){
+        return view('msp.especialRcs');
+    }
+    public function program(){
+        return view('msp.program');
+    }
+
     // public function mspForm(Request $request, $id = null){
 
     // }
