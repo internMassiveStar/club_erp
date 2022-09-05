@@ -29,59 +29,36 @@
             @endif
       
             @if(Auth::guard('admin')->check() || @isset($pin))
-            <h2 class="text-center">Compnay Policy</h2>
+            <h2 class="text-center">Donation</h2>
             <div class="basic-form">
                 <form class="mt-5 mb-5 login-input" method="post" action="{{ @$editData ? route('update-rcs',$editData->id) : route('operation-rcs') }}">
                     @csrf
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <h6><b>Policy Name</b></h6>
-                            <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="Policy" name="member_id" id="member_id" value='{{ @$editData->member_id }}' required>
+                            <h6><b>Donation Name</b></h6>
+                            <input style="border: .01px solid #969393;" type="text" class="form-control"  name="member_id" id="member_id" value='{{ @$editData->member_id }}' required>
                         </div>
                         <div class="form-group col-md-6">
                             <h6><b>Issue Date</b></h6>
                             <input style="border: .01px solid #969393;" type="date" class="form-control" placeholder=" Receiving Date" name="receiving_date" value='{{ @$editData->receiving_date }}' required>
                         </div>
-                    </div>    
+                        
+                        <div class="form-group col-md-6">
+                            <h6 class=""><b>Remarks </b><span class="text-danger">*</span>
+
+                            <textarea style="border: .01px solid #969393;" class="form-control"  name="Remarks"  rows="2" cols="100" ></textarea>
+                        </div>
+                    </div> 
+                    <div class="form-group row">
+                        </h6>
+                       
+                    </div>   
                     <button type="submit" class="btn mb-1 btn-success"> {{ @$editData ? 'Updata' :'Save'}}</button>
                     <!--<button type="submit" class="btn mb-1 btn-danger" name="ADDelete"> Delete</button>-->
                 </form>
             </div>
-            <div class="basic-form">
-                <form class="mt-5 mb-5 login-input" method="post" action="{{ @$editData ? route('update-rcs',$editData->id) : route('operation-rcs') }}">
-                    @csrf
-                <div class="form-row">
-                  
-                        <div class="form-group col-md-4">
-                            <h6><b>Policy Name</b></h6>
-                         
-                              
-                                <select style="border: .01px solid #969393;" class="form-control"  name="receiving_tool" id="receiving_tool">
-                                    <option value="{{ @$editData->receiving_tool }}">{{ @$editData ? $editData->receiving_tool : 'Plese Select' }}</option>
-                                    <option value="Cash">policy 1</option>
-                                    <option value="Cheque">Policy 2</option>
-                                </select>
-                         
-                        </div>  
-                        <div class="form-group col-md-4">
-                            <h6><b>Member Category</b></h6>
-                      
-                              
-                                <select style="border: .01px solid #969393;" class="form-control"  name="receiving_tool" id="receiving_tool">
-                                    <option value="{{ @$editData->receiving_tool }}">{{ @$editData ? $editData->receiving_tool : 'Plese Select' }}</option>
-                                    <option value="gold">Gold</option>
-                                    <option value="Cheque">Silver</option>
-                                </select>
-                           
-                        </div>  
-                        <div class="form-group col-md-4">
-                            <h6><b>Amount</b></h6>
-                            <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="amount" name="member_id" id="member_id" value='{{ @$editData->member_id }}' required>
-                        </div>
-                </div>
-                <button type="submit" class="btn mb-1 btn-success"> {{ @$editData ? 'Updata' :'Save'}}</button>
-                <!--<button type="submit" class="btn mb-1 btn-danger" name="ADDelete"> Delete</button>-->
-            </form>
+          
+            
         </div>
                         
                                                                 
@@ -165,19 +142,15 @@
             @if(Auth::guard('admin')->check() || @isset($pinTable))
             <div class="card">
                 <div class="card-body">
-                   
-                    <a class="text-center"><h4>Policy Table</h4></a>
+                    <a class="text-center"><h4>Donation Table</h4></a>
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered zero-configuration" id="Mytable">
                             <thead>
                                 <tr>
-                                    <th>Policy Name</th>
-                                    <th>Policy Issue Date</th>
-                                    
-                                    <th>Member Catgory</th>
-                                    <th>Amount</th>
-                              
-                                  
+                                   
+                                    <th>Donation  Name</th> 
+                                    <th>Issue Date</th>
+                                    <th>Remarks</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
