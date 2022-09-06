@@ -5,9 +5,12 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\RcsController;
 use App\Http\Controllers\AdController;
+use App\Http\Controllers\DonationController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\MeetingController;
 use App\Http\Controllers\MspController;
 use App\Http\Controllers\PinController;
+use App\Http\Controllers\RcsSpecialController;
 use App\Http\Controllers\TotaladrcsController;
 
 use Illuminate\Support\Facades\Auth;
@@ -174,13 +177,29 @@ Route::post('/login-member',[MemberController::class,'loginMember'])->name('logi
         Route::get('/chequeQueue-cheque',[ChequeManagementController::class,'chequeQueue'])->name('chequeQueue-cheque');
         Route::get('/chequeQueueProcess-cheque/{id}',[ChequeManagementController::class,'chequeQueueProcess'])->name('chequeQueueProcess-cheque');
         Route::post('/chequeQueueUpdate-cheque',[ChequeManagementController::class,'chequeQueueUpdate'])->name('chequeQueueUpdate-cheque');
-            
+        //special rcs
+        
+        Route::get('/specialRcs',[RcsSpecialController::class,'specialRcs'])->name('specialRcs');
+        Route::post('/specialRcs-entry',[RcsSpecialController::class,'specialRcsEntry'])->name('specialRcs-entry');
+        Route::get('/special-rcs-show/{id}',[RcsSpecialController::class,'specialRcsShow'])->name('special-rcs-show');
+        Route::post('/update-special-rce/{id}',[RcsSpecialController::class,'specialRcsUpdate'])->name('update-special-rce');
+        //meeting 
+        Route::get('/program',[MeetingController::class,'program'])->name('program');
+        Route::post('/meeting-entry',[MeetingController::class,'meetingEntry'])->name('meeting-entry');
+        Route::get('/meeting-show/{id}',[MeetingController::class,'meetingShow'])->name('meeting-show');
+        Route::post('/meeting-update/{id}',[MeetingController::class,'meetingUpdate'])->name('meeting-update');
+       //donation 
+       Route::get('/donation',[DonationController::class,'donationView'])->name('donation');
+       Route::post('/donation-entry',[DonationController::class,'donationEntry'])->name('donation-entry');
+       Route::get('/donation-show/{id}',[DonationController::class,'donationShow'])->name('donation-show');
+       Route::post('/donation-update/{id}',[DonationController::class,'donationUpdate'])->name('donation-update');
+
         //Msp 
         Route::get('/policy',[MspController::class,'policyView'])->name('policy');
-        Route::get('/donation',[MspController::class,'donationView'])->name('donation');
+      
 
-        Route::get('/specialRcs',[MspController::class,'specialRcs'])->name('specialRcs');
-        Route::get('/program',[MspController::class,'program'])->name('program');
+     
+        
 
 
         Route::match(['get', 'post'], '/msp-form/{id?}',[MspController::class,'mspForm']);

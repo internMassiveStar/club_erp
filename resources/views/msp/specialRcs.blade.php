@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title') {{'Company Policy'}} @endsection
+@section('title') {{'Special Rcs'}} @endsection
 @section('main-content')
 
 
@@ -31,25 +31,25 @@
             @if(Auth::guard('admin')->check() || @isset($pin))
             <h2 class="text-center">Special Rcs</h2>
             <div class="basic-form">
-                <form class="mt-5 mb-5 login-input" method="post" action="{{ @$editData ? route('update-rcs',$editData->id) : route('operation-rcs') }}">
+                <form class="mt-5 mb-5 login-input" method="post" action="{{ @$editData ? route('update-special-rce',$editData->id) : route('specialRcs-entry') }}">
                     @csrf
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <h6><b>Rcs Name</b></h6>
-                            <input style="border: .01px solid #969393;" type="text" class="form-control"  name="member_id" id="member_id" value='{{ @$editData->member_id }}' required>
+                            <input style="border: .01px solid #969393;" type="text" class="form-control"  name="rcs_name" value='{{ @$editData->rcs_name }}' required>
                         </div>
                         <div class="form-group col-md-6">
                             <h6><b>Issue Date</b></h6>
-                            <input style="border: .01px solid #969393;" type="date" class="form-control" placeholder=" Receiving Date" name="receiving_date" value='{{ @$editData->receiving_date }}' required>
+                            <input style="border: .01px solid #969393;" type="date" class="form-control"  name="issue_date" value='{{ @$editData->issue_date }}' required>
                         </div>
                         <div class="form-group col-md-6">
                             <h6><b>Amount</b></h6>
-                            <input style="border: .01px solid #969393;" type="text" class="form-control"  name="member_id" id="member_id" value='{{ @$editData->member_id }}' required>
+                            <input style="border: .01px solid #969393;" type="text" class="form-control"  name="amount"  value='{{ @$editData->amount }}' required>
                         </div>
                         <div class="form-group col-md-6">
                             <h6 class=""><b>Remarks </b><span class="text-danger">*</span>
 
-                            <textarea style="border: .01px solid #969393;" class="form-control"  name="Remarks"  rows="2" cols="100" ></textarea>
+                            <textarea style="border: .01px solid #969393;" class="form-control"  name="remarks"  rows="2" cols="100" >{{ @$editData->remarks }}</textarea>
                         </div>
                     </div> 
                     <div class="form-group row">
@@ -117,7 +117,7 @@
 </div>
     
 @endisset
-{{-- @isset($data) --}}
+@isset($data)
     
 
 
@@ -162,23 +162,22 @@
                             <tbody>
                                 <tr>
 
-                                {{-- @foreach ($data as $item)
+                                @foreach ($data as $item)
                                     
-                                <td>{{ $item->member_id }}</td>
-                                <td>{{ $item->name }}</td>
-                                <td>{{ $item->receiving_amount }}</td>
-                                <td>{{ $item->receiving_date }}</td>
-                                <td>{{ $item->receiving_tool }}</td>
-                                <td>{{ $item->insert_by }}</td>
-                                <td>{{ $item->update_by }}</td>
+                                <td>{{ $item->rcs_name }}</td>
+                                
+                                <td>{{ $item->issue_date }}</td>
+                                <td>{{ $item->amount }}</td>
+                                <td>{{ $item->remarks }}</td>
+                                {{-- <td>{{ $item->update_by }}</td> --}}
                                 <td>
                                     <a class="btn btn-danger btn-sm"
-                                     href="{{ route('rcs-update',$item->id) }}">update</a>
+                                     href="{{ route('special-rcs-show',$item->id) }}">update</a>
                                   
                                 </td>
                               
                                 </tr>
-                         @endforeach --}}
+                         @endforeach
                             </tbody>
                             
                         </table>
@@ -190,5 +189,5 @@
 
 @endif
 
-{{-- @endisset --}}
+@endisset
 @endsection

@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title') {{'Company Policy'}} @endsection
+@section('title') {{'Donation '}} @endsection
 @section('main-content')
 
 
@@ -31,22 +31,22 @@
             @if(Auth::guard('admin')->check() || @isset($pin))
             <h2 class="text-center">Donation</h2>
             <div class="basic-form">
-                <form class="mt-5 mb-5 login-input" method="post" action="{{ @$editData ? route('update-rcs',$editData->id) : route('operation-rcs') }}">
+                <form class="mt-5 mb-5 login-input" method="post" action="{{ @$editData ? route('donation-update',$editData->id) : route('donation-entry') }}">
                     @csrf
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <h6><b>Donation Name</b></h6>
-                            <input style="border: .01px solid #969393;" type="text" class="form-control"  name="member_id" id="member_id" value='{{ @$editData->member_id }}' required>
+                            <input style="border: .01px solid #969393;" type="text" class="form-control"  name="donation_name"  value='{{ @$editData->donation_name }}' required>
                         </div>
                         <div class="form-group col-md-6">
                             <h6><b>Issue Date</b></h6>
-                            <input style="border: .01px solid #969393;" type="date" class="form-control" placeholder=" Receiving Date" name="receiving_date" value='{{ @$editData->receiving_date }}' required>
+                            <input style="border: .01px solid #969393;" type="date" class="form-control"  name="issue_date" value='{{ @$editData->issue_date }}' required>
                         </div>
                         
                         <div class="form-group col-md-6">
                             <h6 class=""><b>Remarks </b><span class="text-danger">*</span>
 
-                            <textarea style="border: .01px solid #969393;" class="form-control"  name="Remarks"  rows="2" cols="100" ></textarea>
+                            <textarea style="border: .01px solid #969393;" class="form-control"  name="remarks"  rows="2" cols="100" >{{ @$editData->remarks }}</textarea>
                         </div>
                     </div> 
                     <div class="form-group row">
@@ -114,7 +114,7 @@
 </div>
     
 @endisset
-{{-- @isset($data) --}}
+@isset($data)
     
 
 
@@ -151,29 +151,28 @@
                                     <th>Donation  Name</th> 
                                     <th>Issue Date</th>
                                     <th>Remarks</th>
+                                    <th>Insert By</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
 
-                                {{-- @foreach ($data as $item)
+                                @foreach ($data as $item)
                                     
-                                <td>{{ $item->member_id }}</td>
-                                <td>{{ $item->name }}</td>
-                                <td>{{ $item->receiving_amount }}</td>
-                                <td>{{ $item->receiving_date }}</td>
-                                <td>{{ $item->receiving_tool }}</td>
+                                <td>{{ $item->donation_name }}</td>
+                                <td>{{ $item->issue_date }}</td>
+                                <td>{{ $item->remarks }}</td>
                                 <td>{{ $item->insert_by }}</td>
-                                <td>{{ $item->update_by }}</td>
+                               
                                 <td>
                                     <a class="btn btn-danger btn-sm"
-                                     href="{{ route('rcs-update',$item->id) }}">update</a>
+                                     href="{{ route('donation-show',$item->id) }}">update</a>
                                   
                                 </td>
                               
                                 </tr>
-                         @endforeach --}}
+                         @endforeach 
                             </tbody>
                             
                         </table>
@@ -185,5 +184,5 @@
 
 @endif
 
-{{-- @endisset --}}
+@endisset
 @endsection

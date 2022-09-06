@@ -29,31 +29,29 @@
             @endif
       
             @if(Auth::guard('admin')->check() || @isset($pin))
-            <h2 class="text-center">Program Meeting</h2>
+            <h2 class="text-center">Program/Meeting</h2>
             <div class="basic-form">
-                <form class="mt-5 mb-5 login-input" method="post" action="{{ @$editData ? route('update-rcs',$editData->id) : route('operation-rcs') }}">
+                <form class="mt-5 mb-5 login-input" method="post" action="{{ @$editData ? route('meeting-update',$editData->id) : route('meeting-entry') }}">
                     @csrf
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <h6><b>Program/Meeting Name</b></h6>
-                            <input style="border: .01px solid #969393;" type="text" class="form-control"  name="member_id" id="member_id" value='{{ @$editData->member_id }}' required>
+                            <h6><b>Total Meeting</b></h6>
+                            <input style="border: .01px solid #969393;" type="text" class="form-control"  name="total_meeting"  value='{{ @$editData->total_meeting }}' required>
                         </div>
                         <div class="form-group col-md-6">
                             <h6><b>Program/Meeting Type</b></h6>
                         
                               
-                                <select style="border: .01px solid #969393;" class="form-control"  name="receiving_tool" id="receiving_tool">
-                                    <option value="{{ @$editData->receiving_tool }}">{{ @$editData ? $editData->receiving_tool : 'Plese Select' }}</option>
-                                    <option value="cash">Community program</option>
-                                    <option value="Cheque">Monthly Dinner</option>
+                                <select style="border: .01px solid #969393;" class="form-control"  name="meeting_type" id="receiving_tool">
+                                    <option value="{{ @$editData->meeting_type }}">{{ @$editData ? $editData->meeting_type : 'Plese Select' }}</option>
+                                    <option value="Community program">Community program</option>
+                                    <option value="Club Program">Club Program</option>
+                                    <option value="Formation Meeting">Formation Meeting</option>
                                 </select>
                             
                         </div>  
                       
-                        <div class="form-group col-md-6">
-                            <h6><b>Program/Meeting Date</b></h6>
-                            <input style="border: .01px solid #969393;" type="date" class="form-control" placeholder=" Receiving Date" name="receiving_date" value='{{ @$editData->receiving_date }}' required>
-                        </div>
+                      
                       
                     
                     </div>    
@@ -117,7 +115,7 @@
 </div>
     
 @endisset
-{{-- @isset($data) --}}
+@isset($data)
     
 
 
@@ -150,33 +148,29 @@
                         <table class="table table-striped table-bordered zero-configuration" id="Mytable">
                             <thead>
                                 <tr>
-                                    <th>Program Name</th>
-                                    <th>Program Type</th> 
-                                    <th>Program Date</th>
-                                    
+                                    <th>Total Meeting</th>
+                                    <th>Meeting Type</th> 
+                                    <th>Insert By</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
 
-                                {{-- @foreach ($data as $item)
+                                 @foreach ($data as $item)
                                     
-                                <td>{{ $item->member_id }}</td>
-                                <td>{{ $item->name }}</td>
-                                <td>{{ $item->receiving_amount }}</td>
-                                <td>{{ $item->receiving_date }}</td>
-                                <td>{{ $item->receiving_tool }}</td>
+                                <td>{{ $item->total_meeting }}</td>
+                                <td>{{ $item->meeting_type }}</td>
                                 <td>{{ $item->insert_by }}</td>
-                                <td>{{ $item->update_by }}</td>
+                               
                                 <td>
                                     <a class="btn btn-danger btn-sm"
-                                     href="{{ route('rcs-update',$item->id) }}">update</a>
+                                     href="{{ route('meeting-show',$item->id) }}">update</a>
                                   
                                 </td>
                               
                                 </tr>
-                         @endforeach --}}
+                         @endforeach 
                             </tbody>
                             
                         </table>
@@ -188,5 +182,5 @@
 
 @endif
 
-{{-- @endisset --}}
+@endisset
 @endsection
