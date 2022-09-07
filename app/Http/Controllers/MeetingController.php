@@ -18,6 +18,8 @@ class MeetingController extends Controller
         $meeting->meeting_type=$request->meeting_type;
         $meeting->insert_by=Session::get('id');
         $meeting->save();
+        Session::flash('success',"Meeting/Program Save");
+
         return redirect()->back();
     }
     public function meetingShow($id){
@@ -29,6 +31,8 @@ class MeetingController extends Controller
         $meeting->total_meeting=$request->total_meeting;
         $meeting->meeting_type=$request->meeting_type;
         $meeting->update();
+        Session::flash('success',"Meeting/Program Update");
+
         return redirect('/program');
     }
 }

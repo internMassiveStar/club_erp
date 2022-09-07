@@ -1,6 +1,9 @@
 @extends('layouts.master')
 @section('title') {{'Company Policy'}} @endsection
 @section('main-content')
+
+
+
 @php
     $success = Session::get('success');
     $error = Session::get('error');
@@ -11,6 +14,7 @@
 @elseif ($error)
     <div class="alert alert-danger">{{ $error }}</div>
 @endif
+
 
     <div class="card">
         <div class="card-body">
@@ -38,37 +42,64 @@
             @endif
       
             @if(Auth::guard('admin')->check() || @isset($pin))
-            <h2 class="text-center">Program/Meeting</h2>
+            <h2 class="text-center">Weightage</h2>
             <div class="basic-form">
-                <form class="mt-5 mb-5 login-input" method="post" action="{{ @$editData ? route('meeting-update',$editData->id) : route('meeting-entry') }}">
+                <form class="mt-5 mb-5 login-input" method="post" action="{{ @$editData ? route('weightage-update',$editData->id) : route('weightage-entry') }}">
                     @csrf
                     <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <h6><b>Total Meeting</b></h6>
-                            <input style="border: .01px solid #969393;" type="text" class="form-control"  name="total_meeting"  value='{{ @$editData->total_meeting }}' required>
+                        <div class="form-group col-md-3">
+                            <h6><b>MSP1 (Network building)</b></h6>
+                            <input style="border: .01px solid #969393;" type="text" class="form-control"  name="msp1" id="member_id" value='{{ @$editData->msp1 }}' required>
                         </div>
-                        <div class="form-group col-md-6">
-                            <h6><b>Program/Meeting Type</b></h6>
-                        
-                              
-                                <select style="border: .01px solid #969393;" class="form-control"  name="meeting_type" id="receiving_tool">
-                                    <option value="{{ @$editData->meeting_type }}">{{ @$editData ? $editData->meeting_type : 'Plese Select' }}</option>
-                                    <option value="Community program">Community program</option>
-                                    <option value="Club Program">Club Program</option>
-                                    <option value="Formation Meeting">Formation Meeting</option>
-                                </select>
-                            
-                        </div>  
-                      
-                      
-                      
-                    
+                        <div class="form-group col-md-3">
+                            <h6><b>MSP2(Club Fund By You)</b></h6>
+                            <input style="border: .01px solid #969393;" type="text" class="form-control"  name="msp2" id="member_id" value='{{ @$editData->msp2 }}' required>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <h6><b>MSP3(Club Fund By Your Refarral)</b></h6>
+                            <input style="border: .01px solid #969393;" type="text" class="form-control"  name="msp3" value='{{ @$editData->msp3 }}' required>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <h6><b>MSP4 (Attend Formation Meeting)</b></h6>
+                            <input style="border: .01px solid #969393;" type="text" class="form-control"  name="msp4" id="member_id" value='{{ @$editData->msp4 }}' required>
+                        </div>
                     </div>    
+                    <div class="form-row">
+                        
+                        <div class="form-group col-md-3">
+                            <h6><b>MSP5(Attend Club Program)</b></h6>
+                            <input style="border: .01px solid #969393;" type="text" class="form-control"  name="msp5" id="member_id" value='{{ @$editData->msp5 }}' required>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <h6><b>MSP6(Given Responsibity perform)</b></h6>
+                            <input style="border: .01px solid #969393;" type="text" class="form-control"  name="msp6" value='{{ @$editData->msp6 }}' required>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <h6><b>MSP7(Attend Community Program)</b></h6>
+                            <input style="border: .01px solid #969393;" type="text" class="form-control"  name="msp7" id="member_id" value='{{ @$editData->msp7 }}' required>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <h6><b>MSP8(Consume Rate)</b></h6>
+                            <input style="border: .01px solid #969393;" type="text" class="form-control"  name="msp8" id="member_id" value='{{ @$editData->msp8 }}' required>
+                        </div>
+                    </div>      
+                    <div class="form-row">
+                    
+                        <div class="form-group col-md-4">
+                            <h6><b>MSP9(Responsibity Rate)</b></h6>
+                            <input style="border: .01px solid #969393;" type="text" class="form-control"  name="msp9" value='{{ @$editData->msp9 }}' required>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <h6><b>MSP10(Given Time)</b></h6>
+                            <input style="border: .01px solid #969393;" type="text" class="form-control"  name="msp10" value='{{ @$editData->msp10}}' required>
+                        </div>
+                    </div>   
+                   
                     <button type="submit" class="btn mb-1 btn-success"> {{ @$editData ? 'Updata' :'Save'}}</button>
                     <!--<button type="submit" class="btn mb-1 btn-danger" name="ADDelete"> Delete</button>-->
                 </form>
             </div>
-         
+          
         </div>
                         
                                                                 
@@ -84,12 +115,8 @@
     <table class="table table-striped table-bordered zero-configuration" id="adopttable">
         <thead>
             <tr>
-                <th>MemberID</th>
-                <th>Member Name</th>
-                <th>ReceivingDate</th>
-                <th>ReceivingAmount</th>
-                <th>ReceivingTool</th>
-                <th>Insert by ID</th>
+                <th>Msp1</th>
+                
        
           
             </tr>
@@ -152,34 +179,49 @@
             @if(Auth::guard('admin')->check() || @isset($pinTable))
             <div class="card">
                 <div class="card-body">
-                    <a class="text-center"><h4>Program table</h4></a>
+                   
+                    <a class="text-center"><h4>Policy Table</h4></a>
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered zero-configuration" id="Mytable">
                             <thead>
                                 <tr>
-                                    <th>Total Meeting</th>
-                                    <th>Meeting Type</th> 
-                                    <th>Insert By</th>
+                                    <th>Msp1</th>
+                                    <th>Msp2</th>
+                                    <th>Msp3</th>
+                                    <th>Msp4</th>
+                                    <th>Msp5</th>
+                                    <th>Msp6</th>
+                                    <th>Msp7</th>
+                                    <th>Msp8</th>
+                                    <th>Msp9</th>
+                                    <th>Msp10</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
 
-                                 @foreach ($data as $item)
+                                @foreach ($data as $item)
                                     
-                                <td>{{ $item->total_meeting }}</td>
-                                <td>{{ $item->meeting_type }}</td>
-                                <td>{{ $item->insert_by }}</td>
-                               
+                                <td>{{ $item->msp1 }}%</td>
+                                <td>{{ $item->msp2 }}%</td>
+                                <td>{{ $item->msp3 }}%</td>
+                                <td>{{ $item->msp4 }}%</td>
+                                <td>{{ $item->msp5 }}%</td>
+                                <td>{{ $item->msp6 }}%</td>
+                                <td>{{ $item->msp7 }}%</td>
+                                <td>{{ $item->msp8 }}%</td>
+                                <td>{{ $item->msp9 }}%</td>
+                                <td>{{ $item->msp10 }}%</td>
+
                                 <td>
                                     <a class="btn btn-danger btn-sm"
-                                     href="{{ route('meeting-show',$item->id) }}">update</a>
+                                     href="{{ route('weightage-show',$item->id) }}">update</a>
                                   
                                 </td>
                               
                                 </tr>
-                         @endforeach 
+                         @endforeach
                             </tbody>
                             
                         </table>

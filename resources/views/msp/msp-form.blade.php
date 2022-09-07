@@ -113,20 +113,28 @@
                 <h2 class="text-center">Paid Donation</h2>
                 <div class="basic-form">
 
-                    <form class="form-valide" action=" " method="post" enctype="multipart/form-data">
+                    <form class="form-valide" action="{{ route('paid-donation') }}" method="post" enctype="multipart/form-data">
                         @csrf
                           <table class="table table-striped table-inverse table-responsive" style="border: 1px solid black">
                             <thead class="thead-inverse">
                                 <tr>
-                                    <th>Donation Type</th>
+                                    <th>Donation Name</th>
                                     <th>Amount</th>
                                     <th><a class="btn mb-1 btn-success" style="margin-top: 30%" onclick="create_tr('table_id')" ><i class="fa fa-plus"></i></a></th>
                                 </tr>
                                 </thead>
                                 <tbody id="table_id">
                                     <tr>
-                                        <td><input style="border: .01px solid #969393;" type="text" class="form-control" placeholder=" Donation Type" name="degree[]" ></td>
-                                        <td><input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="Amount" name="institute[]"></td>
+                                        <td>   
+                                     <select style="border: .01px solid #969393;" class="form-control"  name="donation_name[]" id="receiving_tool">
+                                            @foreach ($donations as $donation )
+                                                
+                                           
+                                            <option value="{{ $donation->donation_name }}">{{ $donation->donation_name }}</option>
+                                        
+                                            @endforeach
+                                        </select></td>
+                                        <td><input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="Amount" name="amount[]"></td>
                                         
                                         <td><a class="btn mb-1 btn-danger" style="margin-top: 10%; color:white" onclick="remove_tr(this)" ><i class="fa fa-close"></i></a></td>
                                         
@@ -154,7 +162,7 @@
                 <h2 class="text-center">Paid Special RCS</h2>
                 <div class="basic-form">
 
-                    <form class="form-valide" action=" " method="post" enctype="multipart/form-data">
+                    <form class="form-valide" action="{{ route('paid-specail-rcs') }}" method="post" enctype="multipart/form-data">
                         @csrf
                           <table class="table table-striped table-inverse table-responsive" style="border: 1px solid black">
                             <thead class="thead-inverse">
@@ -165,8 +173,15 @@
                                 </thead>
                                 <tbody id="table_id_special_rcs">
                                     <tr>
-                                        <td><input style="border: .01px solid #969393;" type="text" class="form-control" placeholder=" Special RCS Type" name="degree[]" ></td>
-                                        
+                                        <td>   
+                                            <select style="border: .01px solid #969393;" class="form-control"  name="rcs_name[]" id="receiving_tool">
+                                                   @foreach ($rcs_specials as $rcs_special )
+                                                       
+                                                  
+                                                   <option value="{{ $rcs_special->rcs_name }}">{{ $rcs_special->rcs_name }}</option>
+                                               
+                                                   @endforeach
+                                               </select></td>                                        
                                         <td><a class="btn mb-1 btn-danger" style="margin-top: 10%; color:white" onclick="remove_tr(this)" ><i class="fa fa-close"></i></a></td>
                                         
                                     </tr>

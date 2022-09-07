@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Rcsepecial;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Session;
 class RcsSpecialController extends Controller
 {
     public function specialRcs(){
@@ -18,6 +18,7 @@ class RcsSpecialController extends Controller
         $rcs_special->amount=$request->amount;
         $rcs_special->remarks=$request->remarks;
         $rcs_special->save();
+        Session::flash('success',"Special Rcs Save");
         return redirect()->back();
     }
     public function specialRcsShow($id){
@@ -32,6 +33,8 @@ class RcsSpecialController extends Controller
         $rcs_special->amount=$request->amount;
         $rcs_special->remarks=$request->remarks;
         $rcs_special->update();
+        Session::flash('success',"Special Rcs Update");
+
         return redirect('/specialRcs');
     }
 }

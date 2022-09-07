@@ -95,6 +95,7 @@
                     <i class="icon-badge menu-icon"></i> <span class="nav-text">Msp</span>
                 </a>
                 <ul aria-expanded="false">
+                    <li><a href="{{ route('weightage') }}">Weightage</a></li>
                     <li><a href="{{ route('program') }}">Program/Meeting</a></li>
                     <li><a href="{{ route('policy') }}">Policy</a></li>
                     <li><a href="{{ route('specialRcs') }}">Special Rcs</a></li>

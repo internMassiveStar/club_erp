@@ -19,6 +19,8 @@ class DonationController extends Controller
         $donation->remarks=$request->remarks;
         $donation->insert_by=Session::get('id');
         $donation->save();
+        Session::flash('success',"Donation Save");
+
         return redirect()->back();
     }
     public function donationShow($id){
@@ -32,6 +34,8 @@ class DonationController extends Controller
         $donation->remarks=$request->remarks;
     
         $donation->update();
+        Session::flash('success',"Donation Update");
+
         return redirect('/donation');
     }
     

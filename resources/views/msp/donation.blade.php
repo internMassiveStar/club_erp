@@ -1,7 +1,16 @@
 @extends('layouts.master')
 @section('title') {{'Donation '}} @endsection
 @section('main-content')
+@php
+    $success = Session::get('success');
+    $error = Session::get('error');
 
+@endphp
+@if ($success)
+    <div class="alert alert-success">{{ $success }}</div>
+@elseif ($error)
+    <div class="alert alert-danger">{{ $error }}</div>
+@endif
 
     <div class="card">
         <div class="card-body">
