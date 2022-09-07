@@ -34,11 +34,15 @@
                 <form class="mt-5 mb-5 login-input" method="post" action="{{ @$editData ? route('update-rcs',$editData->id) : route('operation-rcs') }}">
                     @csrf
                     <div class="form-row">
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-4">
                             <h6><b>Policy Name</b></h6>
                             <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="Policy" name="member_id" id="member_id" value='{{ @$editData->member_id }}' required>
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-4">
+                            <h6><b>Higest Amount</b></h6>
+                            <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="Policy" name="member_id" id="member_id" value='{{ @$editData->member_id }}' required>
+                        </div>
+                        <div class="form-group col-md-4">
                             <h6><b>Issue Date</b></h6>
                             <input style="border: .01px solid #969393;" type="date" class="form-control" placeholder=" Receiving Date" name="receiving_date" value='{{ @$editData->receiving_date }}' required>
                         </div>
@@ -47,41 +51,7 @@
                     <!--<button type="submit" class="btn mb-1 btn-danger" name="ADDelete"> Delete</button>-->
                 </form>
             </div>
-            <div class="basic-form">
-                <form class="mt-5 mb-5 login-input" method="post" action="{{ @$editData ? route('update-rcs',$editData->id) : route('operation-rcs') }}">
-                    @csrf
-                <div class="form-row">
-                  
-                        <div class="form-group col-md-4">
-                            <h6><b>Policy Name</b></h6>
-                         
-                              
-                                <select style="border: .01px solid #969393;" class="form-control"  name="receiving_tool" id="receiving_tool">
-                                    <option value="{{ @$editData->receiving_tool }}">{{ @$editData ? $editData->receiving_tool : 'Plese Select' }}</option>
-                                    <option value="Cash">policy 1</option>
-                                    <option value="Cheque">Policy 2</option>
-                                </select>
-                         
-                        </div>  
-                        <div class="form-group col-md-4">
-                            <h6><b>Member Category</b></h6>
-                      
-                              
-                                <select style="border: .01px solid #969393;" class="form-control"  name="receiving_tool" id="receiving_tool">
-                                    <option value="{{ @$editData->receiving_tool }}">{{ @$editData ? $editData->receiving_tool : 'Plese Select' }}</option>
-                                    <option value="gold">Gold</option>
-                                    <option value="Cheque">Silver</option>
-                                </select>
-                           
-                        </div>  
-                        <div class="form-group col-md-4">
-                            <h6><b>Amount</b></h6>
-                            <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="amount" name="member_id" id="member_id" value='{{ @$editData->member_id }}' required>
-                        </div>
-                </div>
-                <button type="submit" class="btn mb-1 btn-success"> {{ @$editData ? 'Updata' :'Save'}}</button>
-                <!--<button type="submit" class="btn mb-1 btn-danger" name="ADDelete"> Delete</button>-->
-            </form>
+          
         </div>
                         
                                                                 

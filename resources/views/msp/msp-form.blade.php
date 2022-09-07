@@ -195,33 +195,60 @@
                     <form class="form-valide" action="" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="form-row">
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-3">
                                 <h6><b>AD</b></h6>
                                 <input style="border: .01px solid #969393;" type="number" class="form-control input-default" placeholder="Member paid AD" name="member_ad" >
                             </div>
-                            <div class="form-group col-md-6">
-                                <h6><b>RCS</b></h6>
-                                <input style="border: .01px solid #969393;" type="number" class="form-control" placeholder="  Member paid RCS" name="member_rcs">
-                            </div>    
-                            
-                            <div class="form-group col-md-6">
-                                <h6><b>Special RCS</b></h6>
-                                <input style="border: .01px solid #969393;" type="number" class="form-control" placeholder="  Member Pais Special RCS" name="member_special_rcs">
-                            </div>
-                            <div class="form-group col-md-6">
-                                <h6><b>Donation</b></h6>
-                                <input style="border: .01px solid #969393;" type="number" class="form-control" placeholder="  Member paid Donation" name="member_donation">
-                            </div>
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-3">
                                 <h6><b>Name Value</b></h6>
                                 <input style="border: .01px solid #969393;" type="number" class="form-control" placeholder="  Member Name Value" name="member_name_value">
                             </div>
-                            <div class="form-group col-md-6">
-                                <h6><b>Activities</b></h6>
+                            <div class="form-group col-md-3">
+                                <h6><b>Activities Value</b></h6>
                                 <input style="border: .01px solid #969393;" type="number" class="form-control" placeholder="  Member Activities" name="member_activities">
                             </div>
-                            
-                            
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <h6><b>RCS</b></h6>
+                                <input style="border: .01px solid #969393;" type="number" class="form-control" placeholder="  Member paid RCS" name="member_rcs">
+                            </div>    
+                            <div class="form-group col-md-4">
+                                <h6><b>Point</b></h6>
+                                <input style="border: .01px solid #969393;" type="number" class="form-control" placeholder="  Member paid RCS" name="member_rcs">
+                            </div>  
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <h6><b>Special RCS</b></h6>
+                                <input style="border: .01px solid #969393;" type="number" class="form-control" placeholder="  Member Pais Special RCS" name="member_special_rcs">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <h6><b>Point</b></h6>
+                                <input style="border: .01px solid #969393;" type="number" class="form-control" placeholder="  Member Pais Special RCS" name="member_special_rcs">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <h6><b>Donation</b></h6>
+                                <input style="border: .01px solid #969393;" type="number" class="form-control" placeholder="  Member paid Donation" name="member_donation">
+                            </div>
+                          
+                            <div class="form-group col-md-4">
+                                <h6><b>Point</b></h6>
+                                <input style="border: .01px solid #969393;" type="number" class="form-control" placeholder="  Member paid Donation" name="member_donation">
+                            </div>  
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <h6><b>Invesment</b></h6>
+                                <input style="border: .01px solid #969393;" type="number" class="form-control" placeholder="  Member paid Donation" name="member_donation">
+                            </div>
+                          
+                            <div class="form-group col-md-4">
+                                <h6><b>Point</b></h6>
+                                <input style="border: .01px solid #969393;" type="number" class="form-control" placeholder="  Member paid Donation" name="member_donation">
+                            </div>
                         </div>
                         <button type="submit" class="btn mb-1 btn-success" name="MemberProfession" id ="MemberProfession"  >Club Fund Save</button>    
                     </form>
