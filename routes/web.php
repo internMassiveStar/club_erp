@@ -5,11 +5,15 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\RcsController;
 use App\Http\Controllers\AdController;
+use App\Http\Controllers\DonationController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\MeetingController;
 use App\Http\Controllers\MspController;
 use App\Http\Controllers\PinController;
+use App\Http\Controllers\PolicyController;
+use App\Http\Controllers\RcsSpecialController;
 use App\Http\Controllers\TotaladrcsController;
-
+use App\Models\PaidDonation;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
@@ -174,18 +178,38 @@ Route::post('/login-member',[MemberController::class,'loginMember'])->name('logi
         Route::get('/chequeQueue-cheque',[ChequeManagementController::class,'chequeQueue'])->name('chequeQueue-cheque');
         Route::get('/chequeQueueProcess-cheque/{id}',[ChequeManagementController::class,'chequeQueueProcess'])->name('chequeQueueProcess-cheque');
         Route::post('/chequeQueueUpdate-cheque',[ChequeManagementController::class,'chequeQueueUpdate'])->name('chequeQueueUpdate-cheque');
-            
+        //special rcs
+        
+        Route::get('/specialRcs',[RcsSpecialController::class,'specialRcs'])->name('specialRcs');
+        Route::post('/specialRcs-entry',[RcsSpecialController::class,'specialRcsEntry'])->name('specialRcs-entry');
+        Route::get('/special-rcs-show/{id}',[RcsSpecialController::class,'specialRcsShow'])->name('special-rcs-show');
+        Route::post('/update-special-rce/{id}',[RcsSpecialController::class,'specialRcsUpdate'])->name('update-special-rce');
+        //meeting 
+        Route::get('/program',[MeetingController::class,'program'])->name('program');
+        Route::post('/meeting-entry',[MeetingController::class,'meetingEntry'])->name('meeting-entry');
+        Route::get('/meeting-show/{id}',[MeetingController::class,'meetingShow'])->name('meeting-show');
+        Route::post('/meeting-update/{id}',[MeetingController::class,'meetingUpdate'])->name('meeting-update');
+       //donation 
+       Route::get('/donation',[DonationController::class,'donationView'])->name('donation');
+       Route::post('/donation-entry',[DonationController::class,'donationEntry'])->name('donation-entry');
+       Route::get('/donation-show/{id}',[DonationController::class,'donationShow'])->name('donation-show');
+       Route::post('/donation-update/{id}',[DonationController::class,'donationUpdate'])->name('donation-update');
+     //policy
+     Route::get('/policy',[PolicyController::class,'policyView'])->name('policy');
+     Route::post('/policy-entry',[PolicyController::class,'policyEntry'])->name('policy-entry');
+     Route::get('/policy-show/{id}',[PolicyController::class,'policyShow'])->name('policy-show');
+     Route::post('/policy-update/{id}',[PolicyController::class,'policyUpdate'])->name('policy-update');
+
+
         //Msp 
-        Route::get('/policy',[MspController::class,'policyView'])->name('policy');
-        Route::get('/donation',[MspController::class,'donationView'])->name('donation');
-
-        Route::get('/specialRcs',[MspController::class,'specialRcs'])->name('specialRcs');
-        Route::get('/program',[MspController::class,'program'])->name('program');
-
-
         Route::match(['get', 'post'], '/msp-form/{id?}',[MspController::class,'mspForm']);
-            
-     
+        Route::get('/weightage',[MspController::class,'weightage'])->name('weightage');
+        Route::post('/weightage-entry',[MspController::class,'weightageEntry'])->name('weightage-entry');
+        Route::get('/weightage-show/{id}',[MspController::class,'weightageShow'])->name('weightage-show');
+        Route::post('/weightage-update/{id}',[MspController::class,'weightageUpdate'])->name('weightage-update');
+        Route::post('/paid-donation',[MspController::class,'paidDonation'])->name('paid-donation');
+        Route::post('/paid-specail-rcs',[MspController::class,'paidspecailRcs'])->name('paid-specail-rcs');
+
             //  Route::get('/change-password', [MemberController::class, 'changePassword'])->name('change-password');
             //  Route::post('/password-change', [MemberController::class, 'passwordChange'])->name('password-change');  
 

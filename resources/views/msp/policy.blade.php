@@ -3,6 +3,19 @@
 @section('main-content')
 
 
+
+@php
+    $success = Session::get('success');
+    $error = Session::get('error');
+
+@endphp
+@if ($success)
+    <div class="alert alert-success">{{ $success }}</div>
+@elseif ($error)
+    <div class="alert alert-danger">{{ $error }}</div>
+@endif
+
+
     <div class="card">
         <div class="card-body">
      
@@ -31,57 +44,27 @@
             @if(Auth::guard('admin')->check() || @isset($pin))
             <h2 class="text-center">Compnay Policy</h2>
             <div class="basic-form">
-                <form class="mt-5 mb-5 login-input" method="post" action="{{ @$editData ? route('update-rcs',$editData->id) : route('operation-rcs') }}">
+                <form class="mt-5 mb-5 login-input" method="post" action="{{ @$editData ? route('policy-update',$editData->id) : route('policy-entry') }}">
                     @csrf
                     <div class="form-row">
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-4">
                             <h6><b>Policy Name</b></h6>
-                            <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="Policy" name="member_id" id="member_id" value='{{ @$editData->member_id }}' required>
+                            <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="policy name" name="policy_name" id="member_id" value='{{ @$editData->policy_name }}' required>
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-4">
+                            <h6><b>Higest Amount</b></h6>
+                            <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="amount" name="highest_ad" id="member_id" value='{{ @$editData->highest_ad }}' required>
+                        </div>
+                        <div class="form-group col-md-4">
                             <h6><b>Issue Date</b></h6>
-                            <input style="border: .01px solid #969393;" type="date" class="form-control" placeholder=" Receiving Date" name="receiving_date" value='{{ @$editData->receiving_date }}' required>
+                            <input style="border: .01px solid #969393;" type="date" class="form-control"  name="issue_date" value='{{ @$editData->issue_date }}' required>
                         </div>
                     </div>    
                     <button type="submit" class="btn mb-1 btn-success"> {{ @$editData ? 'Updata' :'Save'}}</button>
                     <!--<button type="submit" class="btn mb-1 btn-danger" name="ADDelete"> Delete</button>-->
                 </form>
             </div>
-            <div class="basic-form">
-                <form class="mt-5 mb-5 login-input" method="post" action="{{ @$editData ? route('update-rcs',$editData->id) : route('operation-rcs') }}">
-                    @csrf
-                <div class="form-row">
-                  
-                        <div class="form-group col-md-4">
-                            <h6><b>Policy Name</b></h6>
-                         
-                              
-                                <select style="border: .01px solid #969393;" class="form-control"  name="receiving_tool" id="receiving_tool">
-                                    <option value="{{ @$editData->receiving_tool }}">{{ @$editData ? $editData->receiving_tool : 'Plese Select' }}</option>
-                                    <option value="Cash">policy 1</option>
-                                    <option value="Cheque">Policy 2</option>
-                                </select>
-                         
-                        </div>  
-                        <div class="form-group col-md-4">
-                            <h6><b>Member Category</b></h6>
-                      
-                              
-                                <select style="border: .01px solid #969393;" class="form-control"  name="receiving_tool" id="receiving_tool">
-                                    <option value="{{ @$editData->receiving_tool }}">{{ @$editData ? $editData->receiving_tool : 'Plese Select' }}</option>
-                                    <option value="gold">Gold</option>
-                                    <option value="Cheque">Silver</option>
-                                </select>
-                           
-                        </div>  
-                        <div class="form-group col-md-4">
-                            <h6><b>Amount</b></h6>
-                            <input style="border: .01px solid #969393;" type="text" class="form-control" placeholder="amount" name="member_id" id="member_id" value='{{ @$editData->member_id }}' required>
-                        </div>
-                </div>
-                <button type="submit" class="btn mb-1 btn-success"> {{ @$editData ? 'Updata' :'Save'}}</button>
-                <!--<button type="submit" class="btn mb-1 btn-danger" name="ADDelete"> Delete</button>-->
-            </form>
+          
         </div>
                         
                                                                 
@@ -137,7 +120,7 @@
 </div>
     
 @endisset
-{{-- @isset($data) --}}
+@isset($data)
     
 
 
@@ -172,35 +155,28 @@
                             <thead>
                                 <tr>
                                     <th>Policy Name</th>
-                                    <th>Policy Issue Date</th>
-                                    
-                                    <th>Member Catgory</th>
-                                    <th>Amount</th>
-                              
-                                  
+                                    <th>Highest Ad</th>
+                                    <th>Issue Date</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
 
-                                {{-- @foreach ($data as $item)
+                                @foreach ($data as $item)
                                     
-                                <td>{{ $item->member_id }}</td>
-                                <td>{{ $item->name }}</td>
-                                <td>{{ $item->receiving_amount }}</td>
-                                <td>{{ $item->receiving_date }}</td>
-                                <td>{{ $item->receiving_tool }}</td>
-                                <td>{{ $item->insert_by }}</td>
-                                <td>{{ $item->update_by }}</td>
+                                <td>{{ $item->policy_name }}</td>
+                                <td>{{ $item->highest_ad }}</td>
+                                <td>{{ $item->issue_date }}</td>
+                               
                                 <td>
                                     <a class="btn btn-danger btn-sm"
-                                     href="{{ route('rcs-update',$item->id) }}">update</a>
+                                     href="{{ route('policy-show',$item->id) }}">update</a>
                                   
                                 </td>
                               
                                 </tr>
-                         @endforeach --}}
+                         @endforeach
                             </tbody>
                             
                         </table>
@@ -212,5 +188,5 @@
 
 @endif
 
-{{-- @endisset --}}
+@endisset
 @endsection

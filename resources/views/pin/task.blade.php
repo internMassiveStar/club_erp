@@ -16,6 +16,7 @@
                     <table class="table table-striped table-bordered zero-configuration" id="Cheque">
                         <thead>
                             <tr>
+                               
                                 <th>Employee Id</th>
                                 <th>Employee Name</th>
                                 <th>Page</th>
