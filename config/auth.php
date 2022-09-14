@@ -36,10 +36,10 @@ return [
     */
 
     'guards' => [
-        // 'web' => [
-        //     'driver' => 'session',
-        //     'provider' => 'users',
-        // ],
+        'web' => [
+            'driver' => 'session',
+            'provider' => 'users',
+        ],
         //member guards
         'member' => [
    
@@ -80,10 +80,10 @@ return [
 
     'providers' => [
 
-        // 'users' => [
-        //     'driver' => 'eloquent',
-        //     'model' => App\Models\User::class,
-        // ],
+        'users' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\User::class,
+        ],
 //member-auth
 
         'users' => [

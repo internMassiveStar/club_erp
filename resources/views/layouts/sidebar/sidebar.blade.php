@@ -103,6 +103,15 @@
                     <li><a href="{{ url('/msp-form') }}">MSP Form</a></li>
                 </ul>
             </li>
+
+            <li>
+                <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                    <i class="icon-badge menu-icon"></i> <span class="nav-text">Reports</span>
+                </a>
+                <ul aria-expanded="false">
+                    <li><a href="{{ route('reports') }}">Reports</a></li>
+                </ul>
+            </li>
             <li>
                 <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                     <i class="icon-grid menu-icon"></i><span class="nav-text">Running Cost Share</span>
