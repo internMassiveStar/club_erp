@@ -13,18 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('weightages', function (Blueprint $table) {
+        Schema::create('mspreferredfunds', function (Blueprint $table) {
             $table->id();
-            $table->float('msp1');
-            $table->float('msp2');
-            $table->float('msp3');
-            $table->float('msp4');
-            $table->float('msp5');
-            $table->float('msp6');
-            $table->float('msp7');
-            $table->float('msp8');
-            $table->float('msp9');
-            $table->float('msp10');
+            $table->string('member_id');    
+            $table->integer('total_amount');    
+            $table->string('referred_id');    
+            $table->integer('contribution_amount')->nullable();    
+            $table->float('portion')->nullable();    
+            $table->integer('rcm')->nullable();    
             $table->timestamps();
         });
     }
@@ -36,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('weightages');
+        Schema::dropIfExists('mspreferredfunds');
     }
 };
