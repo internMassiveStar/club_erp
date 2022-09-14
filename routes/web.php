@@ -191,24 +191,31 @@ Route::post('/login-member',[MemberController::class,'loginMember'])->name('logi
         Route::get('/meeting-show/{id}',[MeetingController::class,'meetingShow'])->name('meeting-show');
         Route::post('/meeting-update/{id}',[MeetingController::class,'meetingUpdate'])->name('meeting-update');
        //donation 
-        Route::get('/donation',[DonationController::class,'donationView'])->name('donation');
-        Route::post('/donation-entry',[DonationController::class,'donationEntry'])->name('donation-entry');
-        Route::get('/donation-show/{id}',[DonationController::class,'donationShow'])->name('donation-show');
-        Route::post('/donation-update/{id}',[DonationController::class,'donationUpdate'])->name('donation-update');
-       //policy
-        Route::get('/policy',[PolicyController::class,'policyView'])->name('policy');
-        Route::post('/policy-entry',[PolicyController::class,'policyEntry'])->name('policy-entry');
-        Route::get('/policy-show/{id}',[PolicyController::class,'policyShow'])->name('policy-show');
-        Route::post('/policy-update/{id}',[PolicyController::class,'policyUpdate'])->name('policy-update');
 
-       //Msp 
-        Route::match(['get', 'post'], '/msp-form/{id?}',[MspController::class,'mspForm']);
+       Route::get('/donation',[DonationController::class,'donationView'])->name('donation');
+       Route::post('/donation-entry',[DonationController::class,'donationEntry'])->name('donation-entry');
+       Route::get('/donation-show/{id}',[DonationController::class,'donationShow'])->name('donation-show');
+       Route::post('/donation-update/{id}',[DonationController::class,'donationUpdate'])->name('donation-update');
+       //policy
+       Route::get('/policy',[PolicyController::class,'policyView'])->name('policy');
+       Route::post('/policy-entry',[PolicyController::class,'policyEntry'])->name('policy-entry');
+       Route::get('/policy-show/{id}',[PolicyController::class,'policyShow'])->name('policy-show');
+       Route::post('/policy-update/{id}',[PolicyController::class,'policyUpdate'])->name('policy-update');
+
+
+        //Msp 
+        Route::match(['get', 'post'], '/msp-form/{type?}/{id?}',[MspController::class,'mspForm']);
+
+     
+      
+     
         Route::get('/weightage',[MspController::class,'weightage'])->name('weightage');
         Route::post('/weightage-entry',[MspController::class,'weightageEntry'])->name('weightage-entry');
         Route::get('/weightage-show/{id}',[MspController::class,'weightageShow'])->name('weightage-show');
         Route::post('/weightage-update/{id}',[MspController::class,'weightageUpdate'])->name('weightage-update');
-        Route::post('/paid-donation',[MspController::class,'paidDonation'])->name('paid-donation');
-        Route::post('/paid-specail-rcs',[MspController::class,'paidspecailRcs'])->name('paid-specail-rcs');
+        
+        Route::get('/calculation',[MspController::class,'calculation'])->name('paid-donation');
+        // Route::post('/paid-specail-rcs',[MspController::class,'paidspecailRcs'])->name('paid-specail-rcs');
 
             //  Route::get('/change-password', [MemberController::class, 'changePassword'])->name('change-password');
             //  Route::post('/password-change', [MemberController::class, 'passwordChange'])->name('password-change');  
