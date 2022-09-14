@@ -12,6 +12,7 @@ use App\Http\Controllers\MspController;
 use App\Http\Controllers\PinController;
 use App\Http\Controllers\PolicyController;
 use App\Http\Controllers\RcsSpecialController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\TotaladrcsController;
 use App\Models\PaidDonation;
 use Illuminate\Support\Facades\Auth;
@@ -190,6 +191,7 @@ Route::post('/login-member',[MemberController::class,'loginMember'])->name('logi
         Route::get('/meeting-show/{id}',[MeetingController::class,'meetingShow'])->name('meeting-show');
         Route::post('/meeting-update/{id}',[MeetingController::class,'meetingUpdate'])->name('meeting-update');
        //donation 
+
        Route::get('/donation',[DonationController::class,'donationView'])->name('donation');
        Route::post('/donation-entry',[DonationController::class,'donationEntry'])->name('donation-entry');
        Route::get('/donation-show/{id}',[DonationController::class,'donationShow'])->name('donation-show');
@@ -203,6 +205,10 @@ Route::post('/login-member',[MemberController::class,'loginMember'])->name('logi
 
         //Msp 
         Route::match(['get', 'post'], '/msp-form/{type?}/{id?}',[MspController::class,'mspForm']);
+
+     
+      
+     
         Route::get('/weightage',[MspController::class,'weightage'])->name('weightage');
         Route::post('/weightage-entry',[MspController::class,'weightageEntry'])->name('weightage-entry');
         Route::get('/weightage-show/{id}',[MspController::class,'weightageShow'])->name('weightage-show');
@@ -217,8 +223,10 @@ Route::post('/login-member',[MemberController::class,'loginMember'])->name('logi
             //  Route::get('/ad-member_personal',[AdController::class,'memberAdView'])->name('ad-member_personal');
             //  Route::get('/rcs-member_personal',[RcsController::class,'memberRcsView'])->name('rcs-member_personal');
         
-
-
+   //repots
+   Route::get('reports',[ReportController::class,'reports'])->name('reports');
+   
+   Route::post('generate-reports',[ReportController::class,'generateReport'])->name('generate-reports');
 });
 
 

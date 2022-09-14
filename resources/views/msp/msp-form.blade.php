@@ -185,6 +185,7 @@
     </div>
 </details>
 
+
 <details>
     <summary>
         Member Club Fund Amount
@@ -264,7 +265,11 @@
     </div>
 </details>
 
-{{-- <details>
+
+ 
+
+{{!--<details>
+
 <summary>
     Member Reference's Club Fund Total Amount
 </summary>
@@ -276,6 +281,7 @@
             <div class="basic-form">
                 <form class="form-valide" action="" method="post" enctype="multipart/form-data">
                     @csrf
+
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <h6><b>AD</b></h6>
@@ -307,12 +313,13 @@
                     </div>
                     <button type="submit" class="btn mb-1 btn-success" name="MemberProfession" id ="MemberProfession"  >Reference Club Fund Save</button>    
                 </form>
+
                 
             </div>
         </div>
-    </div>
+ 
 </div>
-</details> --}}
+</details>
   
 <details>
 <summary>
