@@ -21,3 +21,6 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::post('/get-member', [MemberAppController::class, 'getMember']);
+Route::get('/get-position/{id}', [MemberAppController::class, 'getPosition']);
+
+Route::post('/agm-registration', [MemberAppController::class, 'agmRegistration']);

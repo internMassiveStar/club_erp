@@ -1,9 +1,14 @@
 
+
 @extends('layouts.master')
 @section('title') {{'Reports.'}} @endsection
 
 
+    
 @section('main-content')
+
+
+
 @isset($flag)
 
 <form class="mt-5 mb-5 login-input" method="post" action="{{ route('generate-reports') }}">
@@ -22,182 +27,12 @@
 @endisset
 
 
-@isset($member)
-    
 
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
+@isset($memberwith)  
 
-<!--Author      : @arboshiki-->
-<style>
-    #invoice{
-    padding: 30px;
-}
 
-.invoice {
-    position: relative;
-    background-color: #FFF;
-    min-height: 680px;
-    padding: 15px
-}
 
-.invoice header {
-    padding: 10px 0;
-    margin-bottom: 20px;
-    border-bottom: 1px solid #3989c6
-}
 
-.invoice .company-details {
-    text-align: right
-}
-
-.invoice .company-details .name {
-    margin-top: 0;
-    margin-bottom: 0
-}
-
-.invoice .contacts {
-    margin-bottom: 20px
-}
-
-.invoice .invoice-to {
-    text-align: left
-}
-
-.invoice .invoice-to .to {
-    margin-top: 0;
-    margin-bottom: 0
-}
-
-.invoice .invoice-details {
-    text-align: right
-}
-
-.invoice .invoice-details .invoice-id {
-    margin-top: 0;
-    color: #3989c6
-}
-
-.invoice main {
-    padding-bottom: 50px
-}
-
-.invoice main .thanks {
-    margin-top: -100px;
-    font-size: 2em;
-    margin-bottom: 50px
-}
-
-.invoice main .notices {
-    padding-left: 6px;
-    border-left: 6px solid #3989c6
-}
-
-.invoice main .notices .notice {
-    font-size: 1.2em
-}
-
-.invoice table {
-    width: 100%;
-    border-collapse: collapse;
-    border-spacing: 0;
-    margin-bottom: 20px
-}
-
-.invoice table td,.invoice table th {
-    padding: 15px;
-    background: #eee;
-    border-bottom: 1px solid #fff
-}
-
-.invoice table th {
-    white-space: nowrap;
-    font-weight: 400;
-    font-size: 16px
-}
-
-.invoice table td h3 {
-    margin: 0;
-    font-weight: 400;
-    color: #3989c6;
-    font-size: 1.2em
-}
-
-.invoice table .qty,.invoice table .total,.invoice table .unit {
-    text-align: right;
-    font-size: 1.2em
-}
-
-.invoice table .no {
-    color: #fff;
-    font-size: 1.6em;
-    background: #3989c6
-}
-
-.invoice table .unit {
-    background: #ddd
-}
-
-.invoice table .total {
-    background: #3989c6;
-    color: #fff
-}
-
-.invoice table tbody tr:last-child td {
-    border: none
-}
-
-.invoice table tfoot td {
-    background: 0 0;
-    border-bottom: none;
-    white-space: nowrap;
-    text-align: right;
-    padding: 10px 20px;
-    font-size: 1.2em;
-    border-top: 1px solid #aaa
-}
-
-.invoice table tfoot tr:first-child td {
-    border-top: none
-}
-
-.invoice table tfoot tr:last-child td {
-    color: #3989c6;
-    font-size: 1.4em;
-    border-top: 1px solid #3989c6
-}
-
-.invoice table tfoot tr td:first-child {
-    border: none
-}
-
-.invoice footer {
-    width: 100%;
-    text-align: center;
-    color: #777;
-    border-top: 1px solid #aaa;
-    padding: 8px 0
-}
-
-@media print {
-    .invoice {
-        font-size: 11px!important;
-        overflow: hidden!important
-    }
-
-    .invoice footer {
-        position: absolute;
-        bottom: 10px;
-        page-break-after: always
-    }
-
-    .invoice>div:last-child {
-        page-break-before: always
-    }
-}
-</style>
 <div class="toolbar hidden-print">
     <div class="text-right">
         <button id="printInvoice" onclick="printDiv('invoice')" class="btn btn-info"><i class="fa fa-print"></i> Print</button>
@@ -206,25 +41,25 @@
     <hr>
 </div>
 
-<div id="invoice" >
+<div id="invoice">
     <div class="invoice overflow-auto">
         <div style="min-width: 600px">
             <header>
                 <div class="row">
                     <div class="col">
                         <img style="width: 150;height:100px; border-radius: 50%; float: left;"
-                        src="{{ $member->a_photo ? url('/' . $member->a_photo) : url('a_photo/no-image.png') }}"
+                        src="{{asset('images/mcllogo.jpg') }}"
                         alt="">
                     </div>
                     <div class="col company-details">
                         <h2 class="name">
                           <a target="_blank" href="#">
-                          {{ $member->name}}
+                          {{ $memberwith->member_name}}
                             </a>
                         </h2>
-                        <div>{{ $member->email }}</div>
-                        <div>{{ $member->mobile }}</div>
-                        <div>{{ $member->address }}</div>
+                        <div>Member id: {{ $memberwith->member_id}}</div>
+                        {{-- <div>{{ $member->mobile }}</div>
+                        <div>{{ $member->address }}</div> --}}
                     </div>
                 </div>
             </header>
@@ -242,49 +77,118 @@
                        
                     </div>
                 </div>
-              
-              
-                <table border="0" cellspacing="10" cellpadding="5">
-                    <thead>
-                        <tr>
-                         
-                            <th class="text-left">Ad</th>
-                            <th class="text-right">Rcs</th>
-                            <th class="text-right">Msp</th>
-                         
-                        </tr>
-                    </thead>
-                    <tbody>
-                  
-                        <tr>
+                <div style="overflow:auto;">
+                    <h4 style="color:#FF5733">Msp Report With Weight</h4>
+                      <table border="0" cellspacing="0" cellpadding="0">
+                        <thead>
+                            <tr>
+                            <th class="thStyle1">Member Reference</th>
+                            <th class="thStyle1">Member Club Fund</th>
+                            <th class="thStyle1">Member Referral club fund</th>
+                            <th class="thStyle1">Formation Meeting</th>
                           
-                                
-                        
-                         
-                            <td class="text-left"><h3>
-                             {{ $member->ad }}
-                            </td>
-                            <td class="unit">{{ $member->rcs }}</td>
-                            <td class="qty">{{ $member->msp }}</td>
+                            <th class="thStyle1">Club Programm</th>
+                          
+                            </tr>
+                        </thead>
+                        <tbody> 
+                       
+                            <tr>
+                                <td class="unit">{{ $memberwith->member_reference }}</td>
+                                <td class="qty">{{ $memberwith->member_clubfund }}</td>
+                                <td class="unit">{{ $memberwith->member_referral_clubfund }}</td>
+                                <td class="qty">{{ $memberwith->member_attend_formationmeeting }}</td>
+                                <td class="unit">{{ $memberwith->member_attend_clubprogram }}</td>
+                            </tr>
+                        </tbody>
+                       
+                        <th class="thStyle1">Community Program</th>
+                        <th class="thStyle1">Responsibility</th>
+                        <th class="thStyle1">Responsibility Gap</th>
+                        <th class="thStyle1">Consume</th>
+                        <th class="thStyle1">Time Donation</th>
+                     
+                        <tr>
                            
+                            <td class="qty">{{ $memberwith->member_attend_communityprogram }}</td>
+                            <td class="unit">{{ $memberwith->member_responsibility }}</td>
+                            <td class="qty">{{ $memberwith->member_responsibility_gap }}</td>
+                           
+                            <td class="unit">{{ $memberwith->member_consume }}</td>
+                            
+                            <td class="qty">{{ $memberwith->member_time_donation }}</td>
+                          
                         </tr>
-                   
-                        
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <td colspan="2"></td>
-                            <td colspan="2">Highest Msp</td>
-                            <td>9.5</td>
-                        </tr>
-                        <tr>
-                            <td colspan="2"></td>
-                            <td colspan="2">Your Position</td>
-                            <td>12th</td>
-                        </tr>
-                        
-                    </tfoot>
-                </table>
+                    </table>
+                </div>
+                <div style="overflow:auto;">
+                    <h4 style="color:#107897 ">Msp Report WithoutWeight</h4>
+                    <table border="0" cellspacing="0" cellpadding="0">
+                            <thead>
+                                <tr>
+                                <th class="thStyle">Member Reference</th>
+                                <th class="thStyle">Member Club Fund</th>
+                                <th class="thStyle">Member Referral club fund</th>
+                                <th class="thStyle">Formation Meeting</th>
+                                <th class="thStyle">Club Programm</th> 
+                              
+                                </tr>
+                            </thead>
+                            <tbody> 
+                           
+                                <tr>
+                                    <td class="unit">{{ $memberwithout->member_reference }}</td>
+                                    <td class="qty">{{ $memberwithout->member_clubfund }}</td>
+                                    <td class="unit">{{ $memberwithout->member_referral_clubfund }}</td>
+                                    <td class="qty">{{ $memberwithout->member_attend_formationmeeting }}</td>
+                                    <td class="unit">{{ $memberwithout->member_attend_clubprogram }}</td>
+                                    
+                                </tr>
+                              
+                            </tbody>
+                            <th class="thStyle">Community Program</th>
+                            <th class="thStyle">Responsibility</th>
+                            <th class="thStyle">Responsibility Gap</th>
+                            <th class="thStyle">Consume</th>
+                            <th class="thStyle">Time Donation</th>
+                            <tr>
+                               
+                                <td class="qty">{{ $memberwithout->member_attend_communityprogram }}</td>
+                                <td class="unit">{{ $memberwithout->member_responsibility }}</td>
+                                <td class="qty">{{ $memberwithout->member_responsibility_gap }}</td>
+                               
+                                <td class="unit">{{ $memberwithout->member_consume }}</td>
+                                
+                                <td class="qty">{{ $memberwithout->member_time_donation }}</td>
+                            </tr>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="2"></td>
+                                    <td colspan="2">Highest Msp</td>
+                                    <td>{{ $memberwith->max('msp') }}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"></td>
+                                    <td colspan="2">Your Msp</td>
+                                    <td>{{ $memberwith->msp }}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"></td>
+                                    <td colspan="2">Your Position</td>
+                                    @if($position==1)
+                                    <td>1st</td>
+                                    @elseif($position==2)
+                                    <td>2nd</td>
+                                    @elseif($position==3)
+                                    <td>3rd</td>
+                                    @else
+                                    <td>{{ $position }}th</td>
+                                    @endif
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+           
            
                 <div class="thanks">Thank you!</div>
                 <div class="notices">
@@ -297,10 +201,11 @@
             </footer>
         </div>
         <!--DO NOT DELETE THIS div. IT is responsible for showing footer always at the bottom-->
-      
+   
     </div>
 </div>
-@endisset          
+@endisset
+
 @endsection
 
 <script>
@@ -316,15 +221,19 @@
 
 function printDiv(divName) {
   
-     var printContents = document.getElementById(divName).innerHTML;
-     var newWin = window.open('', '', 'height=650, width=650');
-            newWin.document.write('');
-            newWin.document.write('<title>Print Content of Div element by  using Javascript</title>');
-            newWin.document.write(' <h1>Content of Div element: <br>');
-            newWin.document.write(printContents);
-            newWin.document.write('');
-            newWin.document.close();
-            newWin.print();
+   
+    var printContents = document.getElementById(divName).innerHTML;
+     var originalContents = document.body.innerHTML;
+
+     document.body.innerHTML = printContents;
+
+
+     window.print();
+     
+
+     document.body.innerHTML = originalContents;
 }
+
+
 
 </script>

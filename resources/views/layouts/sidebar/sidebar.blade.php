@@ -76,7 +76,11 @@
                     
                 </ul>
             </li>
-         
+            <li>
+                <a href="{{ route('agm') }}" aria-expanded="false">
+                    <i class="icon-badge menu-icon"></i><span class="nav-text">Agm</span>
+                </a>
+            </li>
             <li>
                 <a href="{{ route('employee-register') }}" aria-expanded="false">
                     <i class="icon-badge menu-icon"></i><span class="nav-text">Employee Entry</span>
@@ -103,6 +107,7 @@
                     <li><a href="{{ url('/msp-form') }}">MSP Form</a></li>
                 </ul>
             </li>
+            
 
             <li>
                 <a class="has-arrow" href="javascript:void()" aria-expanded="false">
@@ -110,6 +115,10 @@
                 </a>
                 <ul aria-expanded="false">
                     <li><a href="{{ route('reports') }}">Reports</a></li>
+                    <li><a href="{{ route('reports-withweight') }}">Reports Withweight</a></li>
+                    <li><a href="{{ route('reports-withoutweight') }}">Reports Withoutweight</a></li>
+
+
                 </ul>
             </li>
             <li>

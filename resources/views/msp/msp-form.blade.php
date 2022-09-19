@@ -41,10 +41,10 @@
                                 <h6><b>Refered By(ID)</b></h6>
                                 <input style="border: .01px solid #969393;" type="text" class="form-control input-default" placeholder="Reference By" name="member_reference_by" maxlength="10" required>
                             </div>
-                            <div class="form-group col-md-6">
+                            {{-- <div class="form-group col-md-6">
                                 <h6><b>Member Joining Date</b></h6>
                                 <input style="border: .01px solid #969393;" type="date" class="form-control input-default" placeholder="Joining date" name="member_joiningdate" required>
-                            </div>
+                            </div> --}}
                             
                             <div class="form-group col-md-6">
                                 <h6><b>Member Total Reference</b></h6>
@@ -268,7 +268,7 @@
 
  
 
-{{!--<details>
+{{-- <details>
 
 <summary>
     Member Reference's Club Fund Total Amount
@@ -320,7 +320,7 @@
  
 </div>
 </details>
-  
+   --}}
 <details>
 <summary>
     Member Given Time Value For Community Build

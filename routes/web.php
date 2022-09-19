@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\RcsController;
 use App\Http\Controllers\AdController;
+use App\Http\Controllers\AgmController;
 use App\Http\Controllers\DonationController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\MeetingController;
@@ -227,6 +228,12 @@ Route::post('/login-member',[MemberController::class,'loginMember'])->name('logi
    Route::get('reports',[ReportController::class,'reports'])->name('reports');
    
    Route::post('generate-reports',[ReportController::class,'generateReport'])->name('generate-reports');
+   Route::get('reports-withweight',[ReportController::class,'reportsWithweight'])->name('reports-withweight');
+   Route::get('reports-withoutweight',[ReportController::class,'reportsWithoutweight'])->name('reports-withoutweight');
+
+
+   //agm
+   Route::get('/agm',[AgmController::class,'agm'])->name('agm');
 });
 
 

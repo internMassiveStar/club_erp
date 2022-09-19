@@ -8,6 +8,17 @@ use App\Models\PaidSpecialRcs;
 use App\Models\Rcsepecial;
 use App\Models\Weightage;
 use App\Models\Mspreferredfund;
+use App\Models\Msplistvalue;
+use App\Models\MspwithoutWeight;
+use App\Models\MspwithWeight;
+use App\Models\Mspclubfund;
+use App\Models\Msptimedonation;
+use App\Models\Mspclubfundpoint;
+
+
+
+
+
 use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
@@ -19,23 +30,26 @@ class MspController extends Controller
         $donations=Donation::all();
         $rcs_specials=Rcsepecial::all();
         if($request->isMethod('post')){
+           
+            //if($type=='member' && Session::get('msp_step')==''){
+            if($type=='member'){
 
-            if($type=='member' && Session::get('msp_step')==''){
-                dd($request->member_joiningdate);
-                $rules = [
-                'member_name'=>'required|regex:/^[\pL\s\-]+$/u',
-                'member_id'=>'required|min:10',
-                'member_refered_by'=>'required|max:10',
-                'member_joiningdate'=>'required|date',
-                'member_reference'=>'required|numeric',
-                'member_attend_formationmeeting'=>'required|numeric',
-                'member_attend_clubprogram'=>'required|numeric',
-                'member_attend_communityprogram'=>'required|numeric',
-                'member_responsibility'=>'required|numeric',
-                'member_responsibility_gap'=>'required|numeric',
-                'member_consume'=>'required|numeric',
-                ];
-                $this->validate($request,$rules);
+                
+                // $rules = [
+                // // 'member_name'=>'required|regex:/^[\pL\s\-]+$/u',
+                // 'member_id'=>'required|min:10',
+                // // 'member_refered_by'=>'required|max:10',
+                // // 'member_joiningdate'=>'required|date',
+                // // 'member_reference'=>'required|numeric',
+                // // 'member_attend_formationmeeting'=>'required|numeric',
+                // // 'member_attend_clubprogram'=>'required|numeric',
+                // // 'member_attend_communityprogram'=>'required|numeric',
+                // // 'member_responsibility'=>'required|numeric',
+                // // 'member_responsibility_gap'=>'required|numeric',
+                // // 'member_consume'=>'required|numeric',
+                // ];
+                // $this->validate($request,$rules);
+           
                $member_id = $request->member_id;
                $member_name = $request->member_name;
                $member_refered_by = $request->member_reference_by;
@@ -43,9 +57,10 @@ class MspController extends Controller
                
                Session::put('msp_member_id',$member_id);
                Session::put('msp_member_name',$member_name);
-               Session::put('referred_id',$member_reference_by);
+               Session::put('referred_id',$member_refered_by);
                Session::put('msp_member_joiningdate',$member_joiningdate);
                Session::put('msp_step','member');
+             
 
                $msp_listvalue = new Msplistvalue();
                $msp_listvalue->member_id = $member_id;
@@ -63,6 +78,7 @@ class MspController extends Controller
                $msp_without_weight->member_responsibility_gap = $request->member_responsibility_gap;
                $msp_without_weight->member_consume = $request->member_consume;
                $msp_without_weight->save();
+              
 
                $msp_with_weight = new MspwithWeight();
                $msp_with_weight->member_id = $member_id;
@@ -72,7 +88,8 @@ class MspController extends Controller
                Session::flash('success',"Member save");
             }
             elseif ($type=='donation' && Session::get('msp_step')=='member') {
-                $member_id = Session::get('member_id');
+                $member_id = Session::get('msp_member_id');
+              
                 if($member_id && $request->donation_name != null){
                     $donation_name = $request->donation_name;
                     $amount = $request->amount;
@@ -95,8 +112,10 @@ class MspController extends Controller
                 }
                 return redirect()->back();
             }
-            elseif ($type=='special_rcs' && Session::get('msp_step')=='donation') {
-                $member_id = Session::get('member_id');
+           // elseif ($type=='special_rcs' && Session::get('msp_step')=='donation') {
+            elseif ($type=='special_rcs') {
+
+                $member_id = Session::get('msp_member_id');
                 if($member_id && $request->rcs_name != null){
                     $rcs_name = $request->rcs_name;
                 
@@ -116,23 +135,25 @@ class MspController extends Controller
                 }
                 return redirect()->back();
             }
-            elseif ($type=='club_fund' && Session::get('msp_step')=='special_rcs') {
-                $member_id = Session::get('member_id');
+           // elseif ($type=='club_fund' && Session::get('msp_step')=='special_rcs') {
+            elseif ($type=='club_fund' ) {
 
-                $rules = [
-                    'member_ad' => 'required|numeric',
-                    'member_name_value' => 'required|numeric',
-                    'member_activities' => 'required|numeric',
-                    'member_rcs' => 'required|numeric',
-                    'member_rcs_point' => 'required|numeric|min:1',
-                    'member_special_rcs' => 'required|numeric',
-                    'member_special_rcs_point' => 'required|numeric|min:1',
-                    'member_donation' => 'required|numeric',
-                    'member_donation_point' => 'required|numeric|min:1',
-                    'member_investment' => 'required|numeric',
-                    'member_investment_point' => 'required|numeric|min:1',
-                ];
-                $this->validate($request,$rules);
+                $member_id = Session::get('msp_member_id');
+
+                // $rules = [
+                //     'member_ad' => 'required|numeric',
+                //     'member_name_value' => 'required|numeric',
+                //     'member_activities' => 'required|numeric',
+                //     'member_rcs' => 'required|numeric',
+                //     'member_rcs_point' => 'required|numeric|min:1',
+                //     'member_special_rcs' => 'required|numeric',
+                //     'member_special_rcs_point' => 'required|numeric|min:1',
+                //     'member_donation' => 'required|numeric',
+                //     'member_donation_point' => 'required|numeric|min:1',
+                //     'member_investment' => 'required|numeric',
+                //     'member_investment_point' => 'required|numeric|min:1',
+                // ];
+                // $this->validate($request,$rules);
                 if(!empty($member_id)){
                     $date = Session::get('msp_member_joiningdate');
                     $set_date = "2022-06-30";
@@ -155,7 +176,7 @@ class MspController extends Controller
 
                     $actual_others_value = $rcs+$special_rcs+$donation+$investment;
                     $msp_others = $msp_rcs+$msp_special_rcs+$msp_donation+$msp_investment;
-                    if($msp_others==5){
+                    if($msp_others <=5){
                         
                         ($date < $set_date) ? $ad = 200000 : $ad = 500000;
 
@@ -202,20 +223,23 @@ class MspController extends Controller
 
                     }
                     else{
-                        Session::flash('error',"Tolal point greater or less than 100");
+                        Session::flash('error',"Tolal point equal or less than 5");
                         return redirect()->back();
                     }
                     
                 }
 
             }
-            elseif ($type=='time_donation' && Session::get('msp_step')=='club_fund') {
-                $member_id = Session::get('member_id');
-                $reles = [
-                    'member_given_time'=>'required|numeric',
-                    'member_asume_salary'=>'required|numeric',
-                ];
-                $this->validate($request,$rules);
+            //elseif ($type=='time_donation' && Session::get('msp_step')=='club_fund') {
+            elseif ($type=='time_donation') {
+
+                $member_id = Session::get('msp_member_id');
+                
+                // $rules = [
+                //     'member_given_time'=>'required|numeric',
+                //     'member_asume_salary'=>'required|numeric',
+                // ];
+                // $this->validate($request,$rules);
                 
 
                 if(!empty($member_id)){
@@ -230,16 +254,19 @@ class MspController extends Controller
                     $time_donation_table->save();
 
                     Msplistvalue::where('member_id',$member_id)->update(['member_time_donation'=>($time*$hourly_salary)]);
-                    Session::flash('success',"Build value saved");
+                    
+  
                     Session::put('msp_member_id','');
                     Session::put('msp_member_name','');
                     Session::put('referred_id','');
                     Session::put('msp_member_joiningdate','');
                     Session::put('msp_step','');
-                    calculation();
+                    // calculation();
+                     self::calculation();
+                    Session::flash('success',"Build value saved");
                 }
                 else{
-                    Session::flash('success',"Build value save faild");
+                    Session::flash('error',"Build value save faild");
                 }
             }
         }
@@ -315,6 +342,7 @@ class MspController extends Controller
     
     
     $referred_fund = Mspreferredfund::all();
+     
     //$referred_fund_array = Mspreferredfund::all()->toArray();
     $total_referred_fund = $referred_fund->sum('total_amount');
     $count = $referred_fund->count();
@@ -323,9 +351,9 @@ class MspController extends Controller
     foreach ($referred_fund as $key => $value) {
         // member contribution amount
         $contribution = DB::table('mspreferredfunds')->select(DB::raw('sum(total_amount) as amount'))->where('referred_id', $value->member_id)->groupBy('referred_id')->first();
-        //dd($contribution->amount);
+      
         if($contribution != null){
-            $contribution_amount = $contribution->amount;
+            $contribution_amount= $contribution->amount;
             //dd($contribution_amount);
             $portion = ($value->total_amount/$total_referred_fund)*100;
             Mspreferredfund::where('member_id',$value->member_id)->update(['contribution_amount'=>$contribution_amount,'portion'=>$portion]);
@@ -347,13 +375,17 @@ class MspController extends Controller
     }
 
     $msp_list_value = Msplistvalue::all();
+   
+
     $max_reference = $msp_list_value->max('member_reference');
+  
     $max_formation_meeting = $msp_list_value->max('member_attend_formationmeeting');
     $max_club_program = $msp_list_value->max('member_attend_clubprogram');
     $max_community_program = $msp_list_value->max('member_attend_communityprogram');
     $max_time_donation = $msp_list_value->max('member_time_donation');
 
-    foreach ($referred_fund as $key => $value) {
+    foreach ($msp_list_value as $key => $value) {
+
         $reference_point = ROUND(($value->member_reference/$max_reference)*10);
         $formation_point = ROUND(($value->member_attend_formationmeeting/$max_formation_meeting)*10);
         $clubprogram_point = ROUND(($value->member_attend_clubprogram/$max_club_program)*10);

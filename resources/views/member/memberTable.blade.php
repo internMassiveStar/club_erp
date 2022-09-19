@@ -29,8 +29,15 @@
                     <h4>Member Table</h4>
                 </a>
 
-              
-                <div class="table-responsive">
+                <div class="toolbar hidden-print">
+                  <div class="text-right">
+                      <button onclick="exportTableToExcel('adopttable','members-data')" class="btn btn-info"><i class="fa fa-save "></i> Export Table Data To Excel File</button>
+                      <button id="printInvoice" onclick="printDiv('adopttable')" class="btn btn-info"><i class="fa fa-print"></i> Print</button>
+                     
+                  </div>
+                  <hr>
+              </div>
+                <div class="table-responsive" id="adopttable">
                     <table class="table table-striped table-bordered zero-configuration"
                         id="Membertable">
                         <thead>
