@@ -23,6 +23,8 @@ use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
+
 class MspController extends Controller
 {
    
@@ -32,7 +34,7 @@ class MspController extends Controller
         if($request->isMethod('post')){
            
             //if($type=='member' && Session::get('msp_step')==''){
-            if($type=='member'){
+                if(($type=='member') && (Session::get('msp_step')=='')){
 
                 
                 // $rules = [
@@ -49,6 +51,25 @@ class MspController extends Controller
                 // // 'member_consume'=>'required|numeric',
                 // ];
                 // $this->validate($request,$rules);
+
+                $validator = Validator::make($request->all(),[
+                    'member_name'=>'required|regex:/^[\pL\s\-]+$/u',
+                    'member_id'=>'required|min:10',
+                    
+                    'member_joiningdate'=>'required|date',
+                    'member_reference'=>'required|numeric',
+                    'member_attend_formationmeeting'=>'required|numeric',
+                    'member_attend_clubprogram'=>'required|numeric',
+                    'member_attend_communityprogram'=>'required|numeric',
+                    'member_responsibility'=>'required|numeric',
+                    'member_responsibility_gap'=>'required|numeric',
+                    'member_consume'=>'required|numeric',
+                ]);
+
+                if($validator->fails()){
+                    return redirect('/msp-form/member')->withErrors($validator)->withInput();
+                }
+                else{
            
                $member_id = $request->member_id;
                $member_name = $request->member_name;
@@ -65,7 +86,7 @@ class MspController extends Controller
                $msp_listvalue = new Msplistvalue();
                $msp_listvalue->member_id = $member_id;
                $msp_listvalue->member_reference = $request->member_reference;
-               $msp_listvalue->member_attend_formationmeeting = $request->member_attend_clubmeeting;
+               $msp_listvalue->member_attend_formationmeeting = $request->member_attend_formationmeeting;
                $msp_listvalue->member_attend_clubprogram = $request->member_attend_clubprogram;
                $msp_listvalue->member_attend_communityprogram = $request->member_attend_communityprogram;
                $msp_listvalue->save();
@@ -86,13 +107,15 @@ class MspController extends Controller
                $msp_with_weight->member_refered_by = $member_refered_by;
                $msp_with_weight->save();
                Session::flash('success',"Member save");
+                }
             }
-            elseif ($type=='donation' && Session::get('msp_step')=='member') {
+            elseif (($type=='donation') && (Session::get('msp_step')=='member')) {
                 $member_id = Session::get('msp_member_id');
               
                 if($member_id && $request->donation_name != null){
                     $donation_name = $request->donation_name;
                     $amount = $request->amount;
+                    $donation_sum=0;
                     for( $i=0; $i < count($donation_name); $i++){
                     
                         $paid_donation=new PaidDonation();
@@ -100,24 +123,26 @@ class MspController extends Controller
                         
                         $paid_donation->donation_name =$donation_name[$i];
                         $paid_donation->amount=$amount[$i];
+                        $donation_sum+=$amount[$i];
 
                         $paid_donation->save();
 
                     }
                     Session::flash('success',"Doantion save");
                     Session::put('msp_step','donation');
+                    Session::put('donation',$donation_sum);
                 }
                 else{
                     Session::flash('success',"Doantion save faild");
                 }
                 return redirect()->back();
             }
-           // elseif ($type=='special_rcs' && Session::get('msp_step')=='donation') {
-            elseif ($type=='special_rcs') {
+            elseif (($type=='special_rcs') && (Session::get('msp_step')=='donation')) {
 
                 $member_id = Session::get('msp_member_id');
                 if($member_id && $request->rcs_name != null){
                     $rcs_name = $request->rcs_name;
+                    $sum_spcl_rcs=0;
                 
                     for( $i=0; $i < count($rcs_name); $i++){
                         $amount=Rcsepecial::select('amount')->where('rcs_name',$rcs_name[$i])->first();
@@ -125,18 +150,19 @@ class MspController extends Controller
                         $paid_special_rcs->member_id= $member_id;
                         $paid_special_rcs->rcs_name =$rcs_name[$i];
                         $paid_special_rcs->amount=$amount->amount;
+                        $sum_spcl_rcs+=$amount->amount;
                         $paid_special_rcs->save();
                     }
                     Session::flash('success',"Specail Rcs Paid");
                     Session::put('msp_step','special_rcs');
+                    Session::put('spcial_rcs',$sum_spcl_rcs);
                 }
                 else{
                     Session::flash('error',"Specail Rcs save faild");
                 }
-                return redirect()->back();
+                return redirect()->back()->with('sum_spcl_rcs');
             }
-           // elseif ($type=='club_fund' && Session::get('msp_step')=='special_rcs') {
-            elseif ($type=='club_fund' ) {
+            elseif (($type=='club_fund') && (Session::get('msp_step')=='special_rcs')) {
 
                 $member_id = Session::get('msp_member_id');
 
@@ -154,6 +180,23 @@ class MspController extends Controller
                 //     'member_investment_point' => 'required|numeric|min:1',
                 // ];
                 // $this->validate($request,$rules);
+                $validator = Validator::make($request->all(),[
+                    'member_ad' => 'required|numeric',
+                    'member_name_value' => 'required|numeric',
+                    'member_activities' => 'required|numeric',
+                    'member_rcs' => 'required|numeric',
+                    'member_rcs_point' => 'required|numeric|min:1',
+                    'member_special_rcs' => 'required|numeric',
+                    'member_special_rcs_point' => 'required|numeric|min:1',
+                    'member_donation' => 'required|numeric',
+                    'member_donation_point' => 'required|numeric|min:1',
+                    'member_investment' => 'required|numeric',
+                    'member_investment_point' => 'required|numeric|min:1',
+                ]);
+                if($validator->fails()){
+                    return redirect('/msp-form/club_fund')->withErrors($validator)->withInput();
+                }
+                else{
                 if(!empty($member_id)){
                     $date = Session::get('msp_member_joiningdate');
                     $set_date = "2022-06-30";
@@ -228,6 +271,7 @@ class MspController extends Controller
                     }
                     
                 }
+            }
 
             }
             //elseif ($type=='time_donation' && Session::get('msp_step')=='club_fund') {
@@ -240,7 +284,13 @@ class MspController extends Controller
                 //     'member_asume_salary'=>'required|numeric',
                 // ];
                 // $this->validate($request,$rules);
-                
+                $validator = Validator::make($request->all(),[
+                    'member_given_time'=>'required|numeric',
+                    'member_asume_salary'=>'required|numeric',
+                ]);
+                if($validator->fails()){
+                    return redirect('/msp-form/time_donation')->withErrors($validator)->withInput();
+                }else{
 
                 if(!empty($member_id)){
                     $time = $request->member_given_time;
@@ -268,6 +318,7 @@ class MspController extends Controller
                 else{
                     Session::flash('error',"Build value save faild");
                 }
+            }
             }
         }
         

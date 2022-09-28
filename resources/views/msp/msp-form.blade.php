@@ -9,6 +9,15 @@
     $error = Session::get('error');
 
 @endphp
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 @if ($success)
     <div class="alert alert-success">{{ $success }}</div>
 @elseif ($error)
@@ -41,10 +50,10 @@
                                 <h6><b>Refered By(ID)</b></h6>
                                 <input style="border: .01px solid #969393;" type="text" class="form-control input-default" placeholder="Reference By" name="member_reference_by" maxlength="10" required>
                             </div>
-                            {{-- <div class="form-group col-md-6">
+                            <div class="form-group col-md-6">
                                 <h6><b>Member Joining Date</b></h6>
                                 <input style="border: .01px solid #969393;" type="date" class="form-control input-default" placeholder="Joining date" name="member_joiningdate" required>
-                            </div> --}}
+                            </div>
                             
                             <div class="form-group col-md-6">
                                 <h6><b>Member Total Reference</b></h6>
@@ -52,7 +61,7 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <h6><b>Member Total Attend Formation Meeting</b></h6>
-                                <input style="border: .01px solid #969393;" type="number" class="form-control" placeholder="  Enter Digit" name="member_attend_clubmeeting" required>
+                                <input style="border: .01px solid #969393;" type="number" class="form-control" placeholder="  Enter Digit" name="member_attend_formationmeeting" required>
                             </div>
                             <div class="form-group col-md-6">
                                 <h6><b>Member Total Attend Club Program</b></h6>
@@ -225,7 +234,10 @@
                             <div class="form-row">
                                 <div class="form-group col-md-4">
                                     <h6><b>Special RCS</b></h6>
-                                    <input style="border: .01px solid #969393;" type="number" class="form-control" placeholder="  Member Pais Special RCS" name="member_special_rcs">
+                                    @php
+                                    $spcl = Session::get('spcial_rcs');
+                                @endphp
+                                    <input style="border: .01px solid #969393;" type="number" class="form-control" @if($spcl) value="{{ $spcl }}" @endif name="member_special_rcs">
                                 </div>
                                 <div class="form-group col-md-4">
                                     <h6><b>Point</b></h6>
@@ -235,7 +247,11 @@
                             <div class="form-row">
                                 <div class="form-group col-md-4">
                                     <h6><b>Donation</b></h6>
-                                    <input style="border: .01px solid #969393;" type="number" class="form-control" placeholder="  Member paid Donation" name="member_donation">
+                                    @php
+                                    $donation = Session::get('donation');
+                                
+                                @endphp
+                                    <input style="border: .01px solid #969393;" type="number" class="form-control" @if($donation) value="{{ $donation }}" @endif name="member_donation">
                                 </div>
                             
                                 <div class="form-group col-md-4">
@@ -319,8 +335,8 @@
         </div>
  
 </div>
-</details>
-   --}}
+</details> --}}
+  
 <details>
 <summary>
     Member Given Time Value For Community Build

@@ -52,15 +52,15 @@
                         <td >{{ $item->member_consume }}</td>
                         
                         <td >{{ $item->member_time_donation }}</td>
-                        <td >{{ $item->msp}}</td>
+                        <td  >{{ number_format((float)$item->msp, 2, '.', '')}}</td>
                         @if( $loop->index+1==1)
-                        <td>1st</td>
+                        <td>1<sup>st</sup></td>
                         @elseif(  $loop->index+1==2)
-                        <td>2nd</td>
+                        <td>2<sup>nd</sup></td>
                         @elseif( $loop->index+1==3)
-                        <td>3rd</td>
+                        <td >3<sup>rd</sup></td>
                         @else
-                        <td>{{  $loop->index+1 }}th</td>
+                        <td>{{  $loop->index+1 }}<sup>th</sup></td>
                         @endif
                     
                 </tr>

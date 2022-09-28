@@ -94,6 +94,7 @@
                     <li><a href="{{ route('ad-operation') }}">Ad operation</a></li>
                 </ul>
             </li>
+            @if(Auth::guard('admin')->check())
             <li>
                 <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                     <i class="icon-badge menu-icon"></i> <span class="nav-text">Msp</span>
@@ -121,6 +122,7 @@
 
                 </ul>
             </li>
+            @endif
             <li>
                 <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                     <i class="icon-grid menu-icon"></i><span class="nav-text">Running Cost Share</span>

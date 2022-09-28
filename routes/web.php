@@ -180,7 +180,53 @@ Route::post('/login-member',[MemberController::class,'loginMember'])->name('logi
         Route::get('/chequeQueue-cheque',[ChequeManagementController::class,'chequeQueue'])->name('chequeQueue-cheque');
         Route::get('/chequeQueueProcess-cheque/{id}',[ChequeManagementController::class,'chequeQueueProcess'])->name('chequeQueueProcess-cheque');
         Route::post('/chequeQueueUpdate-cheque',[ChequeManagementController::class,'chequeQueueUpdate'])->name('chequeQueueUpdate-cheque');
-        //special rcs
+       
+        // Route::post('/paid-specail-rcs',[MspController::class,'paidspecailRcs'])->name('paid-specail-rcs');
+
+            //  Route::get('/change-password', [MemberController::class, 'changePassword'])->name('change-password');
+            //  Route::post('/password-change', [MemberController::class, 'passwordChange'])->name('password-change');  
+
+            //  Route::get('/ad-member_personal',[AdController::class,'memberAdView'])->name('ad-member_personal');
+            //  Route::get('/rcs-member_personal',[RcsController::class,'memberRcsView'])->name('rcs-member_personal');
+        
+   
+
+   //agm
+   Route::get('/agm',[AgmController::class,'agm'])->name('agm');
+});
+
+
+
+
+
+
+
+
+    Route::group(['middleware' => ['MemberMiddleware']], function () {
+      
+        Route::get('/ad-member_personal',[AdController::class,'memberAdView'])->name('ad-member_personal');
+        Route::get('/rcs-member_personal',[RcsController::class,'memberRcsView'])->name('rcs-member_personal');
+
+
+        });
+
+
+    
+        Route::group(['middleware' => ['auth:admin']], function(){
+
+        
+            Route::get('/monthly-procedure',[TotaladrcsController::class,'monthlyProcedure'])->name('monthly-procedure');
+            Route::get('/monthly-procedure-calculation',[TotaladrcsController::class,'monthlyProcedureCalculation'])->name('monthly-procedure-calculation');
+            Route::get('/norcs',[TotaladrcsController::class,'noRcs'])->name('noRcs');
+            Route::get('/norcs/{id}',[TotaladrcsController::class,'noRcs_active'])->name('noRcs_active');
+            Route::get('/norcs-calculation/{id}',[TotaladrcsController::class,'noRcs_deactive'])->name('noRcs_deactive');
+            Route::get('/set-pin',[PinController::class,'pinView'])->name('set-pin');
+            Route::post('/generate-pin',[PinController::class,'generatePin'])->name('generate-pin');
+            Route::get('/remove-pin/{id}',[PinController::class,'removePin'])->name('remove-pin');
+            Route::get('/task',[PinController::class,'task'])->name('task');
+
+
+             //special rcs
         
         Route::get('/specialRcs',[RcsSpecialController::class,'specialRcs'])->name('specialRcs');
         Route::post('/specialRcs-entry',[RcsSpecialController::class,'specialRcsEntry'])->name('specialRcs-entry');
@@ -216,55 +262,14 @@ Route::post('/login-member',[MemberController::class,'loginMember'])->name('logi
         Route::post('/weightage-update/{id}',[MspController::class,'weightageUpdate'])->name('weightage-update');
         
         Route::get('/calculation',[MspController::class,'calculation'])->name('paid-donation');
-        // Route::post('/paid-specail-rcs',[MspController::class,'paidspecailRcs'])->name('paid-specail-rcs');
 
-            //  Route::get('/change-password', [MemberController::class, 'changePassword'])->name('change-password');
-            //  Route::post('/password-change', [MemberController::class, 'passwordChange'])->name('password-change');  
-
-            //  Route::get('/ad-member_personal',[AdController::class,'memberAdView'])->name('ad-member_personal');
-            //  Route::get('/rcs-member_personal',[RcsController::class,'memberRcsView'])->name('rcs-member_personal');
-        
-   //repots
+        //repots
    Route::get('reports',[ReportController::class,'reports'])->name('reports');
    
    Route::post('generate-reports',[ReportController::class,'generateReport'])->name('generate-reports');
    Route::get('reports-withweight',[ReportController::class,'reportsWithweight'])->name('reports-withweight');
    Route::get('reports-withoutweight',[ReportController::class,'reportsWithoutweight'])->name('reports-withoutweight');
 
-
-   //agm
-   Route::get('/agm',[AgmController::class,'agm'])->name('agm');
-});
-
-
-
-
-
-
-
-
-    Route::group(['middleware' => ['MemberMiddleware']], function () {
-      
-        Route::get('/ad-member_personal',[AdController::class,'memberAdView'])->name('ad-member_personal');
-        Route::get('/rcs-member_personal',[RcsController::class,'memberRcsView'])->name('rcs-member_personal');
-
-
-        });
-
-
-    
-        Route::group(['middleware' => ['auth:admin']], function(){
-
-        
-            Route::get('/monthly-procedure',[TotaladrcsController::class,'monthlyProcedure'])->name('monthly-procedure');
-            Route::get('/monthly-procedure-calculation',[TotaladrcsController::class,'monthlyProcedureCalculation'])->name('monthly-procedure-calculation');
-            Route::get('/norcs',[TotaladrcsController::class,'noRcs'])->name('noRcs');
-            Route::get('/norcs/{id}',[TotaladrcsController::class,'noRcs_active'])->name('noRcs_active');
-            Route::get('/norcs-calculation/{id}',[TotaladrcsController::class,'noRcs_deactive'])->name('noRcs_deactive');
-            Route::get('/set-pin',[PinController::class,'pinView'])->name('set-pin');
-            Route::post('/generate-pin',[PinController::class,'generatePin'])->name('generate-pin');
-            Route::get('/remove-pin/{id}',[PinController::class,'removePin'])->name('remove-pin');
-            Route::get('/task',[PinController::class,'task'])->name('task');
 
 
 

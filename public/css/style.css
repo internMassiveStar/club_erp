@@ -6441,7 +6441,6 @@ button.bg-dark:focus {
 }
 
 .invoice main .thanks {
-    margin-top: -100px;
     font-size: 2em;
     margin-bottom: 50px;
 }
@@ -6549,8 +6548,18 @@ button.bg-dark:focus {
     color: #107897;
     font-weight: bold;
     text-align: center;
+    width: 10px;
 }
-
+.highest {
+    font-weight: bold;
+    font-size: 25px;
+    color: #107897;
+}
+.position {
+    color: darkblue;
+    font-size: 23px;
+    font-weight: bold;
+}
 @media print {
     .d-print-none {
         display: none !important;
