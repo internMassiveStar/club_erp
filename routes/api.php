@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\MemberAppController;
+use App\Models\Member;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,9 +20,31 @@ use Illuminate\Support\Facades\Route;
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
+// Route::post('/sanctum/token', function (Request $request) {
+//     $request->validate([
+       
+//         'device_name' => 'required',
+//     ]);
+//     $user = Member::latest()->first();
+ 
+ 
+//      $token= $user->createToken($request->device_name)->plainTextToken;
+//      $response =[
+
+       
+//         'token'=>$token
+//      ];
+    
+//      return response($response,201);
+
+// });
 
 
 Route::post('/get-member', [MemberAppController::class, 'getMember']);
+
+
 Route::get('/get-position/{id}', [MemberAppController::class, 'getPosition']);
 
 Route::post('/agm-registration', [MemberAppController::class, 'agmRegistration']);
+  
+

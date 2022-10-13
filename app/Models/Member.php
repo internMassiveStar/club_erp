@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Sanctum\HasApiTokens;
 
 class Member extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable,HasApiTokens;
     protected $guard = ['member','admin'];
     protected $fillable = [
         'name', 'email', 'password','role'

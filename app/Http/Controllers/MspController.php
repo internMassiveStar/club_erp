@@ -53,8 +53,8 @@ class MspController extends Controller
                 // $this->validate($request,$rules);
 
                 $validator = Validator::make($request->all(),[
-                    'member_name'=>'required|regex:/^[\pL\s\-]+$/u',
-                    'member_id'=>'required|min:10',
+                    // 'member_name'=>'required|regex:/^[\pL\s\-]+$/u',
+                    // 'member_id'=>'required|min:10',
                     
                     'member_joiningdate'=>'required|date',
                     'member_reference'=>'required|numeric',
@@ -285,8 +285,8 @@ class MspController extends Controller
                 // ];
                 // $this->validate($request,$rules);
                 $validator = Validator::make($request->all(),[
-                    'member_given_time'=>'required|numeric',
-                    'member_asume_salary'=>'required|numeric',
+                    // 'member_given_time'=>'required|numeric',
+                    // 'member_asume_salary'=>'required|numeric',
                 ]);
                 if($validator->fails()){
                     return redirect('/msp-form/time_donation')->withErrors($validator)->withInput();
@@ -294,7 +294,7 @@ class MspController extends Controller
 
                 if(!empty($member_id)){
                     $time = $request->member_given_time;
-                    $monthly_salary = $request->member_asume_salary;
+                    $monthly_salary = $request->member_asume_salary; 
                     $hourly_salary = $monthly_salary/(8*26);
 
                     $time_donation_table = new Msptimedonation();

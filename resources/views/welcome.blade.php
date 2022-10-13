@@ -16,7 +16,7 @@
 </head>
 
 <body class="h-100">
-
+   
     <!--*******************
         Preloader start
     ********************-->
@@ -31,26 +31,25 @@
     <!--*******************
         Preloader end
     ********************-->
-
+  
     <div class=" text-center">
+      
         <div class="row">
-            <div class="col-8">
+           
+            <div class="col-8 ">
                 <img src={{ asset('photo/login.jpg') }} 
-                class="img-fluid" alt="..."
-                style="background-position: center center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: 100% 100%; 
-    height: 100vh;"
+                class="img-fluid loginClass" alt="..."
+            
                 >
             </div>
+          
             <div class="col-4">
                 <div class="col-xl-12 pt-5 mt-5">
                     <div class="form-input-content form-section">
                         <div class="card login-form mb-0">
                             <div class="card-body pt-5">
                                 <a class="text-center">
-                                    <img style="height: 100px;" src={{ asset('photo/mcllogo.jpg') }} alt="">
+                                    <img  src={{ asset('photo/mcllogo.jpg') }} alt="">
                                     <h4>Login</h4>
                                 </a>
 
@@ -81,8 +80,9 @@
                     </div>
                 </div>
             </div>
+            <div>
         </div>
-    </div>
+
 
 
 

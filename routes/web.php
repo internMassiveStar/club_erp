@@ -15,9 +15,8 @@ use App\Http\Controllers\PolicyController;
 use App\Http\Controllers\RcsSpecialController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\TotaladrcsController;
-use App\Models\PaidDonation;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +30,7 @@ use Illuminate\Support\Facades\Session;
 */
 
 Route::get('/', function () {
+    
     return view('welcome');
 })->name('page');
 
@@ -201,12 +201,12 @@ Route::post('/login-member',[MemberController::class,'loginMember'])->name('logi
 
 
 
-
     Route::group(['middleware' => ['MemberMiddleware']], function () {
       
         Route::get('/ad-member_personal',[AdController::class,'memberAdView'])->name('ad-member_personal');
         Route::get('/rcs-member_personal',[RcsController::class,'memberRcsView'])->name('rcs-member_personal');
-
+        Route::get('/agm-reg',[AgmController::class,'agmView'])->name('agm-reg');
+        Route::post('/save-agm',[AgmController::class,'saveAgm'])->name('save-agm');
 
         });
 

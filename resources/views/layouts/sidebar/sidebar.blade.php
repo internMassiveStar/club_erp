@@ -21,6 +21,11 @@
     </a>
 </li> 
 <li>
+    <a href="{{ route('agm-reg') }}" aria-expanded="false">
+        <i class="icon-badge menu-icon"></i><span class="nav-text">Agm Registration</span>
+    </a>
+</li> 
+<li>
     <a href="{{ route('logout') }}" aria-expanded="false">
         <i class="icon-grid menu-icon"></i><span class="nav-text">Logout</span>
     </a>

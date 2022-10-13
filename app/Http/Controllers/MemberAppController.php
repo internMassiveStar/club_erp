@@ -13,22 +13,33 @@ class MemberAppController extends Controller
 {
     public function getMember(Request $request){
         $request->validate([
-            'member_id' => 'required',
+            'email' => 'required',
             
         ]);
-        
-        $member = DB::table('mspwith_weights')
-                           ->join('mspclubfunds','mspclubfunds.member_id','mspwith_weights.member_id')
-                           ->select('mspclubfunds.ad_paid','mspclubfunds.rcs','mspwith_weights.member_name','mspwith_weights.msp','mspwith_weights.member_id')
-                           ->where('mspwith_weights.member_id',$request->member_id)
-                           ->first();
+        $credential=Member::select('password','member_id')->where('email',$request->email)->first();
+        if($credential){
+            if(Hash::check($request->password,$credential->password)) {
+                $member = DB::table('mspwith_weights')
+                ->join('mspclubfunds','mspclubfunds.member_id','mspwith_weights.member_id')
+                ->select('mspclubfunds.ad_paid','mspclubfunds.rcs','mspwith_weights.member_name','mspwith_weights.msp','mspwith_weights.member_id')
+                ->where('mspwith_weights.member_id',$credential->member_id)
+                ->first();
+                return response()->json($member);
+    
+            }
 
-     
-     return response()->json($member);
+        }
+
+        
+        }
+
+
+        
+       
             
         
     
-}
+
 public function getPosition($id){
 
    $data=app(\App\Http\Controllers\ReportController::class)->position();

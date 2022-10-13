@@ -11,7 +11,7 @@ use App\Models\Memberprofession;
 use App\Models\Rcsmaster;
 use App\Models\Pin;
 
-use App\Models\Adrcstotal;
+use App\Models\AdRcstotal; 
 use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;

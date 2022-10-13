@@ -93,7 +93,7 @@
                                 <td colspan="2"></td>
                                 <td colspan="2" class="highest">Highest Msp: {{ $max->member_name }}</td>
                               
-                                <td style="color:darkblue;font-size:27px; font-weight:bold">{{ $max->msp}}</td>
+                                <td style="color:darkblue;font-size:27px; font-weight:bold">{{ number_format((float)$max->msp, 2, '.', '')}}</td>
                             </tr>
                             <tr>
                                 <td colspan="2"></td>

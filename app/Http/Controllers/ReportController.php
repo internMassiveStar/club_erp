@@ -6,6 +6,7 @@ use App\Models\MspwithoutWeight;
 use App\Models\MspwithWeight;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
 class ReportController extends Controller
 {
     public function reports(){
@@ -26,16 +27,18 @@ class ReportController extends Controller
        if($memberwith){
         $memberwithout=MspwithoutWeight::where('member_id',$request->member_id)->first();
         $highest=MspwithWeight::all();
-    
-        $max=MspwithWeight::select('msp')->max('msp');
-        $max=MspwithWeight::select( 'member_name','msp')->where('msp',$max)->first();
-       
+        //$max= DB::table('mspwith_weights')->where('msp', DB::raw("(select max(`msp`) from mspwith_weights)"))->get();
+        
+        // $max=MspwithWeight::select('msp')->max('msp');
+        // dd($max);
+        $max=MspwithWeight::select( 'member_name','msp')->where('msp','10')->first();
+        dd($max);
         return view('reports.reports',compact('memberwith','memberwithout','position','max','highest'));
        }else{
         Session::flash('error',"Invalid Member Id");
         return redirect()->back();
        }
-        
+         
     }
 
     public function reportsWithweight(){

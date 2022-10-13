@@ -361,7 +361,6 @@
 
                     </div>    
                     <button type="submit" class="btn mb-1 btn-success" name="build_value_insert" id ="build_value_insert"  >Build Value Save</button>
-                    
                         
                         
                 </form>
